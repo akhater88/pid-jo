@@ -105,9 +105,5 @@
                  height="24">
             <span>{{ app()->getLocale() === 'en' ? __('Switch to Arabic') : __('Switch to English') }}</span>
         </a>
-
-        <a href="{{ route('contact.' . app()->getLocale()) }}" class="pesaro-contact-btn">
-            {{ __('Contact US') }}
-        </a>
     </div>
 </header>
