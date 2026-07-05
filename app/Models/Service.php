@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Translatable\HasTranslations;
+
+class Service extends Model implements HasMedia
+{
+    use HasTranslations;
+    use InteractsWithMedia;
+
+    /**
+     * The attributes that are translatable.
+     *
+     * @var array<int, string>
+     */
+    public array $translatable = ['title', 'slug', 'short_description', 'body'];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'title',
+        'slug',
+        'short_description',
+        'body',
+        'published_at',
+        'sort_order',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'title' => 'array',
+            'slug' => 'array',
+            'short_description' => 'array',
+            'body' => 'array',
+            'published_at' => 'datetime',
+        ];
+    }
+
+    /**
+     * Register media collections.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('hero')->singleFile();
+        $this->addMediaCollection('gallery');
+    }
+
+    /**
+     * Register media conversions.
+     */
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(400)
+            ->format('webp');
+
+        $this->addMediaConversion('card')
+            ->width(800)
+            ->format('webp');
+
+        $this->addMediaConversion('hero')
+            ->width(1920)
+            ->format('webp');
+    }
+
+    /**
+     * Scope a query to only include published services.
+     *
+     * @param  Builder<Service>  $query
+     * @return Builder<Service>
+     */
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
+    }
+
+    /**
+     * Scope a query to order by sort_order then created_at.
+     *
+     * @param  Builder<Service>  $query
+     * @return Builder<Service>
+     */
+    public function scopeOrdered(Builder $query): Builder
+    {
+        return $query->orderBy('sort_order')->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * Check if the service is published.
+     */
+    public function isPublished(): bool
+    {
+        return $this->published_at !== null && $this->published_at->isPast();
+    }
+}

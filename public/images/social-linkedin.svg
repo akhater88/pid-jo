@@ -1,0 +1,52 @@
+<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="14" height="14" fill="#F5F5F5"/>
+<g id="Pesaro">
+<rect width="6415" height="7436" transform="translate(-415 -4087)" fill="white"/>
+<g id="Frame 2147224321">
+<g id="Frame 2147224338" clip-path="url(#clip0_0_1)">
+<rect width="1440" height="682" transform="translate(-215 -525)" fill="white"/>
+<g id="Group 1321314400">
+<g id="Group 1321314398">
+<g id="Frame 2147224323" filter="url(#filter0_d_0_1)">
+<rect x="-111" y="-375" width="285" height="451.135" rx="20" fill="#272727"/>
+<g id="Frame 2147224333">
+<g id="Frame 2147224332">
+<g id="Let&#39;s connect with us:">
+<g id="Social Media">
+<g id="Social Media_2">
+<rect x="-9" y="-9" width="32" height="32" rx="5" fill="white" fill-opacity="0.08"/>
+<g id="Social" clip-path="url(#clip1_0_1)">
+<path id="Vector" d="M13.9965 14V13.9995H14V8.86496C14 6.35313 13.4593 4.41821 10.5227 4.41821C9.11108 4.41821 8.16374 5.19288 7.77699 5.9273H7.73616V4.65271H4.9519V13.9995H7.85108V9.3713C7.85108 8.15271 8.08208 6.97438 9.59116 6.97438C11.0781 6.97438 11.1003 8.36505 11.1003 9.44946V14H13.9965Z" fill="white"/>
+<path id="Vector_2" d="M0.230988 4.65332H3.13365V14.0001H0.230988V4.65332Z" fill="white"/>
+<path id="Vector_3" d="M1.68117 0C0.753083 0 0 0.753083 0 1.68117C0 2.60925 0.753083 3.37808 1.68117 3.37808C2.60925 3.37808 3.36233 2.60925 3.36233 1.68117C3.36175 0.753083 2.60867 0 1.68117 0V0Z" fill="white"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_0_1" x="-136" y="-396" width="335" height="501.135" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="12.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.152941 0 0 0 0 0.152941 0 0 0 0.6 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
+</filter>
+<clipPath id="clip0_0_1">
+<rect width="1440" height="682" fill="white" transform="translate(-215 -525)"/>
+</clipPath>
+<clipPath id="clip1_0_1">
+<rect width="14" height="14" fill="white"/>
+</clipPath>
+</defs>
+</svg>

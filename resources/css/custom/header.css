@@ -1,0 +1,275 @@
+/* ============================================
+   HEADER STYLES
+   Custom CSS for Pesaro Website Header
+   ============================================ */
+
+/* Header Container */
+.pesaro-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+}
+
+.pesaro-header-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+    height: 70px;
+    padding: 0 1rem;
+}
+
+/* Logo */
+.pesaro-logo {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pesaro-logo a {
+    display: block;
+}
+
+.pesaro-logo img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Navigation */
+.pesaro-nav {
+    display: none;
+    align-items: center;
+    gap: 36px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateX(-25.5px);
+    top: 30px;
+}
+
+.pesaro-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: -0.21px;
+    transition: color 0.3s ease;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.pesaro-nav a:hover {
+    color: #c09a5b;
+}
+
+.pesaro-nav a.active {
+    color: #c09a5b;
+    font-weight: 600;
+}
+
+.pesaro-nav-underline {
+    width: 53px;
+    height: 8px;
+    object-fit: contain;
+}
+
+/* Header Right Side */
+.pesaro-header-right {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Language Switcher */
+.pesaro-lang-switcher {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.pesaro-lang-switcher:hover {
+    opacity: 0.8;
+}
+
+.pesaro-lang-switcher svg {
+    width: 20px;
+    height: 20px;
+}
+
+.pesaro-lang-switcher span {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.pesaro-lang-switcher img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Contact Button */
+.pesaro-contact-btn {
+    background: #c09a5b;
+    color: #ffffff;
+    padding: 0 32px;
+    height: 40px;
+    border-radius: 34px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    white-space: nowrap;
+}
+
+.pesaro-contact-btn:hover {
+    background: #a88447;
+}
+
+/* Mobile Menu Button */
+.pesaro-mobile-menu-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.pesaro-mobile-menu-btn:hover {
+    color: #c09a5b;
+}
+
+.pesaro-mobile-menu-btn svg {
+    width: 27px;
+    height: 20px;
+}
+
+/* Mobile Menu */
+.pesaro-mobile-menu {
+    padding: 1rem;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+.pesaro-mobile-menu a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.75rem 0;
+    transition: color 0.3s ease;
+}
+
+.pesaro-mobile-menu a:hover {
+    color: #c09a5b;
+}
+
+.pesaro-mobile-lang-switcher {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    padding: 0.75rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0.5rem 0;
+}
+
+.pesaro-mobile-lang-switcher img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.pesaro-mobile-menu .pesaro-contact-btn {
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: center;
+}
+
+/* Desktop Styles (1024px and up) */
+@media (min-width: 1024px) {
+    .pesaro-header-container {
+        height: 118px;
+        padding: 0 104px;
+    }
+
+    .pesaro-logo {
+        transform: translateY(-50%) translateY(9px);
+        left: 104px;
+    }
+
+    .pesaro-logo img {
+        height: 100px;
+    }
+
+    .pesaro-nav {
+        display: flex;
+    }
+
+    .pesaro-header-right {
+        top: 30px;
+        transform: none;
+        right: 104px;
+    }
+
+    .pesaro-lang-switcher {
+        display: flex;
+    }
+
+    .pesaro-mobile-menu-btn {
+        display: none;
+    }
+}
+
+/* RTL Support */
+[dir="rtl"] .pesaro-logo {
+    left: auto;
+    right: 1rem;
+}
+
+[dir="rtl"] .pesaro-header-right {
+    right: auto;
+    left: 1rem;
+}
+
+[dir="rtl"] .pesaro-nav {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%) translateX(25.5px);
+}
+
+[dir="rtl"] .pesaro-lang-switcher {
+    flex-direction: row-reverse;
+}
+
+@media (min-width: 1024px) {
+    [dir="rtl"] .pesaro-logo {
+        right: 104px;
+        left: auto;
+    }
+
+    [dir="rtl"] .pesaro-header-right {
+        left: 104px;
+        right: auto;
+    }
+}

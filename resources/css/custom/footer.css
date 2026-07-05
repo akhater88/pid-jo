@@ -1,0 +1,408 @@
+/* Footer Section */
+.pesaro-footer {
+    position: relative;
+    background: #222126;
+    overflow: hidden;
+}
+
+/* Background Image Section */
+.pesaro-footer-bg {
+    position: relative;
+    height: 263px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.pesaro-footer-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+}
+
+/* Main Footer Content */
+.pesaro-footer-main {
+    background: #1e1e1e;
+    position: relative;
+    padding: 80px 1rem 26px;
+}
+
+@media (min-width: 1024px) {
+    .pesaro-footer-main {
+        padding: 80px 104px 26px;
+    }
+}
+
+/* Footer Container */
+.pesaro-footer-container {
+    max-width: 1248px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .pesaro-footer-container {
+        grid-template-columns: 285px 1fr 1fr 1fr;
+        gap: 60px;
+    }
+}
+
+/* Contact Card (left sidebar) */
+.pesaro-footer-contact-card {
+    background: #272727;
+    border-radius: 20px;
+    padding: 23px 22px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 4px 25px 0px rgba(39, 39, 39, 0.6);
+}
+
+@media (min-width: 768px) {
+    .pesaro-footer-contact-card {
+        position: absolute;
+        top: -173px;
+        left: 0;
+        width: 285px;
+        min-height: 451px;
+    }
+}
+
+/* Decorative shapes in contact card */
+.pesaro-footer-card-shapes {
+    position: absolute;
+    right: -25px;
+    top: -25px;
+    pointer-events: none;
+}
+
+.pesaro-footer-card-shape {
+    position: absolute;
+    width: 38.157px;
+    height: 38.157px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10.735px;
+    transform: rotate(45deg);
+}
+
+.pesaro-footer-card-shape:nth-child(1) {
+    right: 54px;
+    top: 0;
+}
+
+.pesaro-footer-card-shape:nth-child(2) {
+    right: 34px;
+    top: 44px;
+}
+
+.pesaro-footer-card-shape:nth-child(3) {
+    right: 66px;
+    top: 76px;
+}
+
+.pesaro-footer-card-shape:nth-child(4) {
+    right: 74px;
+    top: 32px;
+}
+
+/* Logo */
+.pesaro-footer-logo {
+    width: 64px;
+    height: 60px;
+    margin-bottom: 11px;
+}
+
+.pesaro-footer-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Contact Info Section */
+.pesaro-footer-contact-heading {
+    margin-bottom: 16px;
+}
+
+.pesaro-footer-contact-heading h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: normal;
+    margin-bottom: 2px;
+}
+
+.pesaro-footer-contact-heading h3 .gold {
+    color: #c09a5b;
+}
+
+.pesaro-footer-contact-heading .divider {
+    width: 23px;
+    height: 2px;
+    background: #c09a5b;
+}
+
+/* Contact Items */
+.pesaro-footer-contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 17px;
+}
+
+.pesaro-footer-contact-item {
+    display: flex;
+    gap: 2px;
+    align-items: flex-start;
+}
+
+.pesaro-footer-contact-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pesaro-footer-contact-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.pesaro-footer-contact-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pesaro-footer-contact-text .label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.pesaro-footer-contact-text .value {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: normal;
+    color: #ffffff;
+}
+
+/* Social Section */
+.pesaro-footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pesaro-footer-social-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pesaro-footer-social-heading img {
+    width: 18px;
+    height: auto;
+}
+
+.pesaro-footer-social-heading p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.pesaro-footer-social-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.pesaro-footer-social-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.pesaro-footer-social-icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.pesaro-footer-social-icon.active {
+    background: #ffffff;
+}
+
+.pesaro-footer-social-icon img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+}
+
+/* Footer Columns (right side) */
+.pesaro-footer-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+@media (min-width: 768px) {
+    .pesaro-footer-columns {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 60px;
+        grid-column: 2 / -1;
+    }
+}
+
+/* Footer Column */
+.pesaro-footer-column h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: normal;
+    margin-bottom: 4px;
+}
+
+.pesaro-footer-column h3 .gold {
+    color: #c09a5b;
+}
+
+.pesaro-footer-column .divider {
+    width: 35px;
+    height: 3px;
+    background: #c09a5b;
+    margin-bottom: 29px;
+}
+
+/* Footer Links */
+.pesaro-footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.pesaro-footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.pesaro-footer-link::before {
+    content: '•';
+    color: #c09a5b;
+    font-size: 17px;
+    font-weight: 600;
+    margin-inline-end: 8px;
+    margin-inline-start: 25.5px;
+}
+
+.pesaro-footer-link a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: normal;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.pesaro-footer-link a:hover {
+    color: #c09a5b;
+}
+
+/* Gallery Grid */
+.pesaro-footer-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+.pesaro-footer-gallery-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pesaro-footer-gallery-heading h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: normal;
+    margin: 0;
+}
+
+.pesaro-footer-gallery-heading h3 .gold {
+    color: #c09a5b;
+}
+
+.pesaro-footer-gallery-heading .divider {
+    width: 35px;
+    height: 3px;
+    background: #c09a5b;
+}
+
+.pesaro-footer-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 68px);
+    gap: 7px;
+}
+
+.pesaro-footer-gallery-item {
+    width: 68px;
+    height: 64px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.pesaro-footer-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Copyright Section */
+.pesaro-footer-copyright {
+    background: #1e1e1e;
+    padding: 8px 1rem 26px;
+    text-align: center;
+}
+
+@media (min-width: 1024px) {
+    .pesaro-footer-copyright {
+        padding: 8px 63px 26px;
+    }
+}
+
+.pesaro-footer-copyright-container {
+    max-width: 1248px;
+    margin: 0 auto;
+}
+
+.pesaro-footer-copyright p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* RTL Support */
+[dir="rtl"] .pesaro-footer-card-shapes {
+    right: auto;
+    left: -25px;
+}
+
+[dir="rtl"] .pesaro-footer-link::before {
+    margin-inline-end: 25.5px;
+    margin-inline-start: 8px;
+}

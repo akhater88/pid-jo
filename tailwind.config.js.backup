@@ -1,0 +1,58 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.vue",
+    "./app/Filament/**/*.php",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-body)', 'Inter', 'system-ui', 'sans-serif'],
+        arabic: ['IBM Plex Sans Arabic', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        // Pesaro Brand Colors from Figma
+        primary: {
+          DEFAULT: '#C09A5B', // Gold/Amber - Main brand color
+          50: '#FAF7F2',
+          100: '#F4EFE5',
+          200: '#E9DFCB',
+          300: '#DDCFB1',
+          400: '#D2BF97',
+          500: '#C09A5B', // Main
+          600: '#A87F42',
+          700: '#7E5F32',
+          800: '#544021',
+          900: '#2A2011',
+        },
+        secondary: {
+          DEFAULT: '#353535', // Dark gray surface
+          lighter: '#4A4A4A',
+          darker: '#252525',
+        },
+        dark: {
+          DEFAULT: '#222126', // Near-black primary background
+          lighter: '#2A2A2F',
+          darker: '#1A1A1E',
+        },
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '112': '28rem',
+        '128': '32rem',
+      },
+      maxWidth: {
+        '8xl': '88rem',
+        '9xl': '96rem',
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
+}

@@ -1,0 +1,258 @@
+/* ============================================
+   NEWS & BLOG SECTION STYLES
+   Custom CSS for Pesaro Website News Grid
+   ============================================ */
+
+/* News Section */
+.pesaro-news-section {
+    background: #222126;
+    position: relative;
+    padding: 40px 1rem;
+    overflow: hidden;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.pesaro-news-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Decorative Scribbles */
+.pesaro-news-decoration {
+    position: absolute;
+    width: 93px;
+    height: 89px;
+    top: 48px;
+    display: none;
+}
+
+.pesaro-news-decoration-left {
+    left: 91px;
+}
+
+.pesaro-news-decoration-right {
+    right: 91px;
+}
+
+.pesaro-news-decoration img {
+    width: 92.998px;
+    height: 89px;
+    object-fit: contain;
+}
+
+/* Section Header */
+.pesaro-news-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 36px;
+    text-align: center;
+}
+
+/* Badge */
+.pesaro-news-badge {
+    border: 1.5px solid #c09a5b;
+    border-radius: 51px;
+    padding: 8px 13px 8px 3px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.pesaro-news-badge ul {
+    margin-left: 24px;
+    color: #c09a5b;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    list-style: disc;
+}
+
+/* Title */
+.pesaro-news-title {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #ffffff;
+    max-width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pesaro-news-title .gold {
+    color: #c09a5b;
+}
+
+/* News Grid */
+.pesaro-news-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 26.5px;
+}
+
+/* News Card */
+.pesaro-news-card {
+    background: #353535;
+    border-radius: 24px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0px 4px 25px rgba(39, 39, 39, 0.8);
+}
+
+/* News Image */
+.pesaro-news-image {
+    width: 100%;
+    height: 246px;
+    border-radius: 20px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.pesaro-news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* News Content */
+.pesaro-news-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.pesaro-news-content h3 {
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    line-height: 28px;
+}
+
+.pesaro-news-content p {
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Poppins', sans-serif;
+    line-height: 26px;
+}
+
+/* View All Button */
+.pesaro-news-view-all {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.pesaro-news-btn {
+    background: #c09a5b;
+    color: #ffffff;
+    padding: 0 32px;
+    height: 48px;
+    border-radius: 101px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.pesaro-news-btn:hover {
+    background: #a88447;
+}
+
+/* Tablet Styles (768px and up) */
+@media (min-width: 768px) {
+    .pesaro-news-title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .pesaro-news-content h3 {
+        font-size: 22px;
+        line-height: 30px;
+    }
+
+    .pesaro-news-content p {
+        font-size: 19px;
+        line-height: 28px;
+    }
+}
+
+/* Desktop Styles (1024px and up) */
+@media (min-width: 1024px) {
+    .pesaro-news-section {
+        padding: 80px 0;
+        margin-top: 80px;
+        margin-bottom: 80px;
+    }
+
+    .pesaro-news-container {
+        padding: 0 104px;
+    }
+
+    .pesaro-news-decoration {
+        display: block;
+    }
+
+    .pesaro-news-title {
+        font-size: 30px;
+        line-height: 40px;
+        max-width: 665px;
+    }
+
+    .pesaro-news-grid {
+        flex-direction: row;
+        gap: 26.5px;
+    }
+
+    .pesaro-news-card {
+        flex: 0 0 393px;
+        width: 393px;
+        padding-top: 24px;
+        padding-bottom: 30px;
+    }
+
+    .pesaro-news-image {
+        width: 345px;
+    }
+
+    .pesaro-news-content {
+        width: 345px;
+    }
+
+    .pesaro-news-content h3 {
+        font-size: 23px;
+        line-height: 32px;
+    }
+
+    .pesaro-news-content p {
+        font-size: 20px;
+        line-height: 30px;
+    }
+}
+
+/* RTL Support */
+[dir="rtl"] .pesaro-news-badge ul {
+    margin-left: 0;
+    margin-right: 24px;
+}
+
+[dir="rtl"] .pesaro-news-decoration-left {
+    left: auto;
+    right: 91px;
+}
+
+[dir="rtl"] .pesaro-news-decoration-right {
+    right: auto;
+    left: 91px;
+}

@@ -1,0 +1,42 @@
+<svg width="20" height="2" viewBox="0 0 20 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="20" height="2" fill="#F5F5F5"/>
+<g id="Pesaro">
+<rect width="6415" height="7436" transform="translate(-325 -4059)" fill="white"/>
+<g id="Frame 2147224321">
+<g id="Frame 2147224338" clip-path="url(#clip0_0_1)">
+<rect width="1440" height="682" transform="translate(-125 -497)" fill="white"/>
+<g id="Group 1321314400">
+<g id="Group 1321314398">
+<g id="Frame 2147224323" filter="url(#filter0_d_0_1)">
+<rect x="-21" y="-347" width="285" height="451.135" rx="20" fill="#272727"/>
+<g id="Frame 2147224333">
+<g id="Frame 2147224332">
+<g id="Let&#39;s connect with us:">
+<g id="Heading">
+<path id="Line 2" d="M1 1H19" stroke="white" stroke-opacity="0.7" stroke-width="2" stroke-linecap="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_0_1" x="-46" y="-368" width="335" height="501.135" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="12.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.152941 0 0 0 0 0.152941 0 0 0 0.6 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
+</filter>
+<clipPath id="clip0_0_1">
+<rect width="1440" height="682" fill="white" transform="translate(-125 -497)"/>
+</clipPath>
+</defs>
+</svg>
