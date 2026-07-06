@@ -1,252 +1,204 @@
 @extends('layouts.app')
 
+@section('title', __('About Us') . ' - ' . config('app.name'))
+@section('meta_description', __('Learn more about Pesaro, your trusted interior design partner in Amman, Jordan.'))
+
 @section('content')
-    {{-- Inner Page Hero --}}
-    <section class="relative bg-dark-lighter py-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Breadcrumb --}}
-            <nav class="flex items-center gap-2 text-sm mb-6" aria-label="Breadcrumb">
-                <a href="{{ route('home.' . app()->getLocale()) }}" class="text-white/60 hover:text-primary transition-colors">
-                    {{ __('Home') }}
-                </a>
-                <svg class="w-4 h-4 text-white/40 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-                <span class="text-primary">{{ __('About Us') }}</span>
-            </nav>
+<!-- Hero Section with Header -->
+<section class="pesaro-about-hero relative bg-[#222126] border-b-2 border-[#403e3e]">
+    <!-- Background Image -->
+    <div class="absolute inset-0 h-[429px]">
+        <img
+            src="{{ asset('images/about-hero-bg-new.jpg') }}"
+            alt="{{ __('About Us') }}"
+            class="absolute w-full h-[242.42%] top-[-69.7%] left-0 object-cover"
+        >
+        <!-- Overlay Gradients -->
+        <div class="absolute inset-0" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 3.5%, rgba(0, 0, 0, 0.06) 37.5%), linear-gradient(90deg, rgba(0, 0, 0, 0.765) 0%, rgba(0, 0, 0, 0.425) 100%)"></div>
+    </div>
 
-            {{-- Page Title --}}
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                {{ __('About Us') }}
-            </h1>
-        </div>
-    </section>
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-4 pt-[217px] pb-[106px]">
+        <!-- Page Title -->
+        <h1 class="text-[40px] leading-[60px] font-semibold text-white tracking-[-0.8px] mb-[10px]">
+            {{ __('About Us') }}
+        </h1>
 
-    {{-- Main About Content --}}
-    <section class="py-16 bg-dark">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-                        {{ __('What the Benefit to get Work with Pesaro') }}
-                    </h2>
-                    <p class="text-lg text-white/80 leading-relaxed">
-                        {{ __('With Finnen, you can transfer your money in a second. We also provide you with secure transfer, don\'t need any frustations! Sometimes, I\'m really impress with my own product provide you with secure transfer.') }}
-                    </p>
-                </div>
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-4">
+            <a href="{{ LaravelLocalization::localizeUrl('/') }}" class="text-[26px] leading-[36px] font-medium text-white/90 hover:text-white transition-colors">
+                {{ __('Home') }}
+            </a>
+            <svg class="w-[7px] h-[14px] text-white/50 rtl:rotate-180 transform -rotate-90" fill="currentColor" viewBox="0 0 7 14">
+                <path d="M0 0L7 7L0 14" />
+            </svg>
+            <span class="text-[26px] leading-[36px] font-semibold text-[#c09a5b]">{{ __('About Us') }}</span>
+        </nav>
+    </div>
+</section>
 
-                {{-- Company Image/Video Placeholder --}}
-                <div class="aspect-video bg-secondary rounded-lg overflow-hidden mb-12">
-                    <div class="w-full h-full bg-gradient-to-br from-primary/10 to-transparent flex items-center justify-center">
-                        <svg class="w-24 h-24 text-primary/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+<!-- Content Section with Video and Text -->
+<section class="pesaro-about-content bg-[#222126] border-b-2 border-[#403e3e] py-[76px]">
+    <div class="container mx-auto px-4">
+        <div class="max-w-[1232px] mx-auto flex flex-col gap-[40px]">
+            <!-- Video Container -->
+            <div class="relative w-full h-[500px] rounded-[36px] overflow-hidden group cursor-pointer"
+                 x-data="{
+                     showVideo: false,
+                     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+                 }">
+
+                <!-- Thumbnail -->
+                <div x-show="!showVideo" class="relative w-full h-full">
+                    <img
+                        src="{{ asset('images/about-content-image.jpg') }}"
+                        alt="{{ __('About Pesaro Video') }}"
+                        class="absolute inset-0 w-full h-full object-cover rounded-[36px]"
+                    >
+                    <!-- Dark Overlay -->
+                    <div class="absolute inset-0 bg-black/30 rounded-[36px]"></div>
+
+                    <!-- Play Button -->
+                    <a
+                        @click.prevent="showVideo = true"
+                        href="#"
+                        class="absolute top-1/2 start-1/2 -translate-x-1/2 translate-y-[4px] -translate-y-1/2 w-[84px] h-[84px] rounded-[42px] bg-[#c09a5b] flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                        aria-label="{{ __('Play video') }}"
+                    >
+                        <svg class="w-[25px] h-[38px] text-white -scale-y-100 ms-1" fill="currentColor" viewBox="0 0 26 43">
+                            <path d="M8 5v33l18-16.5z"/>
                         </svg>
-                    </div>
+                    </a>
                 </div>
 
-                {{-- Company Story --}}
-                <div class="prose prose-invert prose-lg max-w-none">
-                    <p class="text-white/80 leading-relaxed mb-6">
-                        {{ __('Pesaro has been a leading name in interior design and execution since 1951. With over seven decades of experience, we have transformed countless spaces into beautiful, functional environments that reflect our clients\' unique vision and style.') }}
-                    </p>
-                    <p class="text-white/80 leading-relaxed mb-6">
-                        {{ __('Our commitment to excellence, attention to detail, and innovative design solutions have made us a trusted partner for residential and commercial projects throughout Jordan and the region.') }}
-                    </p>
+                <!-- YouTube Iframe -->
+                <div x-show="showVideo" x-cloak class="w-full h-full">
+                    <iframe
+                        :src="showVideo ? videoUrl + '?autoplay=1' : ''"
+                        class="w-full h-full rounded-[36px]"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                    ></iframe>
                 </div>
             </div>
-        </div>
-    </section>
 
-    {{-- Benefits Grid --}}
-    <section class="py-16 bg-dark-lighter">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">{{ __('Why Choose Us') }}</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                    {{ __('What Makes Pesaro Different') }}
-                </h3>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {{-- Benefit 1 --}}
-                <div class="bg-secondary rounded-lg p-8">
-                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-semibold text-white mb-3">{{ __('Expert Design Team') }}</h4>
-                    <p class="text-white/70 leading-relaxed">
-                        {{ __('Our experienced designers bring creativity and technical expertise to every project, ensuring exceptional results.') }}
-                    </p>
-                </div>
-
-                {{-- Benefit 2 --}}
-                <div class="bg-secondary rounded-lg p-8">
-                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-semibold text-white mb-3">{{ __('Fast Execution') }}</h4>
-                    <p class="text-white/70 leading-relaxed">
-                        {{ __('We deliver projects on time without compromising on quality, ensuring smooth and efficient execution.') }}
-                    </p>
-                </div>
-
-                {{-- Benefit 3 --}}
-                <div class="bg-secondary rounded-lg p-8">
-                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-semibold text-white mb-3">{{ __('Best Value') }}</h4>
-                    <p class="text-white/70 leading-relaxed">
-                        {{ __('Competitive pricing and transparent costs ensure you get the best value for your investment.') }}
-                    </p>
-                </div>
-
-                {{-- Benefit 4 --}}
-                <div class="bg-secondary rounded-lg p-8">
-                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-semibold text-white mb-3">{{ __('Premium Materials') }}</h4>
-                    <p class="text-white/70 leading-relaxed">
-                        {{ __('We source the finest materials and finishes to ensure durability and aesthetic excellence.') }}
-                    </p>
-                </div>
-
-                {{-- Benefit 5 --}}
-                <div class="bg-secondary rounded-lg p-8">
-                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-semibold text-white mb-3">{{ __('Client-Focused Approach') }}</h4>
-                    <p class="text-white/70 leading-relaxed">
-                        {{ __('We work closely with our clients to understand their needs and deliver personalized solutions.') }}
-                    </p>
-                </div>
-
-                {{-- Benefit 6 --}}
-                <div class="bg-secondary rounded-lg p-8">
-                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-semibold text-white mb-3">{{ __('Quality Guarantee') }}</h4>
-                    <p class="text-white/70 leading-relaxed">
-                        {{ __('All our work is backed by quality guarantees and comprehensive after-sales support.') }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- Our Story Timeline --}}
-    <section class="py-16 bg-dark">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">{{ __('Our Journey') }}</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                    {{ __('Seven Decades of Excellence') }}
-                </h3>
-            </div>
-
-            <div class="max-w-4xl mx-auto">
-                {{-- Timeline Items --}}
-                <div class="space-y-12">
-                    {{-- 1951 --}}
-                    <div class="flex gap-6 md:gap-8">
-                        <div class="flex-shrink-0">
-                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-                                <span class="text-white font-bold">1951</span>
-                            </div>
-                        </div>
-                        <div class="flex-1 pt-2">
-                            <h4 class="text-xl font-semibold text-white mb-2">{{ __('The Beginning') }}</h4>
-                            <p class="text-white/70 leading-relaxed">
-                                {{ __('Pesaro was founded with a vision to bring exceptional interior design to Jordan. Starting with small residential projects, we quickly built a reputation for quality and innovation.') }}
-                            </p>
-                        </div>
-                    </div>
-
-                    {{-- 1980s --}}
-                    <div class="flex gap-6 md:gap-8">
-                        <div class="flex-shrink-0">
-                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-                                <span class="text-white font-bold">1980s</span>
-                            </div>
-                        </div>
-                        <div class="flex-1 pt-2">
-                            <h4 class="text-xl font-semibold text-white mb-2">{{ __('Expansion & Growth') }}</h4>
-                            <p class="text-white/70 leading-relaxed">
-                                {{ __('We expanded our services to include commercial projects and opened our first showroom in Khalda, showcasing the finest materials and designs.') }}
-                            </p>
-                        </div>
-                    </div>
-
-                    {{-- 2000s --}}
-                    <div class="flex gap-6 md:gap-8">
-                        <div class="flex-shrink-0">
-                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-                                <span class="text-white font-bold">2000s</span>
-                            </div>
-                        </div>
-                        <div class="flex-1 pt-2">
-                            <h4 class="text-xl font-semibold text-white mb-2">{{ __('Modern Innovation') }}</h4>
-                            <p class="text-white/70 leading-relaxed">
-                                {{ __('Embracing new technologies and design trends, we introduced contemporary styles while maintaining our commitment to craftsmanship and quality.') }}
-                            </p>
-                        </div>
-                    </div>
-
-                    {{-- 2026 --}}
-                    <div class="flex gap-6 md:gap-8">
-                        <div class="flex-shrink-0">
-                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-                                <span class="text-white font-bold">2026</span>
-                            </div>
-                        </div>
-                        <div class="flex-1 pt-2">
-                            <h4 class="text-xl font-semibold text-white mb-2">{{ __('Present & Future') }}</h4>
-                            <p class="text-white/70 leading-relaxed">
-                                {{ __('Today, Pesaro continues to lead the industry with innovative designs, sustainable practices, and a dedication to exceeding client expectations in every project we undertake.') }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- Call to Action --}}
-    <section class="py-16 bg-dark-lighter">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-                    {{ __('Ready to Transform Your Space?') }}
+            <!-- Text Content -->
+            <div class="flex flex-col gap-[16px] max-w-[1220px]">
+                <!-- Title -->
+                <h2 class="text-[33px] leading-normal font-medium text-white tracking-[-0.396px]">
+                    @if(app()->isLocale('en'))
+                        Saudi Liver Diseases and Transplantation Society Conference 2024
+                    @else
+                        مؤتمر الجمعية السعودية لأمراض الكبد والزراعة 2024
+                    @endif
                 </h2>
-                <p class="text-lg text-white/80 mb-8">
-                    {{ __('Let\'s discuss your project and bring your vision to life with Pesaro\'s expertise and dedication.') }}
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('contact.' . app()->getLocale()) }}"
-                       class="inline-block bg-primary hover:bg-primary-600 text-white px-8 py-4 rounded-md font-medium transition-colors">
-                        {{ __('Contact Us Today') }}
-                    </a>
-                    <a href="{{ route('services.index.' . app()->getLocale()) }}"
-                       class="inline-block bg-secondary hover:bg-secondary-lighter text-white px-8 py-4 rounded-md font-medium transition-colors">
-                        {{ __('View Our Services') }}
-                    </a>
+
+                <!-- Description -->
+                <div class="text-[24px] leading-[46px] font-medium text-white/80">
+                    @if(app()->isLocale('en'))
+                        <p class="mb-0">The city of Riyadh will host the Saudi Association for Liver Diseases and Transplantation Conference 2024 to discuss developments in the medical field of liver diseases in the .</p>
+                        <p class="mb-0">The Saudi Association for Liver Diseases and Transplantation Conference 2024 is scheduled to be held from October 17-19 with a wide medical presence and the participation of local and international experts and specialists. All this is to showcase the latest technologies and new developments in the field of liver diseases and their treatment.</p>
+                        <p class="mb-0">The conference's activities will include various sessions, including dialogue sessions and specialized training workshops to discuss various areas related to liver diseases and their early diagnosis.</p>
+                        <p>The Saudi Association for Liver Diseases and Transplantation, during its activities, works to enhance the contribution to the advancement of science and the dissemination of knowledge. It also</p>
+                    @else
+                        <p class="mb-0">ستستضيف مدينة الرياض مؤتمر الجمعية السعودية لأمراض الكبد والزراعة 2024 لمناقشة التطورات في المجال الطبي لأمراض الكبد.</p>
+                        <p class="mb-0">من المقرر عقد مؤتمر الجمعية السعودية لأمراض الكبد والزراعة 2024 في الفترة من 17-19 أكتوبر بحضور طبي واسع ومشاركة خبراء ومتخصصين محليين ودوليين. كل هذا لعرض أحدث التقنيات والتطورات الجديدة في مجال أمراض الكبد وعلاجها.</p>
+                        <p class="mb-0">ستتضمن أنشطة المؤتمر جلسات متنوعة، بما في ذلك جلسات الحوار وورش العمل التدريبية المتخصصة لمناقشة مختلف المجالات المتعلقة بأمراض الكبد وتشخيصها المبكر.</p>
+                        <p>تعمل الجمعية السعودية لأمراض الكبد والزراعة، خلال أنشطتها، على تعزيز المساهمة في النهوض بالعلم ونشر المعرفة. كما</p>
+                    @endif
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Timeline Section -->
+<section class="pesaro-about-timeline bg-[#222126] border-b-2 border-[#403e3e] py-[39px]">
+    <div class="container mx-auto px-4">
+        <!-- Section Heading -->
+        <div class="flex flex-col items-center gap-[6px] mb-[42px]">
+            <!-- Badge -->
+            <div class="border-[1.5px] border-[#c09a5b] rounded-[51px] px-[13px] py-[8px] ps-[3px]">
+                <ul class="text-[16px] font-medium text-[#c09a5b] leading-normal">
+                    <li class="list-disc ms-[24px]">
+                        <span>{{ __('Our Story') }}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Title -->
+            <h2 class="text-[30px] leading-[40px] font-semibold text-center capitalize text-white">
+                @if(app()->isLocale('en'))
+                    <span>Explore Our </span><span class="text-[#c09a5b]">Comprehensive</span><br>
+                    <span class="text-[#c09a5b]">Interior Design</span><span> Services</span>
+                @else
+                    <span>استكشف خدماتنا </span><span class="text-[#c09a5b]">الشاملة</span><br>
+                    <span class="text-[#c09a5b]">للتصميم الداخلي</span>
+                @endif
+            </h2>
+        </div>
+
+        <!-- Timeline Content -->
+        <div class="max-w-[1190px] mx-auto relative">
+            <div class="flex items-start justify-between gap-8">
+                <!-- 1951 Timeline -->
+                <div class="flex flex-col gap-[16px] items-start">
+                    <img
+                        src="{{ asset('images/about-timeline-1951-new.jpg') }}"
+                        alt="{{ __('Founded in 1951') }}"
+                        class="w-[130px] h-[120px] rounded-[16px] object-cover"
+                    >
+                    <div class="flex flex-col gap-[12px]">
+                        <!-- Line with dot -->
+                        <div class="relative flex items-center py-[10px]">
+                            <div class="w-[370px] h-[2px] bg-[#c09a5b]"></div>
+                            <div class="absolute left-0 top-[3.78px] w-[15px] h-[15px] rounded-[7.5px] bg-[#c09a5b]"></div>
+                        </div>
+                        <!-- Year -->
+                        <p class="text-[28px] leading-normal font-semibold text-white capitalize">1951</p>
+                    </div>
+                </div>
+
+                <!-- Center Card -->
+                <div class="bg-[#353535] rounded-[24px] px-[24px] pt-[24px] pb-[30px] w-[450px] shadow-[0px_4px_25px_rgba(39,39,39,0.8)] mt-[40px]">
+                    <div class="flex flex-col gap-[6px]">
+                        <p class="text-[23px] leading-[32px] font-semibold text-white capitalize">
+                            @if(app()->isLocale('en'))
+                                Supervision & execution Accessories
+                            @else
+                                إشراف وتنفيذ الإكسسوارات
+                            @endif
+                        </p>
+                        <p class="text-[20px] leading-[30px] font-medium text-white/80">
+                            @if(app()->isLocale('en'))
+                                Powerful project management tools for your companies of all sizes. companies of all sizes.
+                            @else
+                                أدوات إدارة مشاريع قوية لشركاتك من جميع الأحجام.
+                            @endif
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2026 Timeline -->
+                <div class="flex flex-col gap-[16px] items-end">
+                    <img
+                        src="{{ asset('images/about-timeline-2026-new.jpg') }}"
+                        alt="{{ __('Looking to 2026') }}"
+                        class="w-[130px] h-[120px] rounded-[16px] object-cover"
+                    >
+                    <div class="flex flex-col gap-[12px] items-end">
+                        <!-- Line with dot -->
+                        <div class="relative flex items-center py-[10px]">
+                            <div class="w-[370px] h-[2px] bg-[#c09a5b]"></div>
+                            <div class="absolute right-0 top-[3.78px] w-[15px] h-[15px] rounded-[7.5px] bg-[#c09a5b]"></div>
+                        </div>
+                        <!-- Year -->
+                        <p class="text-[28px] leading-normal font-semibold text-white capitalize">2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

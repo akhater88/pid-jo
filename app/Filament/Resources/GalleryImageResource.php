@@ -77,10 +77,11 @@ class GalleryImageResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('image')
-                    ->collection('image')
-                    ->conversion('thumb')
-                    ->size(80),
+                Tables\Columns\ImageColumn::make('image_preview')
+                    ->label('Image')
+                    ->getStateUsing(fn ($record) => $record->getFirstMediaUrl('image', 'thumb'))
+                    ->size(80)
+                    ->defaultImageUrl(asset('images/placeholder.jpg')),
 
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()

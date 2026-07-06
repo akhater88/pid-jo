@@ -2,7 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Blocks\AboutBenefitsBlock;
+use App\Filament\Blocks\AboutContentBlock;
+use App\Filament\Blocks\AboutHeroBlock;
+use App\Filament\Blocks\AboutTimelineBlock;
+use App\Filament\Blocks\BlogHeroBlock;
+use App\Filament\Blocks\BlogListBlock;
 use App\Filament\Blocks\FormBlock;
+use App\Filament\Blocks\ServicesHeroBlock;
+use App\Filament\Blocks\ServicesListBlock;
 use App\Filament\Blocks\GalleryGridBlock;
 use App\Filament\Blocks\HeroHomeBlock;
 use App\Filament\Blocks\HeroInnerBlock;
@@ -61,8 +69,48 @@ class PageResource extends Resource
 
                                 Forms\Components\Builder\Block::make('hero-inner')
                                     ->label('Hero - Inner Page')
-                                    ->icon('heroicon-o-photograph')
+                                    ->icon('heroicon-o-photo')
                                     ->schema(HeroInnerBlock::make()),
+
+                                Forms\Components\Builder\Block::make('about-hero')
+                                    ->label('About Us Hero')
+                                    ->icon('heroicon-o-photo')
+                                    ->schema(AboutHeroBlock::make()),
+
+                                Forms\Components\Builder\Block::make('about-content')
+                                    ->label('About Us Content (Video + Text)')
+                                    ->icon('heroicon-o-video-camera')
+                                    ->schema(AboutContentBlock::make()),
+
+                                Forms\Components\Builder\Block::make('about-timeline')
+                                    ->label('About Us Timeline')
+                                    ->icon('heroicon-o-clock')
+                                    ->schema(AboutTimelineBlock::make()),
+
+                                Forms\Components\Builder\Block::make('about-benefits')
+                                    ->label('About Section with Benefits')
+                                    ->icon('heroicon-o-information-circle')
+                                    ->schema(AboutBenefitsBlock::make()),
+
+                                Forms\Components\Builder\Block::make('blog-hero')
+                                    ->label('Blog Hero')
+                                    ->icon('heroicon-o-photo')
+                                    ->schema(BlogHeroBlock::make()),
+
+                                Forms\Components\Builder\Block::make('blog-list')
+                                    ->label('Blog Posts List')
+                                    ->icon('heroicon-o-newspaper')
+                                    ->schema(BlogListBlock::make()),
+
+                                Forms\Components\Builder\Block::make('services-hero')
+                                    ->label('Services Hero')
+                                    ->icon('heroicon-o-photo')
+                                    ->schema(ServicesHeroBlock::make()),
+
+                                Forms\Components\Builder\Block::make('services-list')
+                                    ->label('Services List with Galleries')
+                                    ->icon('heroicon-o-square-3-stack-3d')
+                                    ->schema(ServicesListBlock::make()),
 
                                 Forms\Components\Builder\Block::make('services-grid')
                                     ->label('Services Grid')

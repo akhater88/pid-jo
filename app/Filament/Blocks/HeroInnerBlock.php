@@ -22,10 +22,13 @@ class HeroInnerBlock
             FileUpload::make('background_image')
                 ->label(__('Background Image'))
                 ->image()
-                ->directory('blocks/hero')
-                ->maxSize(5120)
                 ->imageEditor()
-                ->helperText(__('Recommended size: 1920x1080px')),
+                ->maxSize(5120)
+                ->directory('hero-images')
+                ->visibility('public')
+                ->imagePreviewHeight('250')
+                ->helperText(__('Recommended size: 1920x1080px'))
+                ->columnSpanFull(),
 
             Repeater::make('breadcrumbs')
                 ->label(__('Breadcrumbs'))

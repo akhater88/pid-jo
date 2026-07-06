@@ -14,7 +14,19 @@ class PageController extends Controller
      */
     public function home(): View
     {
-        return view('pages.home');
+        $page = Page::find(1);
+
+        if (!$page) {
+            // Fallback to static home view if page ID 1 doesn't exist
+            return view('pages.home');
+        }
+
+        return view('pages.show', [
+            'page' => $page,
+            'title' => $page->title,
+            'seoTitle' => $page->seo_title ?? $page->title,
+            'seoDescription' => $page->seo_description,
+        ]);
     }
 
     /**
@@ -22,7 +34,53 @@ class PageController extends Controller
      */
     public function about(): View
     {
-        return view('pages.about');
+        $page = Page::query()
+            ->where('slug->' . app()->getLocale(), 'about')
+            ->published()
+            ->firstOrFail();
+
+        return view('pages.show', [
+            'page' => $page,
+            'title' => $page->title,
+            'seoTitle' => $page->seo_title ?? $page->title,
+            'seoDescription' => $page->seo_description,
+        ]);
+    }
+
+    /**
+     * Display the blog/news page.
+     */
+    public function blog(): View
+    {
+        $page = Page::query()
+            ->where('slug->' . app()->getLocale(), 'blog')
+            ->published()
+            ->firstOrFail();
+
+        return view('pages.show', [
+            'page' => $page,
+            'title' => $page->title,
+            'seoTitle' => $page->seo_title ?? $page->title,
+            'seoDescription' => $page->seo_description,
+        ]);
+    }
+
+    /**
+     * Display the services page.
+     */
+    public function services(): View
+    {
+        $page = Page::query()
+            ->where('slug->' . app()->getLocale(), 'services')
+            ->published()
+            ->firstOrFail();
+
+        return view('pages.show', [
+            'page' => $page,
+            'title' => $page->title,
+            'seoTitle' => $page->seo_title ?? $page->title,
+            'seoDescription' => $page->seo_description,
+        ]);
     }
 
     /**

@@ -89,11 +89,12 @@ class TestimonialResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('avatar')
-                    ->collection('avatar')
-                    ->conversion('thumb')
+                Tables\Columns\ImageColumn::make('avatar_image')
+                    ->label('Avatar')
+                    ->getStateUsing(fn ($record) => $record->getFirstMediaUrl('avatar', 'thumb'))
                     ->circular()
-                    ->size(50),
+                    ->size(50)
+                    ->defaultImageUrl(asset('images/placeholder.jpg')),
 
                 Tables\Columns\TextColumn::make('client_name')
                     ->searchable()

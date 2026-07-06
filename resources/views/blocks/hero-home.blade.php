@@ -25,15 +25,14 @@ $promo_2_image = $data['promo_2_image'] ?? null;
     <div class="pesaro-hero-bg">
         <div class="pesaro-hero-bg-inner">
             @if($background_image)
-                <img src="{{ $background_image }}" alt="{{ $title }}">
+                <img src="{{ asset('storage/' . $background_image) }}" alt="{{ $title }}">
             @else
-                <img src="{{ asset('images/hero-bg.jpg') }}" alt="Pesaro Interior">
+                <img src="{{ asset('storage/hero-images/hero-home-bg.jpg') }}" alt="Pesaro Interior">
             @endif
         </div>
         <div class="pesaro-hero-overlay-1"></div>
         <div class="pesaro-hero-overlay-2"></div>
     </div>
-
     <!-- Content -->
     <div class="pesaro-hero-content">
         <div class="pesaro-hero-content-container">

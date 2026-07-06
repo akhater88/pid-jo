@@ -1,0 +1,177 @@
+/* ============================================
+   SWIPER CAROUSEL STYLES
+   Custom CSS for Pesaro Swiper Carousels
+   ============================================ */
+
+/* Carousel Wrapper */
+.pesaro-services-carousel-wrapper,
+.pesaro-news-carousel-wrapper {
+    position: relative;
+    padding: 0 70px;
+    margin-bottom: 60px;
+    max-width: 100%;
+}
+
+/* Services Carousel - wider to show 3 blocks */
+.pesaro-services-carousel-wrapper {
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Swiper Slide Spacing */
+.pesaro-services-swiper .swiper-slide,
+.pesaro-news-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+    box-sizing: border-box;
+}
+
+/* Flexible slide widths with padding for spacing */
+.pesaro-services-swiper .swiper-slide,
+.pesaro-news-swiper .swiper-slide {
+    padding: 0 12px;
+}
+
+/* Ensure cards take full height */
+.pesaro-services-swiper .swiper-slide > *,
+.pesaro-news-swiper .swiper-slide > * {
+    width: 100%;
+}
+
+/* Service Cards in Carousel */
+.pesaro-services-swiper .pesaro-service-card {
+    margin: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pesaro-services-swiper .pesaro-service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* News Cards in Carousel */
+.pesaro-news-swiper .pesaro-news-card {
+    margin: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pesaro-news-swiper .pesaro-news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Navigation Buttons */
+.pesaro-swiper-button-prev,
+.pesaro-swiper-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(192, 154, 91, 0.9);
+    border-radius: 50%;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pesaro-swiper-button-prev:hover,
+.pesaro-swiper-button-next:hover {
+    background: rgba(192, 154, 91, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.pesaro-swiper-button-prev {
+    left: 0;
+}
+
+.pesaro-swiper-button-next {
+    right: 0;
+}
+
+.pesaro-swiper-button-prev.swiper-button-disabled,
+.pesaro-swiper-button-next.swiper-button-disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* Pagination */
+.pesaro-swiper-pagination {
+    position: relative;
+    margin-top: 32px;
+    text-align: center;
+}
+
+.pesaro-swiper-pagination .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.pesaro-swiper-pagination .swiper-pagination-bullet-active {
+    background: #c09a5b;
+    width: 32px;
+    border-radius: 6px;
+}
+
+/* RTL Support */
+[dir="rtl"] .pesaro-swiper-button-prev {
+    left: auto;
+    right: 0;
+}
+
+[dir="rtl"] .pesaro-swiper-button-next {
+    right: auto;
+    left: 0;
+}
+
+[dir="rtl"] .pesaro-swiper-button-prev svg {
+    transform: rotate(180deg);
+}
+
+[dir="rtl"] .pesaro-swiper-button-next svg {
+    transform: rotate(180deg);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .pesaro-services-carousel-wrapper,
+    .pesaro-news-carousel-wrapper {
+        padding: 0 48px;
+    }
+
+    .pesaro-swiper-button-prev,
+    .pesaro-swiper-button-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .pesaro-swiper-button-prev svg,
+    .pesaro-swiper-button-next svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .pesaro-services-carousel-wrapper,
+    .pesaro-news-carousel-wrapper {
+        padding: 0 40px;
+    }
+
+    .pesaro-swiper-button-prev,
+    .pesaro-swiper-button-next {
+        width: 36px;
+        height: 36px;
+    }
+}

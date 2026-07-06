@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServiceResource\Pages;
+use App\Filament\Resources\ServiceResource\RelationManagers;
 use App\Models\Service;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -103,11 +104,12 @@ class ServiceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('hero')
-                    ->collection('hero')
-                    ->conversion('thumb')
+                Tables\Columns\ImageColumn::make('hero_image')
+                    ->label('Image')
+                    ->getStateUsing(fn ($record) => $record->getFirstMediaUrl('hero', 'thumb'))
                     ->circular()
-                    ->size(60),
+                    ->size(60)
+                    ->defaultImageUrl(asset('images/placeholder.jpg')),
 
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
@@ -162,7 +164,7 @@ class ServiceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\SectionsRelationManager::class,
         ];
     }
 

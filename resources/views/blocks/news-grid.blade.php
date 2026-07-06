@@ -5,12 +5,11 @@ $section_title = $data['section_title'] ?? 'Explore Our Comprehensive Interior D
 $limit = $data['limit'] ?? 3;
 $show_all_link = $data['show_all_link'] ?? false;
 
-// Fetch blog posts
+// Fetch blog posts (no limit for carousel)
 $posts = \App\Models\BlogPost::query()
     ->published()
     ->withCount('comments')
     ->ordered()
-    ->limit($limit)
     ->get();
 @endphp
 
@@ -37,54 +36,76 @@ $posts = \App\Models\BlogPost::query()
             </h2>
         </div>
 
-        <!-- Blog Posts Grid -->
+        <!-- Blog Posts Carousel -->
         @if($posts->isNotEmpty())
-            <div class="pesaro-news-grid">
-                @foreach($posts as $index => $post)
-                    <article class="pesaro-news-card">
-                        @if($index % 2 === 1)
-                            {{-- Middle card - text first, then image --}}
-                            <!-- Post Content -->
-                            <div class="pesaro-news-content">
-                                <h3>{{ $post->getTranslation('title', app()->getLocale()) }}</h3>
-                                <p>
-                                    {{ $post->getTranslation('excerpt', app()->getLocale()) ?? $post->getTranslation('short_description', app()->getLocale()) }}
-                                </p>
-                            </div>
+            <div class="pesaro-news-carousel-wrapper">
+                <!-- Swiper Container -->
+                <div class="swiper pesaro-news-swiper">
+                    <div class="swiper-wrapper">
+                        @foreach($posts as $index => $post)
+                            <div class="swiper-slide">
+                                <article class="pesaro-news-card">
+                                    @if($index % 2 === 1)
+                                        {{-- Middle card - text first, then image --}}
+                                        <!-- Post Content -->
+                                        <div class="pesaro-news-content">
+                                            <h3>{{ $post->getTranslation('title', app()->getLocale()) }}</h3>
+                                            <p>
+                                                {{ $post->getTranslation('excerpt', app()->getLocale()) ?? $post->getTranslation('short_description', app()->getLocale()) }}
+                                            </p>
+                                        </div>
 
-                            <!-- Post Image -->
-                            <div class="pesaro-news-image">
-                                @if($post->hasMedia('hero'))
-                                    <img src="{{ $post->getFirstMediaUrl('hero', 'card') }}"
-                                         alt="{{ $post->getTranslation('title', app()->getLocale()) }}">
-                                @else
-                                    <img src="{{ asset('images/blog-2.jpg') }}"
-                                         alt="{{ $post->getTranslation('title', app()->getLocale()) }}">
-                                @endif
-                            </div>
-                        @else
-                            {{-- Side cards - image first, then text --}}
-                            <!-- Post Image -->
-                            <div class="pesaro-news-image">
-                                @if($post->hasMedia('hero'))
-                                    <img src="{{ $post->getFirstMediaUrl('hero', 'card') }}"
-                                         alt="{{ $post->getTranslation('title', app()->getLocale()) }}">
-                                @else
-                                    <img src="{{ asset('images/blog-1.jpg') }}"
-                                         alt="{{ $post->getTranslation('title', app()->getLocale()) }}">
-                                @endif
-                            </div>
+                                        <!-- Post Image -->
+                                        <div class="pesaro-news-image">
+                                            @if($post->hasMedia('hero'))
+                                                <img src="{{ $post->getFirstMediaUrl('hero', 'card') }}"
+                                                     alt="{{ $post->getTranslation('title', app()->getLocale()) }}">
+                                            @else
+                                                <img src="{{ asset('images/blog-2.jpg') }}"
+                                                     alt="{{ $post->getTranslation('title', app()->getLocale()) }}">
+                                            @endif
+                                        </div>
+                                    @else
+                                        {{-- Side cards - image first, then text --}}
+                                        <!-- Post Image -->
+                                        <div class="pesaro-news-image">
+                                            @if($post->hasMedia('hero'))
+                                                <img src="{{ $post->getFirstMediaUrl('hero', 'card') }}"
+                                                     alt="{{ $post->getTranslation('title', app()->getLocale()) }}">
+                                            @else
+                                                <img src="{{ asset('images/blog-1.jpg') }}"
+                                                     alt="{{ $post->getTranslation('title', app()->getLocale()) }}">
+                                            @endif
+                                        </div>
 
-                            <!-- Post Content -->
-                            <div class="pesaro-news-content">
-                                <h3>{{ $post->getTranslation('title', app()->getLocale()) }}</h3>
-                                <p>
-                                    {{ $post->getTranslation('excerpt', app()->getLocale()) ?? $post->getTranslation('short_description', app()->getLocale()) }}
-                                </p>
+                                        <!-- Post Content -->
+                                        <div class="pesaro-news-content">
+                                            <h3>{{ $post->getTranslation('title', app()->getLocale()) }}</h3>
+                                            <p>
+                                                {{ $post->getTranslation('excerpt', app()->getLocale()) ?? $post->getTranslation('short_description', app()->getLocale()) }}
+                                            </p>
+                                        </div>
+                                    @endif
+                                </article>
                             </div>
-                        @endif
-                    </article>
-                @endforeach
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Navigation Arrows -->
+                <div class="pesaro-swiper-button-prev pesaro-news-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </div>
+                <div class="pesaro-swiper-button-next pesaro-news-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pesaro-swiper-pagination pesaro-news-pagination"></div>
             </div>
 
             <!-- View All Button -->

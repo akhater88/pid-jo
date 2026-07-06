@@ -1,0 +1,127 @@
+/* Blog Page Styles */
+
+/* Hero Section */
+.pesaro-blog-hero {
+    min-height: 429px;
+    background-color: #222126;
+}
+
+.pesaro-blog-hero img {
+    object-position: center;
+}
+
+/* Blog Section */
+.pesaro-blog-section {
+    background-color: #222126;
+}
+
+.pesaro-blog-section p {
+    margin-bottom: 0;
+}
+
+/* Badge bullet styling */
+.pesaro-blog-section ul li {
+    position: relative;
+}
+
+.pesaro-blog-section ul li::marker {
+    color: #c09a5b;
+}
+
+/* Blog Card */
+.pesaro-blog-card {
+    background-color: #353535;
+    box-shadow: 0px 4px 25px rgba(39, 39, 39, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pesaro-blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 8px 35px rgba(39, 39, 39, 0.9);
+}
+
+/* Card image hover effect */
+.pesaro-blog-card img {
+    transition: transform 0.5s ease;
+}
+
+.pesaro-blog-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Card title hover effect */
+.pesaro-blog-card h3 a {
+    transition: color 0.3s ease;
+}
+
+.pesaro-blog-card h3 a:hover {
+    color: #c09a5b;
+}
+
+/* Date icon and text alignment */
+.pesaro-blog-card time {
+    display: flex;
+    align-items: center;
+}
+
+/* RTL Support */
+[dir="rtl"] .pesaro-blog-hero nav svg {
+    transform: rotate(90deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pesaro-blog-hero {
+        min-height: 300px;
+    }
+
+    .pesaro-blog-hero .container {
+        padding-top: 120px;
+        padding-bottom: 60px;
+    }
+
+    .pesaro-blog-hero h1 {
+        font-size: 32px;
+        line-height: 48px;
+    }
+
+    .pesaro-blog-hero nav {
+        font-size: 18px;
+    }
+
+    .pesaro-blog-section {
+        padding-top: 24px;
+        padding-bottom: 60px;
+    }
+
+    .pesaro-blog-card {
+        margin-bottom: 24px;
+    }
+}
+
+/* Pagination Styles */
+.pesaro-blog-section nav[role="navigation"] {
+    margin-top: 40px;
+}
+
+.pesaro-blog-section nav[role="navigation"] a,
+.pesaro-blog-section nav[role="navigation"] span {
+    background-color: #353535;
+    color: #ffffff;
+    border: 1px solid #403e3e;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.pesaro-blog-section nav[role="navigation"] a:hover {
+    background-color: #c09a5b;
+    border-color: #c09a5b;
+    color: #ffffff;
+}
+
+.pesaro-blog-section nav[role="navigation"] span[aria-current="page"] {
+    background-color: #c09a5b;
+    border-color: #c09a5b;
+    color: #ffffff;
+}

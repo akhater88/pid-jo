@@ -24,11 +24,11 @@ foreach (['en', 'ar'] as $locale) {
         Route::get('/about', [PageController::class, 'about'])->name("about.{$locale}");
 
         // Services
-        Route::get('/services', [ServiceController::class, 'index'])->name("services.index.{$locale}");
+        Route::get('/services', [PageController::class, 'services'])->name("services.index.{$locale}");
         Route::get('/services/{slug}', [ServiceController::class, 'show'])->name("services.show.{$locale}");
 
         // Blog / News & Blogs
-        Route::get('/blog', [BlogController::class, 'index'])->name("blog.index.{$locale}");
+        Route::get('/blog', [PageController::class, 'blog'])->name("blog.index.{$locale}");
         Route::get('/blog/{slug}', [BlogController::class, 'show'])->name("blog.show.{$locale}");
 
         // Gallery

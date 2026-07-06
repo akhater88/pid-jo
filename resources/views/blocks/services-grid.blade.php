@@ -6,11 +6,10 @@ $section_title_highlight = $data['section_title_highlight'] ?? 'Comprehensive In
 $limit = $data['limit'] ?? 3;
 $show_all_link = $data['show_all_link'] ?? false;
 
-// Fetch services
+// Fetch services (no limit for carousel)
 $services = \App\Models\Service::query()
     ->published()
     ->ordered()
-    ->limit($limit)
     ->get();
 @endphp
 
@@ -37,52 +36,74 @@ $services = \App\Models\Service::query()
             </h2>
         </div>
 
-        <!-- Services Grid -->
+        <!-- Services Carousel -->
         @if($services->isNotEmpty())
-            <div class="pesaro-services-grid">
-                @foreach($services as $index => $service)
-                    @if($index === 1)
-                        {{-- Middle card - tall with overlay --}}
-                        <a href="{{ route('services.show.' . app()->getLocale(), ['slug' => $service->getTranslation('slug', app()->getLocale())]) }}"
-                           class="pesaro-service-card pesaro-service-card-tall">
-                            <!-- Service Image -->
-                            <div class="pesaro-service-image-tall">
-                                @if($service->hasMedia('hero'))
-                                    <img src="{{ $service->getFirstMediaUrl('hero', 'card') }}"
-                                         alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
-                                @else
-                                    <img src="{{ asset('images/service-2.jpg') }}" alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
-                                @endif
-                                <div class="pesaro-service-overlay"></div>
-                            </div>
+            <div class="pesaro-services-carousel-wrapper">
+                <!-- Swiper Container -->
+                <div class="swiper pesaro-services-swiper">
+                    <div class="swiper-wrapper">
+                        @foreach($services as $index => $service)
+                            <div class="swiper-slide">
+                                @if($index % 3 === 1)
+                                    {{-- Middle card - tall with overlay --}}
+                                    <a href="{{ route('services.show.' . app()->getLocale(), ['slug' => $service->getTranslation('slug', app()->getLocale())]) }}"
+                                       class="pesaro-service-card pesaro-service-card-tall">
+                                        <!-- Service Image -->
+                                        <div class="pesaro-service-image-tall">
+                                            @if($service->hasMedia('hero'))
+                                                <img src="{{ $service->getFirstMediaUrl('hero', 'card') }}"
+                                                     alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
+                                            @else
+                                                <img src="{{ asset('images/service-2.jpg') }}" alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
+                                            @endif
+                                            <div class="pesaro-service-overlay"></div>
+                                        </div>
 
-                            <!-- Service Title (Overlay) -->
-                            <h3 class="pesaro-service-title-overlay">
-                                {{ $service->getTranslation('title', app()->getLocale()) }}
-                            </h3>
-                        </a>
-                    @else
-                        {{-- Side cards - short with description --}}
-                        <div class="pesaro-service-card pesaro-service-card-short">
-                            <!-- Service Image -->
-                            <div class="pesaro-service-image-short">
-                                @if($service->hasMedia('hero'))
-                                    <img src="{{ $service->getFirstMediaUrl('hero', 'card') }}"
-                                         alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
+                                        <!-- Service Title (Overlay) -->
+                                        <h3 class="pesaro-service-title-overlay">
+                                            {{ $service->getTranslation('title', app()->getLocale()) }}
+                                        </h3>
+                                    </a>
                                 @else
-                                    <img src="{{ asset('images/service-' . ($index + 1) . '.jpg') }}"
-                                         alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
+                                    {{-- Side cards - short with description --}}
+                                    <div class="pesaro-service-card pesaro-service-card-short">
+                                        <!-- Service Image -->
+                                        <div class="pesaro-service-image-short">
+                                            @if($service->hasMedia('hero'))
+                                                <img src="{{ $service->getFirstMediaUrl('hero', 'card') }}"
+                                                     alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
+                                            @else
+                                                <img src="{{ asset('images/service-' . ($index + 1) . '.jpg') }}"
+                                                     alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
+                                            @endif
+                                        </div>
+
+                                        <!-- Service Content -->
+                                        <div class="pesaro-service-content">
+                                            <h3>{{ $service->getTranslation('title', app()->getLocale()) }}</h3>
+                                            <p>{{ $service->getTranslation('short_description', app()->getLocale()) }}</p>
+                                        </div>
+                                    </div>
                                 @endif
                             </div>
+                        @endforeach
+                    </div>
+                </div>
 
-                            <!-- Service Content -->
-                            <div class="pesaro-service-content">
-                                <h3>{{ $service->getTranslation('title', app()->getLocale()) }}</h3>
-                                <p>{{ $service->getTranslation('short_description', app()->getLocale()) }}</p>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
+                <!-- Navigation Arrows -->
+                <div class="pesaro-swiper-button-prev pesaro-services-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </div>
+                <div class="pesaro-swiper-button-next pesaro-services-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pesaro-swiper-pagination pesaro-services-pagination"></div>
             </div>
 
             <!-- View All Button -->

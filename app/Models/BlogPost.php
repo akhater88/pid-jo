@@ -55,7 +55,9 @@ class BlogPost extends Model implements HasMedia
      */
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('featured')->singleFile();
+        $this->addMediaCollection('featured_image')->singleFile();
+        $this->addMediaCollection('hero')->singleFile();
+        $this->addMediaCollection('gallery');
     }
 
     /**
@@ -71,7 +73,7 @@ class BlogPost extends Model implements HasMedia
             ->width(800)
             ->format('webp');
 
-        $this->addMediaConversion('featured')
+        $this->addMediaConversion('hero')
             ->width(1920)
             ->format('webp');
     }

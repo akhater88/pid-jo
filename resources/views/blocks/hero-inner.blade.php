@@ -9,7 +9,7 @@ $breadcrumbs = $data['breadcrumbs'] ?? [];
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
         @if($background_image)
-            <img src="{{ $background_image }}"
+            <img src="{{ asset('storage/' . $background_image) }}"
                  alt="{{ $title }}"
                  class="w-full h-full object-cover">
         @else

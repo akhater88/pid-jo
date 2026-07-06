@@ -1,0 +1,195 @@
+/* ============================================
+   ABOUT US PAGE STYLES
+   Custom CSS for Pesaro About Us Page
+   ============================================ */
+
+/* Hero Section */
+.pesaro-about-hero {
+    min-height: 429px;
+}
+
+.pesaro-about-hero img {
+    object-position: center;
+}
+
+/* Content Section */
+.pesaro-about-content {
+    background-color: #222126;
+}
+
+.pesaro-about-content p {
+    margin-bottom: 0;
+}
+
+/* Video Container */
+.pesaro-about-content [x-data] {
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Play button hover effect */
+.pesaro-about-content .group:hover [aria-label*="Play"] {
+    transform: translateX(-50%) translateY(calc(-50% + 4px)) scale(1.1);
+}
+
+/* Timeline Section */
+.pesaro-about-timeline {
+    background-color: #222126;
+}
+
+/* Badge bullet styling */
+.pesaro-about-timeline ul li {
+    position: relative;
+}
+
+.pesaro-about-timeline ul li::marker {
+    color: #c09a5b;
+}
+
+/* Center card shadow */
+.pesaro-about-timeline .bg-\[\#353535\] {
+    box-shadow: 0px 4px 25px rgba(39, 39, 39, 0.8);
+}
+
+/* RTL Support */
+[dir="rtl"] .pesaro-about-hero nav svg {
+    transform: rotate(90deg);
+}
+
+[dir="rtl"] .pesaro-about-timeline .items-start {
+    align-items: flex-end;
+}
+
+[dir="rtl"] .pesaro-about-timeline .items-end {
+    align-items: flex-start;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .pesaro-about-timeline .flex.items-start.justify-between {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .pesaro-about-timeline .w-\[370px\] {
+        width: 280px;
+    }
+
+    .pesaro-about-timeline .w-\[450px\] {
+        width: 100%;
+        max-width: 450px;
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .pesaro-about-hero {
+        min-height: 350px;
+    }
+
+    .pesaro-about-hero .container {
+        padding-top: 120px;
+        padding-bottom: 60px;
+    }
+
+    .pesaro-about-hero h1 {
+        font-size: 32px;
+        line-height: 48px;
+    }
+
+    .pesaro-about-hero nav a,
+    .pesaro-about-hero nav span {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .pesaro-about-content {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .pesaro-about-content .h-\[500px\] {
+        height: 300px;
+    }
+
+    .pesaro-about-content h2 {
+        font-size: 24px;
+    }
+
+    .pesaro-about-content .text-\[24px\] {
+        font-size: 18px;
+        line-height: 32px;
+    }
+
+    .pesaro-about-timeline h2 {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .pesaro-about-timeline .w-\[370px\] {
+        width: 100%;
+    }
+
+    .pesaro-about-timeline .w-\[130px\] {
+        width: 100px;
+    }
+
+    .pesaro-about-timeline .h-\[120px\] {
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pesaro-about-hero {
+        min-height: 300px;
+    }
+
+    .pesaro-about-hero .container {
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+
+    .pesaro-about-hero h1 {
+        font-size: 28px;
+        line-height: 40px;
+    }
+
+    .pesaro-about-hero nav a,
+    .pesaro-about-hero nav span {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .pesaro-about-content .h-\[500px\] {
+        height: 250px;
+    }
+
+    .pesaro-about-content .w-\[84px\] {
+        width: 64px;
+        height: 64px;
+    }
+
+    .pesaro-about-content h2 {
+        font-size: 20px;
+    }
+
+    .pesaro-about-content .text-\[24px\] {
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .pesaro-about-timeline h2 {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .pesaro-about-timeline .text-\[23px\] {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .pesaro-about-timeline .text-\[20px\] {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

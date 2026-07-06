@@ -68,15 +68,36 @@ class BlogPostResource extends Resource
                             ->columnSpanFull(),
                     ]),
 
-                Forms\Components\Section::make('Featured Image')
+                Forms\Components\Section::make('Media')
                     ->schema([
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('featured')
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('featured_image')
                             ->label('Featured Image')
-                            ->collection('featured')
+                            ->collection('featured_image')
                             ->image()
                             ->imageEditor()
                             ->maxSize(5120)
-                            ->helperText('Recommended: 1200x630px')
+                            ->helperText('Recommended: 1200x630px. Used in blog list cards.')
+                            ->columnSpanFull(),
+
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('hero')
+                            ->label('Hero Image')
+                            ->collection('hero')
+                            ->image()
+                            ->imageEditor()
+                            ->maxSize(5120)
+                            ->helperText('Recommended: 1920x1080px. Used as background in blog detail page hero section.')
+                            ->columnSpanFull(),
+
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('gallery')
+                            ->label('Gallery Images')
+                            ->collection('gallery')
+                            ->multiple()
+                            ->image()
+                            ->imageEditor()
+                            ->maxFiles(10)
+                            ->maxSize(5120)
+                            ->reorderable()
+                            ->helperText('Up to 10 images. These will be shown with thumbnails in the blog detail page.')
                             ->columnSpanFull(),
                     ]),
 
@@ -99,10 +120,11 @@ class BlogPostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('featured')
-                    ->collection('featured')
-                    ->conversion('thumb')
-                    ->size(60),
+                Tables\Columns\ImageColumn::make('featured_image')
+                    ->label('Image')
+                    ->getStateUsing(fn ($record) => $record->getFirstMediaUrl('featured_image', 'thumb'))
+                    ->size(60)
+                    ->defaultImageUrl(asset('images/placeholder.jpg')),
 
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()

@@ -1,96 +1,196 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- Inner Page Hero --}}
-    <section class="relative bg-dark-lighter py-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Breadcrumb --}}
-            <nav class="flex items-center gap-2 text-sm mb-6" aria-label="Breadcrumb">
-                <a href="{{ route('home.' . app()->getLocale()) }}" class="text-white/60 hover:text-primary transition-colors">
-                    {{ __('Home') }}
-                </a>
-                <svg class="w-4 h-4 text-white/40 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-                <span class="text-primary">{{ __('News & Blogs') }}</span>
-            </nav>
+    {{-- Hero Section --}}
+    <section class="pesaro-blog-hero relative bg-[#222126] border-b-2 border-[#403e3e] min-h-[429px]">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img
+                src="{{ asset('images/blog-hero-bg.jpg') }}"
+                alt="{{ __('News & Blogs') }}"
+                class="absolute inset-0 w-full h-full object-cover"
+            >
+            <!-- Overlay Gradients -->
+            <div class="absolute inset-0" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 3.5%, rgba(0, 0, 0, 0.06) 37.5%), linear-gradient(90deg, rgba(0, 0, 0, 0.765) 0%, rgba(0, 0, 0, 0.425) 100%)"></div>
+        </div>
 
-            {{-- Page Title --}}
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                {{ __('News & Blogs') }}
+        <!-- Content -->
+        <div class="relative z-10 container mx-auto px-4 pt-[217px] pb-[106px]">
+            <!-- Page Title -->
+            <h1 class="text-[40px] leading-[60px] font-semibold text-white tracking-[-0.8px] mb-[10px]">
+                {{ __('News & Events') }}
             </h1>
-            <p class="text-lg text-white/70 max-w-3xl">
-                {{ __('Stay updated with the latest news, trends, and insights from Pesaro') }}
-            </p>
+
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-[16px]">
+                <div class="flex items-center justify-center gap-[12px]">
+                    <a href="{{ route('home.' . app()->getLocale()) }}" class="text-[26px] leading-[36px] font-medium text-white/90 hover:text-white transition-colors">
+                        {{ __('Home') }}
+                    </a>
+                    <div class="flex items-center justify-center w-[7px] h-[14px]">
+                        <svg class="-rotate-90 rtl:rotate-90" width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="#C09A5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <span class="text-[26px] leading-[36px] font-semibold text-[#c09a5b]">{{ __('News & Events') }}</span>
+            </nav>
         </div>
     </section>
 
-    {{-- Blog Posts Grid --}}
-    <section class="py-16 bg-dark">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            @if($posts->isNotEmpty())
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                    @foreach($posts as $post)
-                        <article class="bg-secondary rounded-lg overflow-hidden hover:shadow-2xl transition-all duration-300">
-                            {{-- Post Image --}}
-                            <a href="{{ route('blog.show.' . app()->getLocale(), ['slug' => $post->getTranslation('slug', app()->getLocale())]) }}"
-                               class="block aspect-[16/10] overflow-hidden">
-                                @if($post->hasMedia('featured_image'))
-                                    <img src="{{ $post->getFirstMediaUrl('featured_image', 'card') }}"
-                                         alt="{{ $post->title }}"
-                                         class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                                @else
-                                    <div class="w-full h-full bg-dark flex items-center justify-center">
-                                        <svg class="w-20 h-20 text-primary/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-                                        </svg>
-                                    </div>
-                                @endif
-                            </a>
-
-                            {{-- Post Content --}}
-                            <div class="p-6">
-                                <div class="flex items-center gap-4 text-sm text-primary mb-3">
-                                    <time datetime="{{ $post->published_at?->toISOString() }}">
-                                        {{ $post->published_at?->format('F j, Y') }}
-                                    </time>
-                                </div>
-
-                                <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 hover:text-primary transition-colors">
-                                    <a href="{{ route('blog.show.' . app()->getLocale(), ['slug' => $post->getTranslation('slug', app()->getLocale())]) }}">
-                                        {{ $post->title }}
-                                    </a>
-                                </h3>
-
-                                @if($post->excerpt)
-                                    <p class="text-white/70 mb-4 line-clamp-3">
-                                        {{ $post->excerpt }}
-                                    </p>
-                                @endif
-
-                                <a href="{{ route('blog.show.' . app()->getLocale(), ['slug' => $post->getTranslation('slug', app()->getLocale())]) }}"
-                                   class="inline-flex items-center gap-2 text-primary hover:text-primary-400 font-medium transition-colors group">
-                                    {{ __('Read More') }}
-                                    <svg class="w-4 h-4 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </article>
-                    @endforeach
+    {{-- Blog Section --}}
+    <section class="pesaro-blog-section bg-[#222126] border-b-2 border-[#403e3e] py-[39px] pb-[103px]">
+        <div class="container mx-auto px-4">
+            <!-- Section Heading -->
+            <div class="flex flex-col items-center gap-[6px] mb-[42px]">
+                <!-- Badge -->
+                <div class="border-[1.5px] border-[#c09a5b] rounded-[51px] px-[13px] py-[8px] ps-[3px]">
+                    <ul class="text-[16px] font-medium text-[#c09a5b] leading-normal">
+                        <li class="list-disc ms-[24px]">
+                            <span>{{ __('News & Blogs') }}</span>
+                        </li>
+                    </ul>
                 </div>
 
-                {{-- Pagination --}}
-                <div class="flex justify-center">
-                    {{ $posts->links() }}
+                <!-- Title -->
+                <div class="text-[30px] leading-[40px] font-semibold text-center capitalize max-w-[665px]">
+                    @if(app()->isLocale('en'))
+                        <p class="mb-0">
+                            <span class="text-white">Explore Our </span><span class="text-[#c09a5b]">Comprehensive</span>
+                        </p>
+                        <p class="mb-0">
+                            <span class="text-[#c09a5b]">Interior Design</span><span class="text-white"> Services</span>
+                        </p>
+                    @else
+                        <p class="mb-0 text-white">
+                            <span>استكشف خدماتنا </span><span class="text-[#c09a5b]">الشاملة</span>
+                        </p>
+                        <p class="mb-0">
+                            <span class="text-[#c09a5b]">للتصميم الداخلي</span>
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            @if($posts->isNotEmpty())
+                {{-- Blog Posts Grid with Alternating Layout --}}
+                <div class="max-w-[1190px] mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-[24px] mb-[60px]">
+                        @foreach($posts as $index => $post)
+                            @php
+                                // Determine row (0-indexed)
+                                $row = floor($index / 3);
+                                // Position in row (0, 1, 2)
+                                $posInRow = $index % 3;
+
+                                // Pattern: Row 0 [img, text, img], Row 1 [text, img, text], Row 2 [img, text, img]
+                                // Even rows (0, 2, 4...): image at positions 0 and 2
+                                // Odd rows (1, 3, 5...): image at position 1
+                                $imageFirst = ($row % 2 === 0) ? ($posInRow !== 1) : ($posInRow === 1);
+                            @endphp
+
+                            <article class="pesaro-blog-card bg-[#353535] rounded-[24px] overflow-hidden shadow-[0px_4px_25px_rgba(39,39,39,0.8)] flex flex-col h-full">
+                                @if($imageFirst)
+                                    {{-- Image First --}}
+                                    <a href="{{ route('blog.show.' . app()->getLocale(), ['slug' => $post->getTranslation('slug', app()->getLocale())]) }}"
+                                       class="block w-full h-[246px] overflow-hidden">
+                                        @if($post->hasMedia('featured_image'))
+                                            <img src="{{ $post->getFirstMediaUrl('featured_image', 'card') }}"
+                                                 alt="{{ $post->title }}"
+                                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                                        @else
+                                            <div class="w-full h-full bg-[#222126] flex items-center justify-center">
+                                                <svg class="w-16 h-16 text-[#c09a5b]/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                </svg>
+                                            </div>
+                                        @endif
+                                    </a>
+
+                                    {{-- Content --}}
+                                    <div class="p-[24px] flex flex-col flex-grow">
+                                        <h3 class="text-[23px] leading-[32px] font-semibold text-white mb-[12px] line-clamp-2">
+                                            <a href="{{ route('blog.show.' . app()->getLocale(), ['slug' => $post->getTranslation('slug', app()->getLocale())]) }}"
+                                               class="hover:text-[#c09a5b] transition-colors">
+                                                {{ $post->title }}
+                                            </a>
+                                        </h3>
+
+                                        @if($post->excerpt)
+                                            <p class="text-[18px] leading-[28px] font-medium text-white/80 mb-[16px] line-clamp-3 flex-grow">
+                                                {{ $post->excerpt }}
+                                            </p>
+                                        @endif
+
+                                        <div class="flex items-center gap-[12px] text-[16px] text-[#c09a5b]">
+                                            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <time datetime="{{ $post->published_at?->toISOString() }}">
+                                                {{ $post->published_at?->format('F j, Y') }}
+                                            </time>
+                                        </div>
+                                    </div>
+                                @else
+                                    {{-- Text First --}}
+                                    <div class="p-[24px] flex flex-col flex-grow">
+                                        <h3 class="text-[23px] leading-[32px] font-semibold text-white mb-[12px] line-clamp-2">
+                                            <a href="{{ route('blog.show.' . app()->getLocale(), ['slug' => $post->getTranslation('slug', app()->getLocale())]) }}"
+                                               class="hover:text-[#c09a5b] transition-colors">
+                                                {{ $post->title }}
+                                            </a>
+                                        </h3>
+
+                                        @if($post->excerpt)
+                                            <p class="text-[18px] leading-[28px] font-medium text-white/80 mb-[16px] line-clamp-3 flex-grow">
+                                                {{ $post->excerpt }}
+                                            </p>
+                                        @endif
+
+                                        <div class="flex items-center gap-[12px] text-[16px] text-[#c09a5b]">
+                                            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <time datetime="{{ $post->published_at?->toISOString() }}">
+                                                {{ $post->published_at?->format('F j, Y') }}
+                                            </time>
+                                        </div>
+                                    </div>
+
+                                    {{-- Image --}}
+                                    <a href="{{ route('blog.show.' . app()->getLocale(), ['slug' => $post->getTranslation('slug', app()->getLocale())]) }}"
+                                       class="block w-full h-[246px] overflow-hidden">
+                                        @if($post->hasMedia('featured_image'))
+                                            <img src="{{ $post->getFirstMediaUrl('featured_image', 'card') }}"
+                                                 alt="{{ $post->title }}"
+                                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                                        @else
+                                            <div class="w-full h-full bg-[#222126] flex items-center justify-center">
+                                                <svg class="w-16 h-16 text-[#c09a5b]/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                </svg>
+                                            </div>
+                                        @endif
+                                    </a>
+                                @endif
+                            </article>
+                        @endforeach
+                    </div>
+
+                    {{-- Pagination --}}
+                    @if($posts->hasPages())
+                        <div class="flex justify-center">
+                            {{ $posts->links() }}
+                        </div>
+                    @endif
                 </div>
             @else
-                <div class="text-center py-16">
-                    <svg class="w-20 h-20 text-primary/50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="text-center py-16 max-w-[600px] mx-auto">
+                    <svg class="w-20 h-20 text-[#c09a5b]/30 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
                     </svg>
-                    <h3 class="text-xl font-semibold text-white mb-2">{{ __('No Posts Yet') }}</h3>
-                    <p class="text-white/60">{{ __('Blog posts will be displayed here once they are published.') }}</p>
+                    <h3 class="text-[23px] font-semibold text-white mb-2">{{ __('No Posts Yet') }}</h3>
+                    <p class="text-[18px] text-white/60">{{ __('Blog posts will be displayed here once they are published.') }}</p>
                 </div>
             @endif
         </div>

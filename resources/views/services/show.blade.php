@@ -1,38 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- Inner Page Hero --}}
-    <section class="relative bg-dark-lighter py-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Breadcrumb --}}
-            <nav class="flex items-center gap-2 text-sm mb-6" aria-label="Breadcrumb">
-                <a href="{{ route('home.' . app()->getLocale()) }}" class="text-white/60 hover:text-primary transition-colors">
-                    {{ __('Home') }}
-                </a>
-                <svg class="w-4 h-4 text-white/40 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-                <a href="{{ route('services.index.' . app()->getLocale()) }}" class="text-white/60 hover:text-primary transition-colors">
-                    {{ __('Our Services') }}
-                </a>
-                <svg class="w-4 h-4 text-white/40 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-                <span class="text-primary">{{ $service->title }}</span>
-            </nav>
+    {{-- Use template if available, otherwise fallback to hardcoded layout --}}
+    @if($template && $template->getRenderedBlocks())
+        @foreach($template->getRenderedBlocks() as $block)
+            @php
+                $data = \App\Helpers\TemplateHelper::replaceVariables($block['data'] ?? [], $service);
+            @endphp
+            @includeIf("blocks.{$block['type']}", ['data' => $data, 'service' => $service])
+        @endforeach
+    @else
+        {{-- Fallback: Original hardcoded layout --}}
+        {{-- Inner Page Hero --}}
+        <section class="relative bg-dark-lighter py-16">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                {{-- Breadcrumb --}}
+                <nav class="flex items-center gap-2 text-sm mb-6" aria-label="Breadcrumb">
+                    <a href="{{ route('home.' . app()->getLocale()) }}" class="text-white/60 hover:text-primary transition-colors">
+                        {{ __('Home') }}
+                    </a>
+                    <svg class="w-4 h-4 text-white/40 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    <a href="{{ route('services.index.' . app()->getLocale()) }}" class="text-white/60 hover:text-primary transition-colors">
+                        {{ __('Our Services') }}
+                    </a>
+                    <svg class="w-4 h-4 text-white/40 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    <span class="text-primary">{{ $service->title }}</span>
+                </nav>
 
-            {{-- Page Title --}}
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                {{ $service->title }}
-            </h1>
+                {{-- Page Title --}}
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                    {{ $service->title }}
+                </h1>
 
-            @if($service->short_description)
-                <p class="text-lg text-white/70 max-w-3xl">
-                    {{ $service->short_description }}
-                </p>
-            @endif
-        </div>
-    </section>
+                @if($service->short_description)
+                    <p class="text-lg text-white/70 max-w-3xl">
+                        {{ $service->short_description }}
+                    </p>
+                @endif
+            </div>
+        </section>
 
     {{-- Featured Image --}}
     @if($service->hasMedia('featured_image'))
@@ -61,6 +71,93 @@
             </div>
         </div>
     </section>
+
+    {{-- Service Sections --}}
+    @if($service->sections && $service->sections->isNotEmpty())
+        @foreach($service->sections as $section)
+            <section class="py-12 {{ $loop->even ? 'bg-dark' : 'bg-dark-lighter' }}">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-4xl mx-auto">
+                        {{-- Section Title --}}
+                        @if($section->title)
+                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">
+                                {{ $section->title }}
+                            </h2>
+                        @endif
+
+                        {{-- Text Content --}}
+                        @if($section->type === 'text' && $section->content)
+                            <div class="prose prose-invert prose-lg max-w-none">
+                                <div class="text-white/80 leading-relaxed">
+                                    {!! $section->content !!}
+                                </div>
+                            </div>
+                        @endif
+
+                        {{-- Single Image --}}
+                        @if($section->type === 'image' && isset($section->media_data['image_path']))
+                            <div class="rounded-lg overflow-hidden">
+                                <img src="{{ $section->media_data['image_path'] }}"
+                                     alt="{{ $section->title }}"
+                                     class="w-full h-auto">
+                            </div>
+                        @endif
+
+                        {{-- Video --}}
+                        @if($section->type === 'video' && isset($section->media_data['video_url']))
+                            <div class="aspect-video rounded-lg overflow-hidden">
+                                @php
+                                    $videoUrl = $section->media_data['video_url'];
+                                    $embedUrl = '';
+
+                                    // Convert YouTube URL to embed
+                                    if (str_contains($videoUrl, 'youtube.com/watch?v=')) {
+                                        $videoId = parse_url($videoUrl, PHP_URL_QUERY);
+                                        parse_str($videoId, $params);
+                                        $embedUrl = 'https://www.youtube.com/embed/' . ($params['v'] ?? '');
+                                    } elseif (str_contains($videoUrl, 'youtu.be/')) {
+                                        $videoId = basename(parse_url($videoUrl, PHP_URL_PATH));
+                                        $embedUrl = 'https://www.youtube.com/embed/' . $videoId;
+                                    } elseif (str_contains($videoUrl, 'vimeo.com/')) {
+                                        $videoId = basename(parse_url($videoUrl, PHP_URL_PATH));
+                                        $embedUrl = 'https://player.vimeo.com/video/' . $videoId;
+                                    }
+                                @endphp
+
+                                @if($embedUrl)
+                                    <iframe src="{{ $embedUrl }}"
+                                            class="w-full h-full"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                @endif
+                            </div>
+                        @endif
+
+                        {{-- Image Gallery --}}
+                        @if($section->type === 'gallery' && isset($section->media_data['gallery_images']))
+                            @php
+                                $images = explode(',', $section->media_data['gallery_images']);
+                                $images = array_map('trim', $images);
+                            @endphp
+
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                @foreach($images as $imagePath)
+                                    @if($imagePath)
+                                        <div class="aspect-square rounded-lg overflow-hidden">
+                                            <img src="{{ $imagePath }}"
+                                                 alt="{{ $section->title }}"
+                                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </section>
+        @endforeach
+    @endif
 
     {{-- Service Gallery --}}
     @if($service->hasMedia('gallery'))
@@ -162,4 +259,5 @@
             </div>
         </div>
     </section>
+    @endif
 @endsection
