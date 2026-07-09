@@ -44,31 +44,29 @@ $services = \App\Models\Service::query()
                     <div class="swiper-wrapper">
                         @foreach($services as $index => $service)
                             <div class="swiper-slide">
-                                @if($index % 3 === 1)
-                                    {{-- Middle card - tall with overlay --}}
-                                    <a href="{{ route('services.show.' . app()->getLocale(), ['slug' => $service->getTranslation('slug', app()->getLocale())]) }}"
-                                       class="pesaro-service-card pesaro-service-card-tall">
+                                <article class="pesaro-service-card">
+                                    @if($index % 2 === 1)
+                                        {{-- Middle card - text first, then image --}}
+                                        <!-- Service Content -->
+                                        <div class="pesaro-service-content">
+                                            <h3>{{ $service->getTranslation('title', app()->getLocale()) }}</h3>
+                                            <p>{{ $service->getTranslation('short_description', app()->getLocale()) }}</p>
+                                        </div>
+
                                         <!-- Service Image -->
-                                        <div class="pesaro-service-image-tall">
+                                        <div class="pesaro-service-image">
                                             @if($service->hasMedia('hero'))
                                                 <img src="{{ $service->getFirstMediaUrl('hero', 'card') }}"
                                                      alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
                                             @else
-                                                <img src="{{ asset('images/service-2.jpg') }}" alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
+                                                <img src="{{ asset('images/service-2.jpg') }}"
+                                                     alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
                                             @endif
-                                            <div class="pesaro-service-overlay"></div>
                                         </div>
-
-                                        <!-- Service Title (Overlay) -->
-                                        <h3 class="pesaro-service-title-overlay">
-                                            {{ $service->getTranslation('title', app()->getLocale()) }}
-                                        </h3>
-                                    </a>
-                                @else
-                                    {{-- Side cards - short with description --}}
-                                    <div class="pesaro-service-card pesaro-service-card-short">
+                                    @else
+                                        {{-- Side cards - image first, then text --}}
                                         <!-- Service Image -->
-                                        <div class="pesaro-service-image-short">
+                                        <div class="pesaro-service-image">
                                             @if($service->hasMedia('hero'))
                                                 <img src="{{ $service->getFirstMediaUrl('hero', 'card') }}"
                                                      alt="{{ $service->getTranslation('title', app()->getLocale()) }}">
@@ -83,8 +81,8 @@ $services = \App\Models\Service::query()
                                             <h3>{{ $service->getTranslation('title', app()->getLocale()) }}</h3>
                                             <p>{{ $service->getTranslation('short_description', app()->getLocale()) }}</p>
                                         </div>
-                                    </div>
-                                @endif
+                                    @endif
+                                </article>
                             </div>
                         @endforeach
                     </div>

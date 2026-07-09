@@ -64,45 +64,10 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Navigation Buttons */
+/* Navigation Buttons - Hidden on all screens */
 .pesaro-swiper-button-prev,
 .pesaro-swiper-button-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 20; /* Higher z-index to overlap cards */
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(192, 154, 91, 0.95); /* Slightly more opaque */
-    border-radius: 50%;
-    color: #ffffff;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Add shadow for visibility */
-}
-
-.pesaro-swiper-button-prev:hover,
-.pesaro-swiper-button-next:hover {
-    background: rgba(192, 154, 91, 1);
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-}
-
-.pesaro-swiper-button-prev {
-    left: 16px; /* Overlap the card edge */
-}
-
-.pesaro-swiper-button-next {
-    right: 16px; /* Overlap the card edge */
-}
-
-.pesaro-swiper-button-prev.swiper-button-disabled,
-.pesaro-swiper-button-next.swiper-button-disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
+    display: none !important; /* Hide arrows on all screens */
 }
 
 /* Pagination */
@@ -126,29 +91,4 @@
     border-radius: 6px;
 }
 
-/* RTL Support */
-[dir="rtl"] .pesaro-swiper-button-prev {
-    left: auto;
-    right: 0;
-}
-
-[dir="rtl"] .pesaro-swiper-button-next {
-    right: auto;
-    left: 0;
-}
-
-[dir="rtl"] .pesaro-swiper-button-prev svg {
-    transform: rotate(180deg);
-}
-
-[dir="rtl"] .pesaro-swiper-button-next svg {
-    transform: rotate(180deg);
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-    .pesaro-swiper-button-prev,
-    .pesaro-swiper-button-next {
-        display: none; /* Hide arrows on mobile */
-    }
-}
+/* RTL Support - No changes needed for hidden arrows */
