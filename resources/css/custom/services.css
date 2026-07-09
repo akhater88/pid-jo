@@ -98,19 +98,37 @@
 .pesaro-service-card {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 12px; /* Decreased gap */
+    width: 100%; /* Mobile: full width of container */
+    background: #353535; /* Match news cards */
+    border-radius: 24px; /* Match news cards */
+    padding: 16px; /* Decreased padding from 24px */
+    box-shadow: 0px 4px 25px rgba(39, 39, 39, 0.8); /* Match news cards */
 }
 
 .pesaro-service-card-short {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 12px; /* Decreased gap */
+    width: 100%; /* Mobile: full width of container */
+    background: #353535; /* Match news cards */
+    border-radius: 24px; /* Match news cards */
+    padding: 16px; /* Decreased padding from 24px */
+    box-shadow: 0px 4px 25px rgba(39, 39, 39, 0.8); /* Match news cards */
 }
 
 .pesaro-service-card-tall {
     position: relative;
     text-decoration: none;
     transition: transform 0.3s ease;
+    width: 100%; /* Mobile: full width of container */
+    background: #353535; /* Match news cards */
+    border-radius: 24px; /* Match news cards */
+    padding: 16px; /* Decreased padding from 24px */
+    box-shadow: 0px 4px 25px rgba(39, 39, 39, 0.8); /* Match news cards */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Decreased gap */
 }
 
 .pesaro-service-card-tall:hover {
@@ -120,9 +138,10 @@
 /* Service Images */
 .pesaro-service-image-short {
     width: 100%;
-    height: 285px;
-    border-radius: 24px;
+    height: 200px; /* Decreased from 246px */
+    border-radius: 20px; /* Match news cards */
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .pesaro-service-image-short img {
@@ -133,10 +152,11 @@
 
 .pesaro-service-image-tall {
     width: 100%;
-    height: 470px;
-    border-radius: 24px;
+    height: 200px; /* Decreased from 246px */
+    border-radius: 20px; /* Match news cards */
     overflow: hidden;
     position: relative;
+    flex-shrink: 0;
 }
 
 .pesaro-service-image-tall img {
@@ -151,45 +171,46 @@
     background: linear-gradient(180deg,
         rgba(0, 0, 0, 0.24) 37.66%,
         rgba(0, 0, 0, 0.7) 100%);
-    border-radius: 24px;
+    border-radius: 20px; /* Match news cards */
 }
 
 /* Service Content */
 .pesaro-service-content {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 4px; /* Match news cards */
+    flex-shrink: 0;
 }
 
 .pesaro-service-content h3 {
-    font-size: 24px;
+    font-size: 20px; /* Match news cards */
     font-weight: 600;
     text-transform: capitalize;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
-    line-height: normal;
+    line-height: 28px; /* Match news cards */
 }
 
 .pesaro-service-content p {
-    font-size: 18px;
+    font-size: 18px; /* Match news cards */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.8);
     font-family: 'Poppins', sans-serif;
-    line-height: 28px;
+    line-height: 26px; /* Match news cards */
 }
 
 /* Overlay Title */
 .pesaro-service-title-overlay {
     position: absolute;
-    bottom: 25.5px;
-    left: 25.5px;
-    right: 25.5px;
-    font-size: 24px;
+    bottom: 16px; /* Match new card padding */
+    left: 16px; /* Match new card padding */
+    right: 16px; /* Match new card padding */
+    font-size: 20px; /* Match news cards */
     font-weight: 600;
     text-transform: capitalize;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
-    line-height: normal;
+    line-height: 28px; /* Match news cards */
     z-index: 10;
 }
 
@@ -228,16 +249,18 @@
     }
 
     .pesaro-service-content h3 {
-        font-size: 26px;
+        font-size: 22px; /* Match news cards */
+        line-height: 30px; /* Match news cards */
     }
 
     .pesaro-service-content p {
-        font-size: 19px;
-        line-height: 29px;
+        font-size: 19px; /* Match news cards */
+        line-height: 28px; /* Match news cards */
     }
 
     .pesaro-service-title-overlay {
-        font-size: 26px;
+        font-size: 22px;
+        line-height: 30px;
     }
 }
 
@@ -268,9 +291,12 @@
         gap: 26.5px;
     }
 
+    .pesaro-service-card,
     .pesaro-service-card-short {
         flex: 0 0 393px;
         width: 393px;
+        padding-top: 24px;
+        padding-bottom: 30px;
     }
 
     .pesaro-service-card-tall {
@@ -278,17 +304,28 @@
         width: 393px;
     }
 
+    .pesaro-service-image-short,
+    .pesaro-service-image-tall {
+        width: 345px; /* Match news cards desktop width */
+    }
+
+    .pesaro-service-content {
+        width: 345px; /* Match news cards desktop width */
+    }
+
     .pesaro-service-content h3 {
-        font-size: 28px;
+        font-size: 23px; /* Match news cards */
+        line-height: 32px; /* Match news cards */
     }
 
     .pesaro-service-content p {
-        font-size: 21px;
-        line-height: 31px;
+        font-size: 20px; /* Match news cards */
+        line-height: 30px; /* Match news cards */
     }
 
     .pesaro-service-title-overlay {
-        font-size: 28px;
+        font-size: 23px; /* Match news cards */
+        line-height: 32px; /* Match news cards */
     }
 }
 
