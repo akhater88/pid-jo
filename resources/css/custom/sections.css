@@ -334,10 +334,10 @@
 }
 
 .pesaro-timeline-badge {
-    position: absolute;
+    /*position: absolute;*/
     top: -24px;
     left: 32px;
-    background: #c09a5b;
+    /*background: #c09a5b;*/
     color: #ffffff;
     padding: 8px 24px;
     border-radius: 999px;
