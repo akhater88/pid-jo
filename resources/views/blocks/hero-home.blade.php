@@ -92,7 +92,13 @@ $promo_2_image = $data['promo_2_image'] ?? null;
                             <!-- Background -->
                             <div class="pesaro-promo-bg">
                                 @if($promo_1_image)
-                                    <img src="{{ $promo_1_image }}" alt="{{ $promo_1_title }}">
+                                    @php
+                                        // Handle both uploaded files and legacy URLs
+                                        $promo1ImageUrl = (str_starts_with($promo_1_image, 'http://') || str_starts_with($promo_1_image, 'https://') || str_starts_with($promo_1_image, '/'))
+                                            ? asset($promo_1_image)
+                                            : asset('storage/' . $promo_1_image);
+                                    @endphp
+                                    <img src="{{ $promo1ImageUrl }}" alt="{{ $promo_1_title }}">
                                 @else
                                     <img src="{{ asset('images/hero-bg.jpg') }}" alt="{{ $promo_1_title }}">
                                 @endif
@@ -118,7 +124,13 @@ $promo_2_image = $data['promo_2_image'] ?? null;
                             <!-- Background -->
                             <div class="pesaro-promo-bg">
                                 @if($promo_2_image)
-                                    <img src="{{ $promo_2_image }}" alt="{{ $promo_2_title }}">
+                                    @php
+                                        // Handle both uploaded files and legacy URLs
+                                        $promo2ImageUrl = (str_starts_with($promo_2_image, 'http://') || str_starts_with($promo_2_image, 'https://') || str_starts_with($promo_2_image, '/'))
+                                            ? asset($promo_2_image)
+                                            : asset('storage/' . $promo_2_image);
+                                    @endphp
+                                    <img src="{{ $promo2ImageUrl }}" alt="{{ $promo_2_title }}">
                                 @else
                                     <img src="{{ asset('images/hero-bg.jpg') }}" alt="{{ $promo_2_title }}">
                                 @endif
