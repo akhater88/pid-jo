@@ -38,7 +38,8 @@ class HeroInnerBlock
                         ->required(),
                     TextInput::make('url')
                         ->label(__('URL'))
-                        ->url(),
+                        ->placeholder('/services or https://example.com')
+                        ->helperText(__('Relative path or full URL')),
                 ])
                 ->defaultItems(0)
                 ->collapsible()

@@ -5,7 +5,11 @@ $title = $data['title'] ?? '';
 $title_highlight = $data['title_highlight'] ?? 'Manage';
 $subtitle = $data['subtitle'] ?? '';
 $cta_text = $data['cta_text'] ?? __('Explore Services');
-$cta_url = $data['cta_url'] ?? route('services.index');
+// Handle both relative URIs and absolute URLs
+$ctaUrlRaw = $data['cta_url'] ?? route('services.index');
+$cta_url = (str_starts_with($ctaUrlRaw, 'http://') || str_starts_with($ctaUrlRaw, 'https://'))
+    ? $ctaUrlRaw
+    : url($ctaUrlRaw);
 $background_image = $data['background_image'] ?? null;
 
 // Promo banners (right side cards)

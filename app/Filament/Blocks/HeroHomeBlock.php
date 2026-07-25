@@ -35,8 +35,9 @@ class HeroHomeBlock
 
             TextInput::make('cta_url')
                 ->label(__('Button URL'))
-                ->url()
-                ->default('/contact'),
+                ->default('/contact')
+                ->placeholder('/contact or https://example.com')
+                ->helperText(__('Enter a relative path (e.g., /contact, /services) or full URL (e.g., https://example.com)')),
 
             FileUpload::make('background_image')
                 ->label(__('Background Image'))

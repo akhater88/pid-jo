@@ -2,6 +2,7 @@
 
 namespace App\Filament\Blocks;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -30,21 +31,33 @@ class AboutBenefitsBlock
                 ->rows(3)
                 ->maxLength(1000),
 
-            TextInput::make('main_image')
-                ->label(__('Main Image Path (Large)'))
+            FileUpload::make('main_image')
+                ->label(__('Main Image (Large)'))
                 ->required()
-                ->default('/images/about-main.jpg')
-                ->maxLength(500)
-                ->placeholder('/images/example.jpg')
-                ->helperText(__('Enter the path to the main image (e.g., /images/about-main.jpg). Recommended size: 800x600px.')),
+                ->disk('public')
+                ->directory('blocks/about-benefits')
+                ->image()
+                ->imageEditor()
+                ->imageEditorAspectRatios([
+                    '4:3',
+                    null,
+                ])
+                ->maxSize(5120)
+                ->helperText(__('Upload the main image. Recommended size: 800x600px. Max file size: 5MB.')),
 
-            TextInput::make('small_image')
-                ->label(__('Small Image Path (Overlay)'))
+            FileUpload::make('small_image')
+                ->label(__('Small Image (Overlay)'))
                 ->required()
-                ->default('/images/about-small.jpg')
-                ->maxLength(500)
-                ->placeholder('/images/example.jpg')
-                ->helperText(__('Enter the path to the small overlay image (e.g., /images/about-small.jpg). Recommended size: 400x300px.')),
+                ->disk('public')
+                ->directory('blocks/about-benefits')
+                ->image()
+                ->imageEditor()
+                ->imageEditorAspectRatios([
+                    '4:3',
+                    null,
+                ])
+                ->maxSize(5120)
+                ->helperText(__('Upload the small overlay image. Recommended size: 400x300px. Max file size: 5MB.')),
 
             Repeater::make('benefits')
                 ->label(__('Benefits List'))

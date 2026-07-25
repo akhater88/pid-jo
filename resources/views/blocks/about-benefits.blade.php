@@ -28,7 +28,13 @@ $benefits = $data['benefits'] ?? [
                 {{-- Main large image (background) --}}
                 <div class="pesaro-about-image-main">
                     @if($main_image)
-                        <img src="{{ asset('storage/' . $main_image) }}" alt="{{ $section_title }}">
+                        @php
+                            // Handle both new FileUpload paths and legacy text input paths
+                            $mainImageUrl = str_starts_with($main_image, '/') || str_starts_with($main_image, 'http')
+                                ? asset($main_image)
+                                : asset('storage/' . $main_image);
+                        @endphp
+                        <img src="{{ $mainImageUrl }}" alt="{{ $section_title }}">
                     @else
                         <img src="{{ asset('images/about-main.jpg') }}" alt="{{ __('Pesaro Interior Design') }}">
                     @endif
@@ -38,7 +44,13 @@ $benefits = $data['benefits'] ?? [
                 {{-- Small overlapping image (foreground) --}}
                 <div class="pesaro-about-image-small">
                     @if($small_image)
-                        <img src="{{ asset('storage/' . $small_image) }}" alt="{{ $section_title }}">
+                        @php
+                            // Handle both new FileUpload paths and legacy text input paths
+                            $smallImageUrl = str_starts_with($small_image, '/') || str_starts_with($small_image, 'http')
+                                ? asset($small_image)
+                                : asset('storage/' . $small_image);
+                        @endphp
+                        <img src="{{ $smallImageUrl }}" alt="{{ $section_title }}">
                     @else
                         <img src="{{ asset('images/about-small.jpg') }}" alt="{{ __('Pesaro Projects') }}">
                     @endif

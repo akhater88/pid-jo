@@ -11,7 +11,13 @@
                 @endif
 
                 @if(isset($item['url']) && !$loop->last)
-                    <a href="{{ $item['url'] }}" class="text-white/70 hover:text-primary transition-colors">
+                    @php
+                        // Handle both relative URIs and absolute URLs
+                        $itemUrl = (str_starts_with($item['url'], 'http://') || str_starts_with($item['url'], 'https://'))
+                            ? $item['url']
+                            : url($item['url']);
+                    @endphp
+                    <a href="{{ $itemUrl }}" class="text-white/70 hover:text-primary transition-colors">
                         {{ $item['label'] }}
                     </a>
                 @else
