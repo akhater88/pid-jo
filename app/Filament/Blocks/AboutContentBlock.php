@@ -2,6 +2,7 @@
 
 namespace App\Filament\Blocks;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 
@@ -13,13 +14,22 @@ class AboutContentBlock
     public static function make(): array
     {
         return [
-            TextInput::make('video_thumbnail')
-                ->label(__('Video Thumbnail Image Path'))
+            FileUpload::make('video_thumbnail')
+                ->label(__('Video Thumbnail Image'))
                 ->required()
-                ->default('/images/about-video-thumb.jpg')
-                ->maxLength(500)
-                ->placeholder('/images/example.jpg')
-                ->helperText(__('Enter the path to the video thumbnail image (e.g., /images/about-video-thumb.jpg). Recommended size: 1232x500px.')),
+                ->disk('public')
+                ->directory('blocks/video-thumbnails')
+                ->image()
+                ->imageEditor()
+                ->imageEditorAspectRatios([
+                    '2.464:1',
+                    '16:9',
+                    null,
+                ])
+                ->maxSize(5120)
+                ->imagePreviewHeight('200')
+                ->helperText(__('Upload the video thumbnail image. Recommended size: 1232x500px. Max file size: 5MB.'))
+                ->columnSpanFull(),
 
             TextInput::make('video_url')
                 ->label(__('YouTube Video URL'))

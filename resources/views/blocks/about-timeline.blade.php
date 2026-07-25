@@ -2,10 +2,25 @@
 @php
     $sectionTitle = $data['section_title'] ?? __('Explore Our Comprehensive Interior Design Services');
     $sectionBadge = $data['section_badge'] ?? __('Our Story');
-    $timeline1951Image = $data['timeline_1951_image'] ?? asset('images/about-timeline-1951.jpg');
+
+    // Handle both uploaded files and legacy paths for 1951 image
+    $timeline1951ImageRaw = $data['timeline_1951_image'] ?? null;
+    $timeline1951Image = $timeline1951ImageRaw
+        ? ((str_starts_with($timeline1951ImageRaw, 'http://') || str_starts_with($timeline1951ImageRaw, 'https://') || str_starts_with($timeline1951ImageRaw, '/'))
+            ? asset($timeline1951ImageRaw)
+            : asset('storage/' . $timeline1951ImageRaw))
+        : asset('images/about-timeline-1951.jpg');
+
     $centerTitle = $data['center_title'] ?? __('Supervision & execution Accessories');
     $centerDescription = $data['center_description'] ?? '';
-    $timeline2026Image = $data['timeline_2026_image'] ?? asset('images/about-timeline-2026.jpg');
+
+    // Handle both uploaded files and legacy paths for 2026 image
+    $timeline2026ImageRaw = $data['timeline_2026_image'] ?? null;
+    $timeline2026Image = $timeline2026ImageRaw
+        ? ((str_starts_with($timeline2026ImageRaw, 'http://') || str_starts_with($timeline2026ImageRaw, 'https://') || str_starts_with($timeline2026ImageRaw, '/'))
+            ? asset($timeline2026ImageRaw)
+            : asset('storage/' . $timeline2026ImageRaw))
+        : asset('images/about-timeline-2026.jpg');
 @endphp
 
 <section class="pesaro-about-timeline">

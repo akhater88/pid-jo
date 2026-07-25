@@ -1,6 +1,13 @@
 {{-- About Content Block with Video --}}
 @php
-    $videoThumbnail = $data['video_thumbnail'] ?? asset('images/about-content-image.jpg');
+    // Handle both uploaded files and legacy paths for video thumbnail
+    $videoThumbnailRaw = $data['video_thumbnail'] ?? null;
+    $videoThumbnail = $videoThumbnailRaw
+        ? ((str_starts_with($videoThumbnailRaw, 'http://') || str_starts_with($videoThumbnailRaw, 'https://') || str_starts_with($videoThumbnailRaw, '/'))
+            ? asset($videoThumbnailRaw)
+            : asset('storage/' . $videoThumbnailRaw))
+        : asset('images/about-content-image.jpg');
+
     $videoUrl = $data['video_url'] ?? 'https://www.youtube.com/embed/dQw4w9WgXcQ';
     $contentTitle = $data['content_title'] ?? '';
     $contentBody = $data['content_body'] ?? '';

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Blocks;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -28,13 +29,16 @@ class AboutTimelineBlock
 
             Section::make('1951 Timeline')
                 ->schema([
-                    TextInput::make('timeline_1951_image')
-                        ->label(__('1951 Image Path'))
+                    FileUpload::make('timeline_1951_image')
+                        ->label(__('1951 Timeline Image'))
                         ->required()
-                        ->default('/images/timeline-1951.jpg')
-                        ->maxLength(500)
-                        ->placeholder('/images/example.jpg')
-                        ->helperText(__('Enter the path to the 1951 timeline image (e.g., /images/timeline-1951.jpg). Recommended size: 130x120px.')),
+                        ->disk('public')
+                        ->directory('blocks/timeline')
+                        ->image()
+                        ->imageEditor()
+                        ->maxSize(5120)
+                        ->imagePreviewHeight('120')
+                        ->helperText(__('Upload the 1951 timeline image. Recommended size: 130x120px. Max file size: 5MB.')),
                 ])
                 ->collapsible(),
 
@@ -57,13 +61,16 @@ class AboutTimelineBlock
 
             Section::make('2026 Timeline')
                 ->schema([
-                    TextInput::make('timeline_2026_image')
-                        ->label(__('2026 Image Path'))
+                    FileUpload::make('timeline_2026_image')
+                        ->label(__('2026 Timeline Image'))
                         ->required()
-                        ->default('/images/timeline-2026.jpg')
-                        ->maxLength(500)
-                        ->placeholder('/images/example.jpg')
-                        ->helperText(__('Enter the path to the 2026 timeline image (e.g., /images/timeline-2026.jpg). Recommended size: 130x120px.')),
+                        ->disk('public')
+                        ->directory('blocks/timeline')
+                        ->image()
+                        ->imageEditor()
+                        ->maxSize(5120)
+                        ->imagePreviewHeight('120')
+                        ->helperText(__('Upload the 2026 timeline image. Recommended size: 130x120px. Max file size: 5MB.')),
                 ])
                 ->collapsible(),
         ];

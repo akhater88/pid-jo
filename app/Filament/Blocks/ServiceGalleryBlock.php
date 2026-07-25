@@ -2,8 +2,8 @@
 
 namespace App\Filament\Blocks;
 
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 
 class ServiceGalleryBlock
 {
