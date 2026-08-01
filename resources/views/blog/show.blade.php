@@ -1,49 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- Hero Section with Breadcrumbs --}}
-    <section class="relative bg-[#222126] border-b-2 border-[#403e3e] min-h-[329px] py-[100px]">
-        <!-- Background Image -->
-        <div class="absolute inset-0">
+    {{-- Blog Detail Hero Section --}}
+    <section class="pesaro-about-hero">
+        {{-- Background Image --}}
+        <div class="pesaro-about-hero-background">
             @if($post->hasMedia('featured_image'))
                 <img src="{{ $post->getFirstMediaUrl('featured_image', 'hero') }}"
-                     alt="{{ $post->title }}"
-                     class="absolute inset-0 w-full h-full object-cover">
+                     alt="{{ $post->title }}">
+            @else
+                {{-- Fallback gradient background if image doesn't exist --}}
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #222126 0%, #353535 100%);"></div>
             @endif
-            <!-- Overlay Gradients -->
-            <div class="absolute inset-0" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 3.5%, rgba(0, 0, 0, 0.06) 37.5%), linear-gradient(90deg, rgba(0, 0, 0, 0.765) 0%, rgba(0, 0, 0, 0.425) 100%)"></div>
+            {{-- Overlay Gradients --}}
+            <div class="pesaro-about-hero-overlay"></div>
         </div>
 
-        <!-- Content -->
-        <div class="relative z-10 container mx-auto px-4">
-            <!-- Page Title -->
-            <h1 class="text-[40px] leading-[60px] font-semibold text-white tracking-[-0.8px] mb-[10px]">
-                {{ __('News & Events') }}
+        {{-- Content --}}
+        <div class="pesaro-about-hero-content">
+            {{-- Page Title --}}
+            <h1 class="pesaro-about-hero-title">
+                {{ $post->title }}
             </h1>
 
-            <!-- Breadcrumb -->
-            <nav class="flex items-center gap-[16px]">
-                <div class="flex items-center justify-center gap-[12px]">
-                    <a href="{{ route('home.' . app()->getLocale()) }}" class="text-[26px] leading-[36px] font-medium text-white/90 hover:text-white transition-colors">
+            {{-- Breadcrumb --}}
+            <nav class="pesaro-about-hero-breadcrumb" aria-label="Breadcrumb">
+                <div class="pesaro-about-hero-breadcrumb-item">
+                    <a href="{{ route('home.' . app()->getLocale()) }}" class="pesaro-about-hero-breadcrumb-link">
                         {{ __('Home') }}
                     </a>
-                    <div class="flex items-center justify-center w-[7px] h-[14px]">
-                        <svg class="-rotate-90 rtl:rotate-90" width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="pesaro-about-hero-breadcrumb-separator">
+                        <svg width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="#C09A5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
-                <div class="flex items-center justify-center gap-[12px]">
-                    <a href="{{ route('blog.index.' . app()->getLocale()) }}" class="text-[26px] leading-[36px] font-medium text-white/90 hover:text-white transition-colors">
+                <div class="pesaro-about-hero-breadcrumb-item">
+                    <a href="{{ route('blog.index.' . app()->getLocale()) }}" class="pesaro-about-hero-breadcrumb-link">
                         {{ __('News & Events') }}
                     </a>
-                    <div class="flex items-center justify-center w-[7px] h-[14px]">
-                        <svg class="-rotate-90 rtl:rotate-90" width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="pesaro-about-hero-breadcrumb-separator">
+                        <svg width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="#C09A5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
-                <span class="text-[26px] leading-[36px] font-semibold text-[#c09a5b]">{{ __('Blog Details') }}</span>
+                <span class="pesaro-about-hero-breadcrumb-current">{{ $post->title }}</span>
             </nav>
         </div>
     </section>
@@ -109,14 +111,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        {{-- Join Conversation Button --}}
-                        <div class="mt-8">
-                            <a href="#comment-form"
-                               class="inline-flex items-center gap-2 bg-transparent border-2 border-primary hover:bg-primary text-white px-8 py-3 rounded-full font-medium transition-colors">
-                                <span>{{ __('Join the conversation') }}</span>
-                            </a>
-                        </div>
                     </div>
                 </div>
 
@@ -162,125 +156,7 @@
                             </div>
                         </div>
                     @endif
-
-                    {{-- Recent Comments Widget --}}
-                    <div class="bg-[#2a2830] rounded-lg p-6">
-                        <h3 class="text-[20px] font-semibold text-white mb-6">{{ __('Recent Comments') }}</h3>
-                        <div class="space-y-4">
-                            @for($i = 0; $i < 3; $i++)
-                                <div class="flex gap-3">
-                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-semibold">
-                                        {{ chr(65 + $i) }}
-                                    </div>
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-2 mb-1">
-                                            <h4 class="text-[14px] font-semibold text-white">{{ __('Mohamed Sayed') }}</h4>
-                                            <span class="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded-full">{{ __('Active') }}</span>
-                                        </div>
-                                        <p class="text-[12px] text-white/60 line-clamp-2">
-                                            {{ __('Powerful project management tools for your composites of...') }}
-                                        </p>
-                                    </div>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
                 </aside>
-            </div>
-        </div>
-    </section>
-
-    {{-- Full Width Comment Form Section --}}
-    <section class="py-16 bg-[#222126]">
-        <div class="container mx-auto px-4">
-            {{-- Decorative CTA with Arrows --}}
-            <div class="relative py-16">
-                {{-- Left Arrow --}}
-                <div class="absolute left-0 top-1/2 -translate-y-1/2">
-                    <svg width="77" height="77" viewBox="0 0 77 77" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M38.5 76.5L1 38.5L38.5 1" stroke="#C09A5B" stroke-width="2"/>
-                        <path d="M76 38.5L38.5 76.5L1 38.5" stroke="#C09A5B" stroke-width="2"/>
-                    </svg>
-                </div>
-
-                {{-- Center Content --}}
-                <div class="text-center px-24">
-                    <h3 class="text-[24px] leading-[36px] font-semibold text-white mb-2">
-                        {{ __('Explore Our') }} <span class="text-primary">{{ __('Comprehensive') }}</span>
-                    </h3>
-                    <p class="text-[24px] leading-[36px] font-semibold text-primary">
-                        {{ __('Interior Design Services') }}
-                    </p>
-                </div>
-
-                {{-- Right Arrow --}}
-                <div class="absolute right-0 top-1/2 -translate-y-1/2 rotate-180">
-                    <svg width="77" height="77" viewBox="0 0 77 77" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M38.5 76.5L1 38.5L38.5 1" stroke="#C09A5B" stroke-width="2"/>
-                        <path d="M76 38.5L38.5 76.5L1 38.5" stroke="#C09A5B" stroke-width="2"/>
-                    </svg>
-                </div>
-            </div>
-
-            {{-- Comment Form --}}
-            <div id="comment-form" class="bg-[#2a2830] rounded-lg p-8">
-                <form action="#" method="POST" class="space-y-6">
-                    @csrf
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <label for="name" class="block text-white text-sm font-medium mb-2">{{ __('Full Name') }}</label>
-                            <input type="text" id="name" name="name" placeholder="{{ __('Enter your Name') }}"
-                                   class="w-full bg-[#222126] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-primary">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-white text-sm font-medium mb-2">{{ __('Email') }}</label>
-                            <input type="email" id="email" name="email" placeholder="{{ __('Enter your Email') }}"
-                                   class="w-full bg-[#222126] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-primary">
-                        </div>
-                        <div>
-                            <label for="website" class="block text-white text-sm font-medium mb-2">{{ __('Website') }}</label>
-                            <input type="url" id="website" name="website" placeholder="{{ __('Enter your Website') }}"
-                                   class="w-full bg-[#222126] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-primary">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="comment" class="block text-white text-sm font-medium mb-2">{{ __('Your Comment') }}</label>
-                        <textarea id="comment" name="comment" rows="6" placeholder="{{ __('Enter your Comment') }}"
-                                  class="w-full bg-[#222126] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-primary resize-none"></textarea>
-                    </div>
-                    <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-12 py-3 rounded-full font-medium transition-colors">
-                        {{ __('Submit') }}
-                    </button>
-                </form>
-            </div>
-
-            {{-- Bottom Decorative CTA --}}
-            <div class="relative py-16">
-                {{-- Left Arrow --}}
-                <div class="absolute left-0 top-1/2 -translate-y-1/2">
-                    <svg width="77" height="77" viewBox="0 0 77 77" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M38.5 76.5L1 38.5L38.5 1" stroke="#C09A5B" stroke-width="2"/>
-                        <path d="M76 38.5L38.5 76.5L1 38.5" stroke="#C09A5B" stroke-width="2"/>
-                    </svg>
-                </div>
-
-                {{-- Center Content --}}
-                <div class="text-center px-24">
-                    <h3 class="text-[24px] leading-[36px] font-semibold text-white mb-2">
-                        {{ __('Explore Our') }} <span class="text-primary">{{ __('Comprehensive') }}</span>
-                    </h3>
-                    <p class="text-[24px] leading-[36px] font-semibold text-primary">
-                        {{ __('Interior Design Services') }}
-                    </p>
-                </div>
-
-                {{-- Right Arrow --}}
-                <div class="absolute right-0 top-1/2 -translate-y-1/2 rotate-180">
-                    <svg width="77" height="77" viewBox="0 0 77 77" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M38.5 76.5L1 38.5L38.5 1" stroke="#C09A5B" stroke-width="2"/>
-                        <path d="M76 38.5L38.5 76.5L1 38.5" stroke="#C09A5B" stroke-width="2"/>
-                    </svg>
-                </div>
             </div>
         </div>
     </section>
