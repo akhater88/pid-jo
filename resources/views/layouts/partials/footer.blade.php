@@ -162,10 +162,10 @@
                             <a href="{{ route('faq.' . app()->getLocale()) }}">{{ __('FAQ Questions') }}</a>
                         </div>
                         <div class="pesaro-footer-link">
-                            <a href="#">{{ __('Privacy Policy') }}</a>
+                            <a href="{{ route('privacy.' . app()->getLocale()) }}">{{ __('Privacy Policy') }}</a>
                         </div>
                         <div class="pesaro-footer-link">
-                            <a href="#">{{ __('Terms & Conditions') }}</a>
+                            <a href="{{ route('terms.' . app()->getLocale()) }}">{{ __('Terms & Conditions') }}</a>
                         </div>
                     </div>
                 </div>

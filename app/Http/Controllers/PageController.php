@@ -121,7 +121,12 @@ class PageController extends Controller
      */
     public function privacy(): View
     {
-        return view('pages.privacy');
+        $settings = app(\App\Settings\LegalSettings::class);
+
+        return view('pages.privacy', [
+            'title' => $settings->privacy_title[app()->getLocale()],
+            'content' => $settings->privacy_content[app()->getLocale()],
+        ]);
     }
 
     /**
@@ -129,6 +134,11 @@ class PageController extends Controller
      */
     public function terms(): View
     {
-        return view('pages.terms');
+        $settings = app(\App\Settings\LegalSettings::class);
+
+        return view('pages.terms', [
+            'title' => $settings->terms_title[app()->getLocale()],
+            'content' => $settings->terms_content[app()->getLocale()],
+        ]);
     }
 }
