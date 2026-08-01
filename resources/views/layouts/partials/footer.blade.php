@@ -150,13 +150,13 @@
                     <div class="divider"></div>
                     <div class="pesaro-footer-links">
                         <div class="pesaro-footer-link">
-                            <a href="#">{{ __('About Us') }}</a>
+                            <a href="{{ route('about.' . app()->getLocale()) }}">{{ __('About Us') }}</a>
                         </div>
                         <div class="pesaro-footer-link">
                             <a href="{{ route('blog.index') }}">{{ __('Events & Links') }}</a>
                         </div>
                         <div class="pesaro-footer-link">
-                            <a href="#">{{ __('Contact Us') }}</a>
+                            <a href="{{ route('contact.' . app()->getLocale()) }}">{{ __('Contact Us') }}</a>
                         </div>
                         <div class="pesaro-footer-link">
                             <a href="{{ route('faq.' . app()->getLocale()) }}">{{ __('FAQ Questions') }}</a>
