@@ -93,16 +93,17 @@ class HeroHomeBlock
                     TextInput::make('promo_1_title')
                         ->label(__('Title (Bold)'))
                         ->default(__('Visit our showroom'))
-                        ->required(fn ($get) => $get('promo_1_mode') === 'text')
+                        ->required()
                         ->maxLength(255)
-                        ->hidden(fn ($get) => $get('promo_1_mode') === 'pdf'),
+                        ->helperText(__('For text mode: main title. For PDF mode: title shown above download button')),
 
                     TextInput::make('promo_1_subtitle')
                         ->label(__('Description'))
                         ->default(__('to get your 30% Discount'))
                         ->required(fn ($get) => $get('promo_1_mode') === 'text')
                         ->maxLength(255)
-                        ->hidden(fn ($get) => $get('promo_1_mode') === 'pdf'),
+                        ->hidden(fn ($get) => $get('promo_1_mode') === 'pdf')
+                        ->helperText(__('Only shown in text mode')),
 
                     FileUpload::make('promo_1_image')
                         ->label(__('Background Image'))
@@ -154,16 +155,17 @@ class HeroHomeBlock
                     TextInput::make('promo_2_title')
                         ->label(__('Title (Bold)'))
                         ->default(__('Visit our showroom'))
-                        ->required(fn ($get) => $get('promo_2_mode') === 'text')
+                        ->required()
                         ->maxLength(255)
-                        ->hidden(fn ($get) => $get('promo_2_mode') === 'pdf'),
+                        ->helperText(__('For text mode: main title. For PDF mode: title shown above download button')),
 
                     TextInput::make('promo_2_subtitle')
                         ->label(__('Description'))
                         ->default(__('to get your 20% Discount'))
                         ->required(fn ($get) => $get('promo_2_mode') === 'text')
                         ->maxLength(255)
-                        ->hidden(fn ($get) => $get('promo_2_mode') === 'pdf'),
+                        ->hidden(fn ($get) => $get('promo_2_mode') === 'pdf')
+                        ->helperText(__('Only shown in text mode')),
 
                     FileUpload::make('promo_2_image')
                         ->label(__('Background Image'))

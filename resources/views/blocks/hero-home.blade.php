@@ -118,12 +118,13 @@ $promo_2_pdf_url = $promo_2_pdf ? asset('storage/' . $promo_2_pdf) : null;
                             <!-- Content -->
                             <div class="pesaro-promo-content">
                                 @if($promo_1_mode === 'pdf')
-                                    <!-- PDF Download Icon -->
-                                    <div class="pesaro-promo-pdf-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+                                    <!-- PDF Download Mode -->
+                                    <div class="pesaro-promo-pdf-title">{{ $promo_1_title }}</div>
+                                    <div class="pesaro-promo-download-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                         </svg>
-                                        <p class="mt-2">{{ __('Download PDF') }}</p>
+                                        <span>{{ __('Download') }}</span>
                                     </div>
                                 @else
                                     <!-- Text Content -->
@@ -169,12 +170,13 @@ $promo_2_pdf_url = $promo_2_pdf ? asset('storage/' . $promo_2_pdf) : null;
                             <!-- Content -->
                             <div class="pesaro-promo-content">
                                 @if($promo_2_mode === 'pdf')
-                                    <!-- PDF Download Icon -->
-                                    <div class="pesaro-promo-pdf-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+                                    <!-- PDF Download Mode -->
+                                    <div class="pesaro-promo-pdf-title">{{ $promo_2_title }}</div>
+                                    <div class="pesaro-promo-download-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                         </svg>
-                                        <p class="mt-2">{{ __('Download PDF') }}</p>
+                                        <span>{{ __('Download') }}</span>
                                     </div>
                                 @else
                                     <!-- Text Content -->

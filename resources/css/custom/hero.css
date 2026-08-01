@@ -209,7 +209,7 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
-    width: 240px;
+    width: 280px;
 }
 
 .pesaro-promo-content h3 {
@@ -373,27 +373,40 @@
     border-color: rgba(192, 154, 91, 0.6);
 }
 
-/* PDF Icon Styling */
-.pesaro-promo-pdf-icon {
-    display: flex;
-    flex-direction: column;
+/* PDF Download Button */
+.pesaro-promo-download-btn {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    text-align: center;
-}
-
-.pesaro-promo-pdf-icon svg {
-    color: #c09a5b;
-    width: 48px;
-    height: 48px;
-}
-
-.pesaro-promo-pdf-icon p {
+    gap: 8px;
+    background: #c09a5b;
     color: #ffffff;
-    font-size: 17px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
     font-weight: 600;
-    margin-top: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 4px;
+    width: fit-content;
+}
+
+.pesaro-promo-download-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.pesaro-promo-download-btn:hover {
+    background: #a88447;
+    transform: translateY(-2px);
+}
+
+.pesaro-promo-pdf-title {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 4px;
 }
 
 /* RTL Support */
@@ -410,4 +423,8 @@
 [dir="rtl"] .pesaro-promo-badge {
     left: auto;
     right: 28px;
+}
+
+[dir="rtl"] .pesaro-promo-download-btn {
+    flex-direction: row-reverse;
 }

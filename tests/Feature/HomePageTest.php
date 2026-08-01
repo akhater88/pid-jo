@@ -79,7 +79,7 @@ it('renders hero home block with promo cards in text mode for {locale}', functio
     $response->assertSee('20% OFF', false);
     $response->assertSee('Special offer', false);
     $response->assertSee('for limited time', false);
-    $response->assertDontSee('Download PDF', false);
+    $response->assertDontSee('pesaro-promo-download-btn', false);
 })->with('locales');
 
 it('renders hero home block with promo cards in PDF mode for {locale}', function (string $locale) {
@@ -96,9 +96,11 @@ it('renders hero home block with promo cards in PDF mode for {locale}', function
                 'cta_url' => '/contact',
                 'promo_1_mode' => 'pdf',
                 'promo_1_badge' => '30% OFF',
+                'promo_1_title' => 'Premium Catalog',
                 'promo_1_pdf' => 'hero-pdfs/promo-catalog-1.pdf',
                 'promo_2_mode' => 'pdf',
                 'promo_2_badge' => '20% OFF',
+                'promo_2_title' => 'Design Guide',
                 'promo_2_pdf' => 'hero-pdfs/promo-catalog-2.pdf',
             ],
         ],
@@ -110,11 +112,13 @@ it('renders hero home block with promo cards in PDF mode for {locale}', function
     $response->assertOk();
     $response->assertSee('30% OFF', false);
     $response->assertSee('20% OFF', false);
-    $response->assertSee('Download PDF', false);
+    $response->assertSee('Premium Catalog', false);
+    $response->assertSee('Design Guide', false);
+    $response->assertSee('Download', false);
     $response->assertSee('storage/hero-pdfs/promo-catalog-1.pdf', false);
     $response->assertSee('storage/hero-pdfs/promo-catalog-2.pdf', false);
     $response->assertSee('pesaro-promo-card-link', false);
-    $response->assertSee('download', false);
+    $response->assertSee('pesaro-promo-download-btn', false);
 })->with('locales');
 
 it('renders hero home block with mixed promo card modes for {locale}', function (string $locale) {
@@ -135,6 +139,7 @@ it('renders hero home block with mixed promo card modes for {locale}', function 
                 'promo_1_subtitle' => 'to get your 30% Discount',
                 'promo_2_mode' => 'pdf',
                 'promo_2_badge' => '20% OFF',
+                'promo_2_title' => 'Product Catalog',
                 'promo_2_pdf' => 'hero-pdfs/promo-catalog.pdf',
             ],
         ],
@@ -148,6 +153,7 @@ it('renders hero home block with mixed promo card modes for {locale}', function 
     $response->assertSee('Visit our showroom', false);
     $response->assertSee('to get your 30% Discount', false);
     // Check PDF mode promo card
+    $response->assertSee('Product Catalog', false);
     $response->assertSee('storage/hero-pdfs/promo-catalog.pdf', false);
-    $response->assertSee('Download PDF', false);
+    $response->assertSee('Download', false);
 })->with('locales');
