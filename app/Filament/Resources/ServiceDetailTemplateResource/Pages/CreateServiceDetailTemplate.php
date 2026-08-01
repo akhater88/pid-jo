@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\ServiceDetailTemplateResource\Pages;
 
 use App\Filament\Resources\ServiceDetailTemplateResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateServiceDetailTemplate extends CreateRecord

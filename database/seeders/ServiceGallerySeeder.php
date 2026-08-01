@@ -57,7 +57,7 @@ class ServiceGallerySeeder extends Seeder
                 }
             }
 
-            $this->command->info("Added " . count($images) . " gallery images to service: {$service->getTranslation('title', 'en')}");
+            $this->command->info('Added ' . count($images) . " gallery images to service: {$service->getTranslation('title', 'en')}");
         }
 
         $this->command->info('Service galleries seeded successfully!');

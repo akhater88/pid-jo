@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Models\FormSubmission;
 
 it('renders contact page in {locale}', function (string $locale) {
     $response = $this->get("/{$locale}/contact");

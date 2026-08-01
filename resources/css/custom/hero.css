@@ -360,6 +360,42 @@
     }
 }
 
+/* Promo Card PDF Link */
+.pesaro-promo-card-link {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.pesaro-promo-card-link:hover {
+    transform: translateY(-4px);
+    border-color: rgba(192, 154, 91, 0.6);
+}
+
+/* PDF Icon Styling */
+.pesaro-promo-pdf-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.pesaro-promo-pdf-icon svg {
+    color: #c09a5b;
+    width: 48px;
+    height: 48px;
+}
+
+.pesaro-promo-pdf-icon p {
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
 /* RTL Support */
 [dir="rtl"] .pesaro-badge ul {
     margin-left: 0;

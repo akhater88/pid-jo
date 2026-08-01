@@ -13,15 +13,21 @@ $cta_url = (str_starts_with($ctaUrlRaw, 'http://') || str_starts_with($ctaUrlRaw
 $background_image = $data['background_image'] ?? null;
 
 // Promo banners (right side cards)
+$promo_1_mode = $data['promo_1_mode'] ?? 'text';
 $promo_1_title = $data['promo_1_title'] ?? 'Visit our showroom';
 $promo_1_subtitle = $data['promo_1_subtitle'] ?? 'to get your 30% Discount';
 $promo_1_badge = $data['promo_1_badge'] ?? '30% OFF';
 $promo_1_image = $data['promo_1_image'] ?? null;
+$promo_1_pdf = $data['promo_1_pdf'] ?? null;
+$promo_1_pdf_url = $promo_1_pdf ? asset('storage/' . $promo_1_pdf) : null;
 
+$promo_2_mode = $data['promo_2_mode'] ?? 'text';
 $promo_2_title = $data['promo_2_title'] ?? 'Visit our showroom';
 $promo_2_subtitle = $data['promo_2_subtitle'] ?? 'to get your 20% Discount';
 $promo_2_badge = $data['promo_2_badge'] ?? '20% OFF';
 $promo_2_image = $data['promo_2_image'] ?? null;
+$promo_2_pdf = $data['promo_2_pdf'] ?? null;
+$promo_2_pdf_url = $promo_2_pdf ? asset('storage/' . $promo_2_pdf) : null;
 @endphp
 
 <section class="pesaro-hero">
@@ -88,7 +94,11 @@ $promo_2_image = $data['promo_2_image'] ?? null;
                 <div class="pesaro-promo-banners">
                     <!-- Promo Card 1 -->
                     <div class="pesaro-promo-card-wrap">
-                        <div class="pesaro-promo-card">
+                        @if($promo_1_mode === 'pdf' && $promo_1_pdf_url)
+                            <a href="{{ $promo_1_pdf_url }}" download class="pesaro-promo-card pesaro-promo-card-link">
+                        @else
+                            <div class="pesaro-promo-card">
+                        @endif
                             <!-- Background -->
                             <div class="pesaro-promo-bg">
                                 @if($promo_1_image)
@@ -107,10 +117,25 @@ $promo_2_image = $data['promo_2_image'] ?? null;
 
                             <!-- Content -->
                             <div class="pesaro-promo-content">
-                                <h3>{{ $promo_1_title }}</h3>
-                                <p>{{ $promo_1_subtitle }}</p>
+                                @if($promo_1_mode === 'pdf')
+                                    <!-- PDF Download Icon -->
+                                    <div class="pesaro-promo-pdf-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                        </svg>
+                                        <p class="mt-2">{{ __('Download PDF') }}</p>
+                                    </div>
+                                @else
+                                    <!-- Text Content -->
+                                    <h3>{{ $promo_1_title }}</h3>
+                                    <p>{{ $promo_1_subtitle }}</p>
+                                @endif
                             </div>
-                        </div>
+                        @if($promo_1_mode === 'pdf' && $promo_1_pdf_url)
+                            </a>
+                        @else
+                            </div>
+                        @endif
 
                         <!-- Badge -->
                         <div class="pesaro-promo-badge">
@@ -120,7 +145,11 @@ $promo_2_image = $data['promo_2_image'] ?? null;
 
                     <!-- Promo Card 2 -->
                     <div class="pesaro-promo-card-wrap">
-                        <div class="pesaro-promo-card">
+                        @if($promo_2_mode === 'pdf' && $promo_2_pdf_url)
+                            <a href="{{ $promo_2_pdf_url }}" download class="pesaro-promo-card pesaro-promo-card-link">
+                        @else
+                            <div class="pesaro-promo-card">
+                        @endif
                             <!-- Background -->
                             <div class="pesaro-promo-bg">
                                 @if($promo_2_image)
@@ -139,10 +168,25 @@ $promo_2_image = $data['promo_2_image'] ?? null;
 
                             <!-- Content -->
                             <div class="pesaro-promo-content">
-                                <h3>{{ $promo_2_title }}</h3>
-                                <p>{{ $promo_2_subtitle }}</p>
+                                @if($promo_2_mode === 'pdf')
+                                    <!-- PDF Download Icon -->
+                                    <div class="pesaro-promo-pdf-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                        </svg>
+                                        <p class="mt-2">{{ __('Download PDF') }}</p>
+                                    </div>
+                                @else
+                                    <!-- Text Content -->
+                                    <h3>{{ $promo_2_title }}</h3>
+                                    <p>{{ $promo_2_subtitle }}</p>
+                                @endif
                             </div>
-                        </div>
+                        @if($promo_2_mode === 'pdf' && $promo_2_pdf_url)
+                            </a>
+                        @else
+                            </div>
+                        @endif
 
                         <!-- Badge -->
                         <div class="pesaro-promo-badge">

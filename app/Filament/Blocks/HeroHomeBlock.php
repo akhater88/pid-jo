@@ -3,6 +3,7 @@
 namespace App\Filament\Blocks;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -69,6 +70,19 @@ class HeroHomeBlock
 
             Section::make(__('Promo Card 1 (30% OFF)'))
                 ->schema([
+                    Radio::make('promo_1_mode')
+                        ->label(__('Promo Type'))
+                        ->options([
+                            'text' => __('Text Content (Title & Subtitle)'),
+                            'pdf' => __('PDF Download'),
+                        ])
+                        ->default('text')
+                        ->required()
+                        ->inline()
+                        ->reactive()
+                        ->helperText(__('Choose whether to display text content or provide a downloadable PDF'))
+                        ->columnSpanFull(),
+
                     TextInput::make('promo_1_badge')
                         ->label(__('Badge Label'))
                         ->default('30% OFF')
@@ -79,14 +93,16 @@ class HeroHomeBlock
                     TextInput::make('promo_1_title')
                         ->label(__('Title (Bold)'))
                         ->default(__('Visit our showroom'))
-                        ->required()
-                        ->maxLength(255),
+                        ->required(fn ($get) => $get('promo_1_mode') === 'text')
+                        ->maxLength(255)
+                        ->hidden(fn ($get) => $get('promo_1_mode') === 'pdf'),
 
                     TextInput::make('promo_1_subtitle')
                         ->label(__('Description'))
                         ->default(__('to get your 30% Discount'))
-                        ->required()
-                        ->maxLength(255),
+                        ->required(fn ($get) => $get('promo_1_mode') === 'text')
+                        ->maxLength(255)
+                        ->hidden(fn ($get) => $get('promo_1_mode') === 'pdf'),
 
                     FileUpload::make('promo_1_image')
                         ->label(__('Background Image'))
@@ -98,12 +114,36 @@ class HeroHomeBlock
                         ->imagePreviewHeight('150')
                         ->helperText(__('Recommended size: 600x400px'))
                         ->columnSpanFull(),
+
+                    FileUpload::make('promo_1_pdf')
+                        ->label(__('PDF File'))
+                        ->acceptedFileTypes(['application/pdf'])
+                        ->maxSize(10240)
+                        ->directory('hero-pdfs')
+                        ->visibility('public')
+                        ->required(fn ($get) => $get('promo_1_mode') === 'pdf')
+                        ->hidden(fn ($get) => $get('promo_1_mode') !== 'pdf')
+                        ->helperText(__('Upload the PDF file users will download when clicking the promo card'))
+                        ->columnSpanFull(),
                 ])
                 ->collapsible()
                 ->collapsed(),
 
             Section::make(__('Promo Card 2 (20% OFF)'))
                 ->schema([
+                    Radio::make('promo_2_mode')
+                        ->label(__('Promo Type'))
+                        ->options([
+                            'text' => __('Text Content (Title & Subtitle)'),
+                            'pdf' => __('PDF Download'),
+                        ])
+                        ->default('text')
+                        ->required()
+                        ->inline()
+                        ->reactive()
+                        ->helperText(__('Choose whether to display text content or provide a downloadable PDF'))
+                        ->columnSpanFull(),
+
                     TextInput::make('promo_2_badge')
                         ->label(__('Badge Label'))
                         ->default('20% OFF')
@@ -114,14 +154,16 @@ class HeroHomeBlock
                     TextInput::make('promo_2_title')
                         ->label(__('Title (Bold)'))
                         ->default(__('Visit our showroom'))
-                        ->required()
-                        ->maxLength(255),
+                        ->required(fn ($get) => $get('promo_2_mode') === 'text')
+                        ->maxLength(255)
+                        ->hidden(fn ($get) => $get('promo_2_mode') === 'pdf'),
 
                     TextInput::make('promo_2_subtitle')
                         ->label(__('Description'))
                         ->default(__('to get your 20% Discount'))
-                        ->required()
-                        ->maxLength(255),
+                        ->required(fn ($get) => $get('promo_2_mode') === 'text')
+                        ->maxLength(255)
+                        ->hidden(fn ($get) => $get('promo_2_mode') === 'pdf'),
 
                     FileUpload::make('promo_2_image')
                         ->label(__('Background Image'))
@@ -132,6 +174,17 @@ class HeroHomeBlock
                         ->visibility('public')
                         ->imagePreviewHeight('150')
                         ->helperText(__('Recommended size: 600x400px'))
+                        ->columnSpanFull(),
+
+                    FileUpload::make('promo_2_pdf')
+                        ->label(__('PDF File'))
+                        ->acceptedFileTypes(['application/pdf'])
+                        ->maxSize(10240)
+                        ->directory('hero-pdfs')
+                        ->visibility('public')
+                        ->required(fn ($get) => $get('promo_2_mode') === 'pdf')
+                        ->hidden(fn ($get) => $get('promo_2_mode') !== 'pdf')
+                        ->helperText(__('Upload the PDF file users will download when clicking the promo card'))
                         ->columnSpanFull(),
                 ])
                 ->collapsible()

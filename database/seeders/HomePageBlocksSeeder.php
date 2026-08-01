@@ -16,6 +16,7 @@ class HomePageBlocksSeeder extends Seeder
 
         if (!$page) {
             $this->command->error('Page ID 1 not found! Please create the homepage first.');
+
             return;
         }
 
