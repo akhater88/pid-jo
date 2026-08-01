@@ -12,11 +12,12 @@
     align-items: center;
 }
 
-/* Mobile: 500px height matching Figma */
+/* Mobile: dynamic height */
 @media (max-width: 767px) {
     .pesaro-hero {
-        height: 500px;
-        min-height: 500px;
+        height: auto;
+        min-height: auto;
+        padding: 120px 0 40px;
     }
 }
 
@@ -59,10 +60,8 @@
 
 /* Hero Content */
 .pesaro-hero-content {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 189px; /* Mobile: positioned lower per Figma (189px from top) */
+    position: relative;
+    width: 100%;
     z-index: 10;
 }
 
@@ -157,11 +156,11 @@
 
 /* Promo Banners */
 .pesaro-promo-banners {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 16px;
     flex-shrink: 0;
-    width: 331px;
+    width: 100%;
 }
 
 .pesaro-promo-card-wrap {
@@ -233,7 +232,10 @@
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 7px;
     height: 37px;
-    width: 92px;
+    min-width: 92px;
+    max-width: 275px;
+    width: fit-content;
+    padding: 0 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,6 +246,9 @@
     font-size: 17px;
     font-weight: 600;
     text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Scroll Indicator */
@@ -271,9 +276,14 @@
     .pesaro-hero {
         height: 100vh;
         min-height: 600px;
+        padding: 0;
+        align-items: center;
     }
 
     .pesaro-hero-content {
+        position: absolute;
+        left: 0;
+        right: 0;
         top: 140px;
     }
 
@@ -308,6 +318,10 @@
 
     .pesaro-scroll-indicator {
         display: block; /* Show scroll indicator on tablet and up */
+    }
+
+    .pesaro-promo-banners {
+        width: 100%;
     }
 }
 
@@ -356,7 +370,7 @@
     }
 
     .pesaro-promo-banners {
-        display: flex;
+        width: 331px;
     }
 }
 
