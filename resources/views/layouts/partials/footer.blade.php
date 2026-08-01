@@ -1,3 +1,7 @@
+@php
+    $settings = app(\App\Settings\SiteSettings::class);
+@endphp
+
 <footer class="pesaro-footer">
     {{-- Background Image Section --}}
     <div class="pesaro-footer-bg">
@@ -39,7 +43,7 @@
                             </div>
                             <div class="pesaro-footer-contact-text">
                                 <span class="label">{{ __('Administration') }}</span>
-                                <span class="value">+962 6 55 3 11 77 , +962 77 00 2 32 42</span>
+                                <span class="value">{{ $settings->administration_phone[app()->getLocale()] }}</span>
                             </div>
                         </div>
 
@@ -50,7 +54,7 @@
                             </div>
                             <div class="pesaro-footer-contact-text">
                                 <span class="label">{{ __('Showroom') }}</span>
-                                <span class="value">+962 6 567 58 58 , +962 77 100 23 23</span>
+                                <span class="value">{{ $settings->showroom_phone[app()->getLocale()] }}</span>
                             </div>
                         </div>
 
@@ -61,7 +65,7 @@
                             </div>
                             <div class="pesaro-footer-contact-text">
                                 <span class="label">{{ __('Email us') }}</span>
-                                <span class="value">info@pid-jo.com</span>
+                                <span class="value">{{ $settings->email }}</span>
                             </div>
                         </div>
 
@@ -72,7 +76,7 @@
                             </div>
                             <div class="pesaro-footer-contact-text">
                                 <span class="label">{{ __('Our Location') }}</span>
-                                <span class="value">{{ __('Amman, Jordan - Khalda, Rawan Mall') }}</span>
+                                <span class="value">{{ $settings->location[app()->getLocale()] }}</span>
                             </div>
                         </div>
                     </div>
@@ -84,18 +88,29 @@
                             <p>{{ __('Connect with us:') }}</p>
                         </div>
                         <div class="pesaro-footer-social-icons">
-                            <a href="#" class="pesaro-footer-social-icon" aria-label="Facebook">
-                                <img src="{{ asset('images/social-facebook.svg') }}" alt="Facebook">
-                            </a>
-                            <a href="#" class="pesaro-footer-social-icon active" aria-label="Instagram">
-                                <img src="{{ asset('images/social-instagram.svg') }}" alt="Instagram">
-                            </a>
-                            <a href="#" class="pesaro-footer-social-icon" aria-label="LinkedIn">
-                                <img src="{{ asset('images/social-linkedin.svg') }}" alt="LinkedIn">
-                            </a>
-                            <a href="#" class="pesaro-footer-social-icon" aria-label="YouTube">
-                                <img src="{{ asset('images/social-youtube.svg') }}" alt="YouTube">
-                            </a>
+                            @if($settings->facebook_url)
+                                <a href="{{ $settings->facebook_url }}" class="pesaro-footer-social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+                                    <img src="{{ asset('images/social-facebook.svg') }}" alt="Facebook">
+                                </a>
+                            @endif
+
+                            @if($settings->instagram_url)
+                                <a href="{{ $settings->instagram_url }}" class="pesaro-footer-social-icon {{ $settings->instagram_url ? 'active' : '' }}" aria-label="Instagram" target="_blank" rel="noopener">
+                                    <img src="{{ asset('images/social-instagram.svg') }}" alt="Instagram">
+                                </a>
+                            @endif
+
+                            @if($settings->linkedin_url)
+                                <a href="{{ $settings->linkedin_url }}" class="pesaro-footer-social-icon" aria-label="LinkedIn" target="_blank" rel="noopener">
+                                    <img src="{{ asset('images/social-linkedin.svg') }}" alt="LinkedIn">
+                                </a>
+                            @endif
+
+                            @if($settings->youtube_url)
+                                <a href="{{ $settings->youtube_url }}" class="pesaro-footer-social-icon" aria-label="YouTube" target="_blank" rel="noopener">
+                                    <img src="{{ asset('images/social-youtube.svg') }}" alt="YouTube">
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
