@@ -1,40 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- Inner Page Hero --}}
-    <section class="relative bg-dark-lighter py-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Breadcrumb --}}
-            <nav class="flex items-center gap-2 text-sm mb-6" aria-label="Breadcrumb">
-                <a href="{{ route('home.' . app()->getLocale()) }}" class="text-white/60 hover:text-primary transition-colors">
-                    {{ __('Home') }}
-                </a>
-                <svg class="w-4 h-4 text-white/40 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-                <span class="text-primary">{{ __('Pesaro Gallery') }}</span>
-            </nav>
+    {{-- Gallery Hero Section --}}
+    <section class="pesaro-about-hero">
+        {{-- Background Image --}}
+        <div class="pesaro-about-hero-background">
+            @if($images->isNotEmpty() && $images->first()->hasMedia('image'))
+                <img src="{{ $images->first()->getFirstMediaUrl('image', 'hero') }}"
+                     alt="{{ __('Pesaro Gallery') }}">
+            @else
+                {{-- Fallback gradient background if no images --}}
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #222126 0%, #353535 100%);"></div>
+            @endif
+            {{-- Overlay Gradients --}}
+            <div class="pesaro-about-hero-overlay"></div>
+        </div>
 
+        {{-- Content --}}
+        <div class="pesaro-about-hero-content">
             {{-- Page Title --}}
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h1 class="pesaro-about-hero-title">
                 {{ __('Pesaro Gallery') }}
             </h1>
-            <p class="text-lg text-white/70 max-w-3xl">
-                {{ __('Explore our portfolio of completed projects and get inspired for your next interior design venture') }}
-            </p>
+
+            {{-- Breadcrumb --}}
+            <nav class="pesaro-about-hero-breadcrumb" aria-label="Breadcrumb">
+                <div class="pesaro-about-hero-breadcrumb-item">
+                    <a href="{{ route('home.' . app()->getLocale()) }}" class="pesaro-about-hero-breadcrumb-link">
+                        {{ __('Home') }}
+                    </a>
+                    <div class="pesaro-about-hero-breadcrumb-separator">
+                        <svg width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="#C09A5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <span class="pesaro-about-hero-breadcrumb-current">{{ __('Gallery') }}</span>
+            </nav>
         </div>
     </section>
 
     {{-- Gallery Grid --}}
-    <section class="py-16 bg-dark">
+    <section class="py-16 bg-dark" x-data="galleryViewer()">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             @if($images->isNotEmpty())
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    @foreach($images as $image)
-                        <a href="{{ $image->getFirstMediaUrl('image') }}"
-                           class="group block aspect-square overflow-hidden rounded-lg bg-secondary"
-                           data-lightbox="gallery"
-                           data-title="{{ $image->title }}">
+                    @foreach($images as $index => $image)
+                        <button @click="openGallery({{ $index }})"
+                                class="group relative block aspect-square overflow-hidden rounded-lg bg-secondary cursor-pointer">
                             @if($image->hasMedia('image'))
                                 <img src="{{ $image->getFirstMediaUrl('image', 'card') }}"
                                      alt="{{ $image->title }}"
@@ -50,6 +63,9 @@
                             {{-- Overlay --}}
                             <div class="absolute inset-0 bg-dark/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <div class="text-center text-white px-4">
+                                    <svg class="w-12 h-12 mx-auto mb-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                                    </svg>
                                     @if($image->title)
                                         <h3 class="font-semibold mb-1">{{ $image->title }}</h3>
                                     @endif
@@ -58,8 +74,73 @@
                                     @endif
                                 </div>
                             </div>
-                        </a>
+                        </button>
                     @endforeach
+                </div>
+
+                {{-- Lightbox Modal --}}
+                <div x-show="isOpen"
+                     x-cloak
+                     @keydown.escape.window="close()"
+                     @keydown.arrow-left.window="prev()"
+                     @keydown.arrow-right.window="next()"
+                     class="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0"
+                     x-transition:enter-end="opacity-100"
+                     x-transition:leave="transition ease-in duration-200"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0">
+
+                    {{-- Close Button --}}
+                    <button @click="close()"
+                            class="absolute top-4 right-4 z-10 text-white hover:text-primary transition-colors">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+
+                    {{-- Image Counter --}}
+                    <div class="absolute top-4 left-4 z-10 text-white bg-black/50 px-4 py-2 rounded-lg">
+                        <span x-text="currentIndex + 1"></span> / <span x-text="images.length"></span>
+                    </div>
+
+                    {{-- Previous Button --}}
+                    <button @click="prev()"
+                            class="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white hover:text-primary transition-colors p-2 bg-black/50 rounded-full">
+                        <svg class="w-8 h-8 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+
+                    {{-- Image Container --}}
+                    <div class="relative max-w-7xl max-h-[90vh] mx-auto px-16" @click.self="close()">
+                        <img :src="images[currentIndex]?.url"
+                             :alt="images[currentIndex]?.title"
+                             class="max-w-full max-h-[90vh] object-contain mx-auto"
+                             x-transition:enter="transition ease-out duration-300"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100">
+
+                        {{-- Image Title & Description --}}
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-center"
+                             x-show="images[currentIndex]?.title || images[currentIndex]?.description">
+                            <h3 x-show="images[currentIndex]?.title"
+                                x-text="images[currentIndex]?.title"
+                                class="text-xl font-semibold text-white mb-2"></h3>
+                            <p x-show="images[currentIndex]?.description"
+                               x-text="images[currentIndex]?.description"
+                               class="text-white/80"></p>
+                        </div>
+                    </div>
+
+                    {{-- Next Button --}}
+                    <button @click="next()"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white hover:text-primary transition-colors p-2 bg-black/50 rounded-full">
+                        <svg class="w-8 h-8 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
                 </div>
             @else
                 <div class="text-center py-16">
@@ -100,24 +181,39 @@
 
 @push('scripts')
 <script>
-// Simple lightbox functionality with Alpine.js
-document.addEventListener('alpine:init', () => {
-    Alpine.data('lightbox', () => ({
-        open: false,
-        currentImage: '',
-        currentTitle: '',
+function galleryViewer() {
+    return {
+        isOpen: false,
+        currentIndex: 0,
+        images: [
+            @foreach($images as $image)
+                {
+                    url: '{{ $image->getFirstMediaUrl('image') }}',
+                    title: '{{ addslashes($image->title ?? '') }}',
+                    description: '{{ addslashes($image->description ?? '') }}'
+                },
+            @endforeach
+        ],
 
-        init() {
-            document.querySelectorAll('[data-lightbox]').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.currentImage = link.getAttribute('href');
-                    this.currentTitle = link.getAttribute('data-title') || '';
-                    this.open = true;
-                });
-            });
+        openGallery(index) {
+            this.currentIndex = index;
+            this.isOpen = true;
+            document.body.style.overflow = 'hidden';
+        },
+
+        close() {
+            this.isOpen = false;
+            document.body.style.overflow = '';
+        },
+
+        next() {
+            this.currentIndex = (this.currentIndex + 1) % this.images.length;
+        },
+
+        prev() {
+            this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
         }
-    }));
-});
+    }
+}
 </script>
 @endpush
