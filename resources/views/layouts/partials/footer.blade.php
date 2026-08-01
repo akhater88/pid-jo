@@ -159,7 +159,7 @@
                             <a href="#">{{ __('Contact Us') }}</a>
                         </div>
                         <div class="pesaro-footer-link">
-                            <a href="#">{{ __('FAQ Questions') }}</a>
+                            <a href="{{ route('faq.' . app()->getLocale()) }}">{{ __('FAQ Questions') }}</a>
                         </div>
                         <div class="pesaro-footer-link">
                             <a href="#">{{ __('Privacy Policy') }}</a>

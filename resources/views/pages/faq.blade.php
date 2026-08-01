@@ -1,27 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- Inner Page Hero --}}
-    <section class="relative bg-dark-lighter py-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Breadcrumb --}}
-            <nav class="flex items-center gap-2 text-sm mb-6" aria-label="Breadcrumb">
-                <a href="{{ route('home.' . app()->getLocale()) }}" class="text-white/60 hover:text-primary transition-colors">
-                    {{ __('Home') }}
-                </a>
-                <svg class="w-4 h-4 text-white/40 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-                <span class="text-primary">{{ __('FAQ Questions') }}</span>
-            </nav>
+    {{-- FAQ Hero Section --}}
+    <section class="pesaro-about-hero">
+        {{-- Background Image --}}
+        <div class="pesaro-about-hero-background">
+            @if(file_exists(public_path('images/faq-hero-bg.jpg')))
+                <img src="{{ asset('images/faq-hero-bg.jpg') }}"
+                     alt="{{ __('Frequently Asked Questions') }}">
+            @else
+                {{-- Fallback gradient background if image doesn't exist --}}
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #222126 0%, #353535 100%);"></div>
+            @endif
+            {{-- Overlay Gradients --}}
+            <div class="pesaro-about-hero-overlay"></div>
+        </div>
 
+        {{-- Content --}}
+        <div class="pesaro-about-hero-content">
             {{-- Page Title --}}
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h1 class="pesaro-about-hero-title">
                 {{ __('Frequently Asked Questions') }}
             </h1>
-            <p class="text-lg text-white/70 max-w-3xl">
-                {{ __('Find answers to common questions about our services and processes') }}
-            </p>
+
+            {{-- Breadcrumb --}}
+            <nav class="pesaro-about-hero-breadcrumb" aria-label="Breadcrumb">
+                <div class="pesaro-about-hero-breadcrumb-item">
+                    <a href="{{ route('home.' . app()->getLocale()) }}" class="pesaro-about-hero-breadcrumb-link">
+                        {{ __('Home') }}
+                    </a>
+                    <div class="pesaro-about-hero-breadcrumb-separator">
+                        <svg width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="#C09A5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <span class="pesaro-about-hero-breadcrumb-current">{{ __('FAQ Questions') }}</span>
+            </nav>
         </div>
     </section>
 
