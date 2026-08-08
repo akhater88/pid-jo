@@ -39,10 +39,24 @@ class FixHeroHomeFileUploadsCommand extends Command
 
                         foreach ($fileFields as $field) {
                             if (isset($data[$field]) && is_array($data[$field])) {
-                                // Extract the first value from the array
-                                $data[$field] = $data[$field][0] ?? null;
-                                $updated = true;
-                                $this->info("  Fixed {$field} for page {$page->id} ({$locale})");
+                                // Handle both formats:
+                                // 1. Associative array with UUID keys: {"uuid": "path/to/file.jpg"}
+                                // 2. Indexed array: [0 => "path/to/file.jpg"]
+                                // 3. Empty array: []
+
+                                if (empty($data[$field])) {
+                                    // Empty array - set to null
+                                    $data[$field] = null;
+                                    $updated = true;
+                                    $this->info("  Cleared empty {$field} for page {$page->id} ({$locale})");
+                                } else {
+                                    // Get the first value from the array (associative or indexed)
+                                    $value = is_array($data[$field]) ? array_values($data[$field])[0] : $data[$field];
+
+                                    $data[$field] = $value;
+                                    $updated = true;
+                                    $this->info("  Fixed {$field} for page {$page->id} ({$locale}): {$value}");
+                                }
                             }
                         }
                     }
