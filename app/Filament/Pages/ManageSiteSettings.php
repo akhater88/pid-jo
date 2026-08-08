@@ -39,31 +39,100 @@ class ManageSiteSettings extends SettingsPage
                             ->schema([
                                 Forms\Components\TextInput::make('administration_phone.en')
                                     ->label(__('Administration Phone (English)'))
-                                    ->tel()
                                     ->required()
                                     ->placeholder('+962 6 55 3 11 77 , +962 77 00 2 32 42')
-                                    ->helperText(__('Enter phone number(s) separated by comma')),
+                                    ->helperText(__('Enter phone number(s) separated by comma. Each number should start with + and country code.'))
+                                    ->rules([
+                                        'required',
+                                        function () {
+                                            return function (string $attribute, $value, \Closure $fail) {
+                                                $phones = array_map('trim', explode(',', $value));
+                                                foreach ($phones as $phone) {
+                                                    if (empty($phone)) {
+                                                        continue;
+                                                    }
+                                                    // Validate phone format: should start with + and contain only digits, spaces, and basic formatting
+                                                    if (! preg_match('/^\+[\d\s\-()]+$/', $phone)) {
+                                                        $fail(__('Each phone number must start with + followed by country code and digits. Invalid number: :phone', ['phone' => $phone]));
+
+                                                        return;
+                                                    }
+                                                }
+                                            };
+                                        },
+                                    ]),
 
                                 Forms\Components\TextInput::make('administration_phone.ar')
                                     ->label(__('Administration Phone (Arabic)'))
-                                    ->tel()
                                     ->required()
                                     ->placeholder('+962 6 55 3 11 77 , +962 77 00 2 32 42')
-                                    ->helperText(__('Enter phone number(s) separated by comma')),
+                                    ->helperText(__('Enter phone number(s) separated by comma. Each number should start with + and country code.'))
+                                    ->rules([
+                                        'required',
+                                        function () {
+                                            return function (string $attribute, $value, \Closure $fail) {
+                                                $phones = array_map('trim', explode(',', $value));
+                                                foreach ($phones as $phone) {
+                                                    if (empty($phone)) {
+                                                        continue;
+                                                    }
+                                                    if (! preg_match('/^\+[\d\s\-()]+$/', $phone)) {
+                                                        $fail(__('Each phone number must start with + followed by country code and digits. Invalid number: :phone', ['phone' => $phone]));
+
+                                                        return;
+                                                    }
+                                                }
+                                            };
+                                        },
+                                    ]),
 
                                 Forms\Components\TextInput::make('showroom_phone.en')
                                     ->label(__('Showroom Phone (English)'))
-                                    ->tel()
                                     ->required()
                                     ->placeholder('+962 6 567 58 58 , +962 77 100 23 23')
-                                    ->helperText(__('Enter phone number(s) separated by comma')),
+                                    ->helperText(__('Enter phone number(s) separated by comma. Each number should start with + and country code.'))
+                                    ->rules([
+                                        'required',
+                                        function () {
+                                            return function (string $attribute, $value, \Closure $fail) {
+                                                $phones = array_map('trim', explode(',', $value));
+                                                foreach ($phones as $phone) {
+                                                    if (empty($phone)) {
+                                                        continue;
+                                                    }
+                                                    if (! preg_match('/^\+[\d\s\-()]+$/', $phone)) {
+                                                        $fail(__('Each phone number must start with + followed by country code and digits. Invalid number: :phone', ['phone' => $phone]));
+
+                                                        return;
+                                                    }
+                                                }
+                                            };
+                                        },
+                                    ]),
 
                                 Forms\Components\TextInput::make('showroom_phone.ar')
                                     ->label(__('Showroom Phone (Arabic)'))
-                                    ->tel()
                                     ->required()
                                     ->placeholder('+962 6 567 58 58 , +962 77 100 23 23')
-                                    ->helperText(__('Enter phone number(s) separated by comma')),
+                                    ->helperText(__('Enter phone number(s) separated by comma. Each number should start with + and country code.'))
+                                    ->rules([
+                                        'required',
+                                        function () {
+                                            return function (string $attribute, $value, \Closure $fail) {
+                                                $phones = array_map('trim', explode(',', $value));
+                                                foreach ($phones as $phone) {
+                                                    if (empty($phone)) {
+                                                        continue;
+                                                    }
+                                                    if (! preg_match('/^\+[\d\s\-()]+$/', $phone)) {
+                                                        $fail(__('Each phone number must start with + followed by country code and digits. Invalid number: :phone', ['phone' => $phone]));
+
+                                                        return;
+                                                    }
+                                                }
+                                            };
+                                        },
+                                    ]),
 
                                 Forms\Components\TextInput::make('email')
                                     ->label(__('Email Address'))
