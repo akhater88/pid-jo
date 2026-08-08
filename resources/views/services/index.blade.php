@@ -31,58 +31,36 @@
             <div class="pesaro-services-page-grid">
                 @forelse($services as $service)
                     <article class="pesaro-services-page-card">
-                        {{-- Service Images Grid (2x2) --}}
-                        <a href="{{ route('services.show.' . app()->getLocale(), ['slug' => $service->getTranslation('slug', app()->getLocale())]) }}" class="pesaro-services-page-card-link">
-                            <div class="pesaro-services-page-images">
-                                {{-- First Row --}}
-                                <div class="pesaro-services-page-images-row">
-                                    @php
-                                        // Get gallery images or use hero image as fallback
-                                        $galleryImages = $service->getMedia('gallery');
-                                        $heroImage = $service->hasMedia('hero') ? $service->getFirstMediaUrl('hero', 'card') : asset('images/service-placeholder.jpg');
+                        {{-- Service Images Carousel --}}
+                        <div class="pesaro-services-page-carousel-wrapper">
+                            @php
+                                // Get gallery images or use hero image as fallback
+                                $galleryImages = $service->getMedia('gallery');
+                                $heroImage = $service->hasMedia('hero') ? $service->getFirstMediaUrl('hero', 'card') : asset('images/service-placeholder.jpg');
 
-                                        // Prepare 4 images for the grid
-                                        $images = [];
-                                        if ($galleryImages->count() >= 4) {
-                                            // Use first 4 gallery images
-                                            for ($i = 0; $i < 4; $i++) {
-                                                $images[] = $galleryImages[$i]->getUrl('card');
-                                            }
-                                        } else {
-                                            // Fill with available gallery images and hero image
-                                            foreach ($galleryImages as $img) {
-                                                $images[] = $img->getUrl('card');
-                                            }
-                                            // Fill remaining slots with hero image
-                                            while (count($images) < 4) {
-                                                $images[] = $heroImage;
-                                            }
-                                        }
-                                    @endphp
+                                // Prepare images for carousel
+                                $images = [];
+                                if ($galleryImages->count() > 0) {
+                                    foreach ($galleryImages as $img) {
+                                        $images[] = $img->getUrl('card');
+                                    }
+                                } else {
+                                    $images[] = $heroImage;
+                                }
+                            @endphp
 
-                                    <div class="pesaro-services-page-image-wrapper">
-                                        <img src="{{ $images[0] }}" alt="{{ $service->title }}">
-                                        <div class="pesaro-services-page-image-overlay"></div>
-                                    </div>
-                                    <div class="pesaro-services-page-image-wrapper">
-                                        <img src="{{ $images[1] }}" alt="{{ $service->title }}">
-                                        <div class="pesaro-services-page-image-overlay"></div>
-                                    </div>
-                                </div>
-
-                                {{-- Second Row --}}
-                                <div class="pesaro-services-page-images-row">
-                                    <div class="pesaro-services-page-image-wrapper">
-                                        <img src="{{ $images[2] }}" alt="{{ $service->title }}">
-                                        <div class="pesaro-services-page-image-overlay"></div>
-                                    </div>
-                                    <div class="pesaro-services-page-image-wrapper">
-                                        <img src="{{ $images[3] }}" alt="{{ $service->title }}">
-                                        <div class="pesaro-services-page-image-overlay"></div>
-                                    </div>
+                            <div class="swiper pesaro-service-carousel pesaro-service-carousel-{{ $service->id }}">
+                                <div class="swiper-wrapper">
+                                    @foreach($images as $image)
+                                        <div class="swiper-slide">
+                                            <a href="{{ route('services.show.' . app()->getLocale(), ['slug' => $service->getTranslation('slug', app()->getLocale())]) }}" class="pesaro-services-page-slide-link">
+                                                <img src="{{ $image }}" alt="{{ $service->title }}">
+                                            </a>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </a>
+                        </div>
 
                         {{-- Service Content --}}
                         <div class="pesaro-services-page-content">

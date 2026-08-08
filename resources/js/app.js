@@ -75,4 +75,64 @@ document.addEventListener('DOMContentLoaded', function() {
             },
         },
     });
+
+    // Service Index Page Carousels (one per service card)
+    const serviceCarousels = document.querySelectorAll('.pesaro-service-carousel');
+    serviceCarousels.forEach((carousel) => {
+        new Swiper(carousel, {
+            modules: [Autoplay],
+            slidesPerView: 1,
+            spaceBetween: 16,
+            centeredSlides: true,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1.5,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 1.8,
+                    spaceBetween: 24,
+                },
+                1024: {
+                    slidesPerView: 2.2,
+                    spaceBetween: 30,
+                },
+            },
+        });
+    });
+
+    // Service List Block Carousels (on services page - one carousel per service)
+    const serviceListCarousels = document.querySelectorAll('.pesaro-service-list-carousel');
+    serviceListCarousels.forEach((carousel) => {
+        new Swiper(carousel, {
+            modules: [Autoplay],
+            slidesPerView: 1,
+            spaceBetween: 24,
+            centeredSlides: true,
+            loop: true,
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1.3,
+                    spaceBetween: 24,
+                },
+                768: {
+                    slidesPerView: 1.5,
+                    spaceBetween: 24,
+                },
+                1024: {
+                    slidesPerView: 2.5,
+                    spaceBetween: 24,
+                },
+            },
+        });
+    });
 });

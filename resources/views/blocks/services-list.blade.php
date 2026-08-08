@@ -50,46 +50,31 @@
                             </div>
                         </div>
 
-                        <!-- Gallery -->
+                        <!-- Gallery Carousel -->
                         @php
-                            $galleryImages = $service->getMedia('gallery')->take($galleryLimit);
+                            $galleryImages = $service->getMedia('gallery');
                         @endphp
 
                         @if($galleryImages->isNotEmpty())
-                            <div class="content-stretch flex gap-[24px] items-start w-full">
-                                @foreach($galleryImages as $galleryIndex => $image)
-                                    @php
-                                        // First image is large (440px), others are smaller (174px)
-                                        $isLarge = $galleryIndex === 0;
-                                        $width = $isLarge ? 'w-[440px]' : 'w-[174px]';
-                                    @endphp
-
-                                    <a href="{{ route('services.show.' . app()->getLocale(), ['slug' => $service->getTranslation('slug', app()->getLocale())]) }}"
-                                       class="h-[560px] relative rounded-[26px] shrink-0 {{ $width }} group overflow-hidden">
-                                        <img
-                                            src="{{ $image->getUrl('card') }}"
-                                            alt="{{ $service->title }} - {{ __('Image') }} {{ $galleryIndex + 1 }}"
-                                            class="absolute inset-0 w-full h-full object-cover rounded-[26px] group-hover:scale-110 transition-transform duration-500"
-                                        >
-                                        <!-- Overlay -->
-                                        <div class="absolute bg-[rgba(0,0,0,0.15)] inset-0 rounded-[26px] group-hover:bg-[rgba(0,0,0,0.25)] transition-colors duration-300"></div>
-                                    </a>
-                                @endforeach
-
-                                @if($galleryImages->count() < $galleryLimit)
-                                    {{-- Placeholder images if gallery has fewer than limit --}}
-                                    @for($i = $galleryImages->count(); $i < $galleryLimit; $i++)
-                                        @php
-                                            $isLarge = $i === 0;
-                                            $width = $isLarge ? 'w-[440px]' : 'w-[174px]';
-                                        @endphp
-                                        <div class="h-[560px] relative rounded-[26px] shrink-0 {{ $width }} bg-[#353535] flex items-center justify-center">
-                                            <svg class="w-20 h-20 text-[#c09a5b]/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                            </svg>
-                                        </div>
-                                    @endfor
-                                @endif
+                            <div class="pesaro-service-list-carousel-wrapper w-full max-w-[1232px]">
+                                <div class="swiper pesaro-service-list-carousel pesaro-service-list-carousel-{{ $service->id }}">
+                                    <div class="swiper-wrapper">
+                                        @foreach($galleryImages as $galleryIndex => $image)
+                                            <div class="swiper-slide">
+                                                <a href="{{ route('services.show.' . app()->getLocale(), ['slug' => $service->getTranslation('slug', app()->getLocale())]) }}"
+                                                   class="block relative rounded-[26px] overflow-hidden group">
+                                                    <img
+                                                        src="{{ $image->getUrl('card') }}"
+                                                        alt="{{ $service->title }} - {{ __('Image') }} {{ $galleryIndex + 1 }}"
+                                                        class="w-full h-[560px] object-cover rounded-[26px] group-hover:scale-110 transition-transform duration-500"
+                                                    >
+                                                    <!-- Overlay -->
+                                                    <div class="absolute bg-[rgba(0,0,0,0.15)] inset-0 rounded-[26px] group-hover:bg-[rgba(0,0,0,0.05)] transition-colors duration-300"></div>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         @else
                             {{-- No gallery images --}}
