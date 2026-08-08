@@ -64,12 +64,7 @@ class HeroHomeBlock
                         ->directory('hero-images')
                         ->imagePreviewHeight('250')
                         ->helperText(__('Recommended size: 1920x1080px'))
-                        ->dehydrateStateUsing(fn ($state) => is_array($state) ? $state : (empty($state) ? null : [$state]))
-                        ->afterStateHydrated(function ($component, $state) {
-                            if (is_string($state) && !empty($state)) {
-                                $component->state([$state]);
-                            }
-                        })
+                        ->nullable()
                         ->columnSpanFull(),
                 ])
                 ->collapsible(),
@@ -120,12 +115,7 @@ class HeroHomeBlock
                         ->directory('hero-images/promos')
                         ->imagePreviewHeight('150')
                         ->helperText(__('Recommended size: 600x400px'))
-                        ->dehydrateStateUsing(fn ($state) => is_array($state) ? $state : (empty($state) ? null : [$state]))
-                        ->afterStateHydrated(function ($component, $state) {
-                            if (is_string($state) && !empty($state)) {
-                                $component->state([$state]);
-                            }
-                        })
+                        ->nullable()
                         ->columnSpanFull(),
 
                     FileUpload::make('promo_1_pdf')
@@ -137,12 +127,7 @@ class HeroHomeBlock
                         ->required(fn ($get) => $get('promo_1_mode') === 'pdf')
                         ->hidden(fn ($get) => $get('promo_1_mode') !== 'pdf')
                         ->helperText(__('Upload the PDF file users will download when clicking the promo card'))
-                        ->dehydrateStateUsing(fn ($state) => is_array($state) ? $state : (empty($state) ? null : [$state]))
-                        ->afterStateHydrated(function ($component, $state) {
-                            if (is_string($state) && !empty($state)) {
-                                $component->state([$state]);
-                            }
-                        })
+                        ->nullable()
                         ->columnSpanFull(),
                 ])
                 ->collapsible()
@@ -194,12 +179,7 @@ class HeroHomeBlock
                         ->directory('hero-images/promos')
                         ->imagePreviewHeight('150')
                         ->helperText(__('Recommended size: 600x400px'))
-                        ->dehydrateStateUsing(fn ($state) => is_array($state) ? $state : (empty($state) ? null : [$state]))
-                        ->afterStateHydrated(function ($component, $state) {
-                            if (is_string($state) && !empty($state)) {
-                                $component->state([$state]);
-                            }
-                        })
+                        ->nullable()
                         ->columnSpanFull(),
 
                     FileUpload::make('promo_2_pdf')
@@ -211,12 +191,7 @@ class HeroHomeBlock
                         ->required(fn ($get) => $get('promo_2_mode') === 'pdf')
                         ->hidden(fn ($get) => $get('promo_2_mode') !== 'pdf')
                         ->helperText(__('Upload the PDF file users will download when clicking the promo card'))
-                        ->dehydrateStateUsing(fn ($state) => is_array($state) ? $state : (empty($state) ? null : [$state]))
-                        ->afterStateHydrated(function ($component, $state) {
-                            if (is_string($state) && !empty($state)) {
-                                $component->state([$state]);
-                            }
-                        })
+                        ->nullable()
                         ->columnSpanFull(),
                 ])
                 ->collapsible()
