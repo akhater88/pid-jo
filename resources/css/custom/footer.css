@@ -402,6 +402,11 @@
     left: -25px;
 }
 
+[dir="rtl"] .pesaro-footer-contact-card {
+    left: auto;
+    right: 0;
+}
+
 [dir="rtl"] .pesaro-footer-link::before {
     margin-inline-end: 25.5px;
     margin-inline-start: 8px;

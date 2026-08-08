@@ -565,6 +565,37 @@
     margin-right: 4px;
 }
 
+/* RTL Timeline - Swap left and right positions */
+[dir="rtl"] .pesaro-timeline-left {
+    left: auto;
+    right: 0;
+    align-items: flex-end;
+}
+
+[dir="rtl"] .pesaro-timeline-right {
+    right: auto;
+    left: 0;
+    align-items: flex-start;
+}
+
+[dir="rtl"] .pesaro-timeline-left-content {
+    align-items: flex-end;
+}
+
+[dir="rtl"] .pesaro-timeline-right-content {
+    align-items: flex-start;
+}
+
+[dir="rtl"] .pesaro-timeline-horizontal-dot-left {
+    left: auto;
+    right: 0;
+}
+
+[dir="rtl"] .pesaro-timeline-horizontal-dot-right {
+    right: auto;
+    left: 0;
+}
+
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
