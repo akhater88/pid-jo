@@ -596,6 +596,29 @@
     left: 0;
 }
 
+/* RTL Text Alignment for About Page */
+[dir="rtl"] .pesaro-about-hero-title,
+[dir="rtl"] .pesaro-about-hero-breadcrumb {
+    text-align: right;
+}
+
+[dir="rtl"] .pesaro-about-text-content h2,
+[dir="rtl"] .pesaro-about-text-content-body,
+[dir="rtl"] .pesaro-about-text-content p {
+    text-align: right;
+}
+
+[dir="rtl"] .pesaro-timeline-card-title,
+[dir="rtl"] .pesaro-timeline-card-description,
+[dir="rtl"] .pesaro-timeline-center-title,
+[dir="rtl"] .pesaro-timeline-center-description {
+    text-align: right;
+}
+
+[dir="rtl"] .pesaro-about-hero-breadcrumb {
+    flex-direction: row-reverse;
+}
+
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */

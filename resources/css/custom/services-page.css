@@ -305,6 +305,24 @@
     transform: translateX(-4px) scaleX(-1);
 }
 
+/* RTL Text Alignment */
+[dir="rtl"] .pesaro-services-page-hero-title,
+[dir="rtl"] .pesaro-services-page-hero-description,
+[dir="rtl"] .pesaro-services-page-card-title,
+[dir="rtl"] .pesaro-services-page-card-description,
+[dir="rtl"] .pesaro-services-page-cta-title,
+[dir="rtl"] .pesaro-services-page-cta-description {
+    text-align: right;
+}
+
+[dir="rtl"] .pesaro-services-page-breadcrumb {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .pesaro-services-page-learn-more {
+    flex-direction: row-reverse;
+}
+
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */

@@ -74,6 +74,59 @@
     html {
         scroll-behavior: smooth;
     }
+
+    /* RTL Text Direction Support */
+    [dir="rtl"] {
+        text-align: right;
+    }
+
+    /* Reset text-align for centered and left-aligned elements in RTL */
+    [dir="rtl"] .text-center,
+    [dir="rtl"] [class*="text-center"] {
+        text-align: center;
+    }
+
+    [dir="rtl"] .text-left {
+        text-align: right;
+    }
+
+    [dir="rtl"] .text-right {
+        text-align: left;
+    }
+
+    /* RTL for paragraphs, headings, and text content */
+    [dir="rtl"] p,
+    [dir="rtl"] h1,
+    [dir="rtl"] h2,
+    [dir="rtl"] h3,
+    [dir="rtl"] h4,
+    [dir="rtl"] h5,
+    [dir="rtl"] h6,
+    [dir="rtl"] li,
+    [dir="rtl"] span,
+    [dir="rtl"] div {
+        text-align: inherit;
+    }
+
+    /* Keep specific centered sections centered */
+    [dir="rtl"] header,
+    [dir="rtl"] .pesaro-section-header,
+    [dir="rtl"] .pesaro-timeline-header,
+    [dir="rtl"] .pesaro-services-header,
+    [dir="rtl"] .pesaro-news-header,
+    [dir="rtl"] .pesaro-testimonials-header,
+    [dir="rtl"] .pesaro-about-heading {
+        text-align: center;
+    }
+
+    /* RTL flex direction for specific layouts */
+    [dir="rtl"] .flex-row-reverse {
+        flex-direction: row;
+    }
+
+    [dir="rtl"] .flex-row {
+        flex-direction: row-reverse;
+    }
 }
 
 @layer utilities {

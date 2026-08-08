@@ -69,6 +69,22 @@
     transform: rotate(90deg);
 }
 
+[dir="rtl"] .pesaro-blog-hero nav {
+    flex-direction: row-reverse;
+}
+
+/* RTL Text Alignment */
+[dir="rtl"] .pesaro-blog-hero h1,
+[dir="rtl"] .pesaro-blog-card h3,
+[dir="rtl"] .pesaro-blog-card p,
+[dir="rtl"] .pesaro-blog-card time {
+    text-align: right;
+}
+
+[dir="rtl"] .pesaro-blog-card time {
+    flex-direction: row-reverse;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .pesaro-blog-hero {

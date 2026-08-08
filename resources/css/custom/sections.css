@@ -718,3 +718,25 @@
     left: auto;
     right: 0;
 }
+
+/* RTL Text Alignment for Content Blocks */
+[dir="rtl"] .pesaro-about-text-content,
+[dir="rtl"] .pesaro-benefit-content,
+[dir="rtl"] .pesaro-service-content,
+[dir="rtl"] .pesaro-blog-content,
+[dir="rtl"] .pesaro-timeline-card {
+    text-align: right;
+}
+
+[dir="rtl"] .pesaro-about-text-content h2,
+[dir="rtl"] .pesaro-about-text-content p,
+[dir="rtl"] .pesaro-benefit-content h4,
+[dir="rtl"] .pesaro-benefit-content p,
+[dir="rtl"] .pesaro-service-content h4,
+[dir="rtl"] .pesaro-service-content p,
+[dir="rtl"] .pesaro-blog-content h4,
+[dir="rtl"] .pesaro-blog-content p,
+[dir="rtl"] .pesaro-timeline-card h4,
+[dir="rtl"] .pesaro-timeline-card p {
+    text-align: right;
+}
