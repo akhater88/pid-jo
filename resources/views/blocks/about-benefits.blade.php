@@ -27,12 +27,16 @@ $benefits = $data['benefits'] ?? [
             <div class="pesaro-about-images">
                 {{-- Main large image (background) --}}
                 <div class="pesaro-about-image-main">
-                    @if($main_image)
+                    @php
+                        // Extract file path from array (FileUpload format) or use as string (legacy)
+                        $mainImagePath = is_array($main_image) ? ($main_image[0] ?? null) : $main_image;
+                    @endphp
+                    @if($mainImagePath)
                         @php
-                            // Handle both new FileUpload paths and legacy text input paths
-                            $mainImageUrl = str_starts_with($main_image, '/') || str_starts_with($main_image, 'http')
-                                ? asset($main_image)
-                                : asset('storage/' . $main_image);
+                            // Handle both storage paths and absolute/external paths
+                            $mainImageUrl = str_starts_with($mainImagePath, '/') || str_starts_with($mainImagePath, 'http')
+                                ? asset($mainImagePath)
+                                : asset('storage/' . $mainImagePath);
                         @endphp
                         <img src="{{ $mainImageUrl }}" alt="{{ $section_title }}">
                     @else
@@ -43,12 +47,16 @@ $benefits = $data['benefits'] ?? [
 
                 {{-- Small overlapping image (foreground) --}}
                 <div class="pesaro-about-image-small">
-                    @if($small_image)
+                    @php
+                        // Extract file path from array (FileUpload format) or use as string (legacy)
+                        $smallImagePath = is_array($small_image) ? ($small_image[0] ?? null) : $small_image;
+                    @endphp
+                    @if($smallImagePath)
                         @php
-                            // Handle both new FileUpload paths and legacy text input paths
-                            $smallImageUrl = str_starts_with($small_image, '/') || str_starts_with($small_image, 'http')
-                                ? asset($small_image)
-                                : asset('storage/' . $small_image);
+                            // Handle both storage paths and absolute/external paths
+                            $smallImageUrl = str_starts_with($smallImagePath, '/') || str_starts_with($smallImagePath, 'http')
+                                ? asset($smallImagePath)
+                                : asset('storage/' . $smallImagePath);
                         @endphp
                         <img src="{{ $smallImageUrl }}" alt="{{ $section_title }}">
                     @else

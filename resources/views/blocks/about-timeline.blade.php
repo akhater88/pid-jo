@@ -3,23 +3,25 @@
     $sectionTitle = $data['section_title'] ?? __('Explore Our Comprehensive Interior Design Services');
     $sectionBadge = $data['section_badge'] ?? __('Our Story');
 
-    // Handle both uploaded files and legacy paths for 1951 image
+    // Extract file path from array (FileUpload format) or use as string (legacy) for 1951 image
     $timeline1951ImageRaw = $data['timeline_1951_image'] ?? null;
-    $timeline1951Image = $timeline1951ImageRaw
-        ? ((str_starts_with($timeline1951ImageRaw, 'http://') || str_starts_with($timeline1951ImageRaw, 'https://') || str_starts_with($timeline1951ImageRaw, '/'))
-            ? asset($timeline1951ImageRaw)
-            : asset('storage/' . $timeline1951ImageRaw))
+    $timeline1951ImagePath = is_array($timeline1951ImageRaw) ? ($timeline1951ImageRaw[0] ?? null) : $timeline1951ImageRaw;
+    $timeline1951Image = $timeline1951ImagePath
+        ? ((str_starts_with($timeline1951ImagePath, 'http://') || str_starts_with($timeline1951ImagePath, 'https://') || str_starts_with($timeline1951ImagePath, '/'))
+            ? asset($timeline1951ImagePath)
+            : asset('storage/' . $timeline1951ImagePath))
         : asset('images/about-timeline-1951.jpg');
 
     $centerTitle = $data['center_title'] ?? __('Supervision & execution Accessories');
     $centerDescription = $data['center_description'] ?? '';
 
-    // Handle both uploaded files and legacy paths for 2026 image
+    // Extract file path from array (FileUpload format) or use as string (legacy) for 2026 image
     $timeline2026ImageRaw = $data['timeline_2026_image'] ?? null;
-    $timeline2026Image = $timeline2026ImageRaw
-        ? ((str_starts_with($timeline2026ImageRaw, 'http://') || str_starts_with($timeline2026ImageRaw, 'https://') || str_starts_with($timeline2026ImageRaw, '/'))
-            ? asset($timeline2026ImageRaw)
-            : asset('storage/' . $timeline2026ImageRaw))
+    $timeline2026ImagePath = is_array($timeline2026ImageRaw) ? ($timeline2026ImageRaw[0] ?? null) : $timeline2026ImageRaw;
+    $timeline2026Image = $timeline2026ImagePath
+        ? ((str_starts_with($timeline2026ImagePath, 'http://') || str_starts_with($timeline2026ImagePath, 'https://') || str_starts_with($timeline2026ImagePath, '/'))
+            ? asset($timeline2026ImagePath)
+            : asset('storage/' . $timeline2026ImagePath))
         : asset('images/about-timeline-2026.jpg');
 @endphp
 

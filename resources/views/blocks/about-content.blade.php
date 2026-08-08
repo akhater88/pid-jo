@@ -1,11 +1,12 @@
 {{-- About Content Block with Video --}}
 @php
-    // Handle both uploaded files and legacy paths for video thumbnail
+    // Extract file path from array (FileUpload format) or use as string (legacy)
     $videoThumbnailRaw = $data['video_thumbnail'] ?? null;
-    $videoThumbnail = $videoThumbnailRaw
-        ? ((str_starts_with($videoThumbnailRaw, 'http://') || str_starts_with($videoThumbnailRaw, 'https://') || str_starts_with($videoThumbnailRaw, '/'))
-            ? asset($videoThumbnailRaw)
-            : asset('storage/' . $videoThumbnailRaw))
+    $videoThumbnailPath = is_array($videoThumbnailRaw) ? ($videoThumbnailRaw[0] ?? null) : $videoThumbnailRaw;
+    $videoThumbnail = $videoThumbnailPath
+        ? ((str_starts_with($videoThumbnailPath, 'http://') || str_starts_with($videoThumbnailPath, 'https://') || str_starts_with($videoThumbnailPath, '/'))
+            ? asset($videoThumbnailPath)
+            : asset('storage/' . $videoThumbnailPath))
         : asset('images/about-content-image.jpg');
 
     $videoUrl = $data['video_url'] ?? 'https://www.youtube.com/embed/dQw4w9WgXcQ';

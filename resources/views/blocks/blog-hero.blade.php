@@ -1,8 +1,11 @@
 {{-- Blog Hero Block --}}
 @php
     $title = $data['title'] ?? __('News & Events');
-    $backgroundImage = !empty($data['background_image'])
-        ? asset('storage/' . $data['background_image'])
+    // Extract file path from array (FileUpload format) or use as string (legacy)
+    $backgroundImagePath = $data['background_image'] ?? null;
+    $backgroundImagePath = is_array($backgroundImagePath) ? ($backgroundImagePath[0] ?? null) : $backgroundImagePath;
+    $backgroundImage = !empty($backgroundImagePath)
+        ? asset('storage/' . $backgroundImagePath)
         : asset('storage/hero-images/blog-hero-bg.jpg');
 @endphp
 

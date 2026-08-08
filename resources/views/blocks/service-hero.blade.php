@@ -1,8 +1,14 @@
 {{-- Service Hero Block --}}
+@php
+    // Extract file path from array (FileUpload format) or use as string (legacy)
+    $backgroundImagePath = $data['background_image'] ?? null;
+    $backgroundImagePath = is_array($backgroundImagePath) ? ($backgroundImagePath[0] ?? null) : $backgroundImagePath;
+@endphp
+
 <section class="relative bg-dark py-20 md:py-32 overflow-hidden">
-    @if(!empty($data['background_image']))
+    @if(!empty($backgroundImagePath))
         <div class="absolute inset-0 z-0">
-            <img src="{{ asset('storage/' . $data['background_image']) }}"
+            <img src="{{ asset('storage/' . $backgroundImagePath) }}"
                  alt="{{ $data['title'] ?? '' }}"
                  class="w-full h-full object-cover opacity-20">
         </div>
