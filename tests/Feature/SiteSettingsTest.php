@@ -65,3 +65,72 @@ it('displays social media icons when URLs are set', function () {
     $response->assertSee('https://instagram.com/pesaro', false);
     $response->assertSee('aria-label="Instagram"', false);
 });
+
+it('displays default footer background when no custom image is uploaded', function () {
+    $settings = app(SiteSettings::class);
+
+    expect($settings->footer_background_image)->toBeNull();
+
+    $response = $this->get('/en');
+
+    $response->assertOk();
+    $response->assertSee('footer-bg-image.jpg', false);
+});
+
+it('displays custom footer background when image is uploaded', function () {
+    // Update settings with custom footer background
+    $settings = DB::table('settings')->where('group', 'site')->first();
+    $payload = json_decode($settings->payload, true);
+    $payload['footer_background_image'] = 'footer/custom-bg.jpg';
+
+    DB::table('settings')->where('group', 'site')->update([
+        'payload' => json_encode($payload),
+    ]);
+
+    // Clear settings cache
+    app()->forgetInstance(SiteSettings::class);
+
+    $updatedSettings = app(SiteSettings::class);
+    expect($updatedSettings->footer_background_image)->toBe('footer/custom-bg.jpg');
+
+    $response = $this->get('/en');
+
+    $response->assertOk();
+    $response->assertSee('storage/footer/custom-bg.jpg', false);
+});
+
+it('footer background is clickable when Google Maps URL is set', function () {
+    // Update settings with Google Maps URL
+    $settings = DB::table('settings')->where('group', 'site')->first();
+    $payload = json_decode($settings->payload, true);
+    $payload['google_maps_url'] = 'https://maps.google.com/?q=31.9539,35.9106';
+
+    DB::table('settings')->where('group', 'site')->update([
+        'payload' => json_encode($payload),
+    ]);
+
+    // Clear settings cache
+    app()->forgetInstance(SiteSettings::class);
+
+    $updatedSettings = app(SiteSettings::class);
+    expect($updatedSettings->google_maps_url)->toBe('https://maps.google.com/?q=31.9539,35.9106');
+
+    $response = $this->get('/en');
+
+    $response->assertOk();
+    $response->assertSee('https://maps.google.com/?q=31.9539,35.9106', false);
+    $response->assertSee('target="_blank"', false);
+    $response->assertSee('View our location on Google Maps', false);
+});
+
+it('footer background is not clickable when Google Maps URL is not set', function () {
+    $settings = app(SiteSettings::class);
+
+    expect($settings->google_maps_url)->toBeNull();
+
+    $response = $this->get('/en');
+
+    $response->assertOk();
+    $response->assertDontSee('href="https://maps.google.com', false);
+    $response->assertDontSee('View our location on Google Maps', false);
+});

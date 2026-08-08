@@ -5,7 +5,13 @@
 <footer class="pesaro-footer">
     {{-- Background Image Section --}}
     <div class="pesaro-footer-bg">
-        <img src="{{ asset('images/footer-bg-image.jpg') }}" alt="">
+        @if($settings->google_maps_url)
+            <a href="{{ $settings->google_maps_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ __('View our location on Google Maps') }}">
+                <img src="{{ $settings->footer_background_image ? asset('storage/' . $settings->footer_background_image) : asset('images/footer-bg-image.jpg') }}" alt="{{ __('Visit our location') }}">
+            </a>
+        @else
+            <img src="{{ $settings->footer_background_image ? asset('storage/' . $settings->footer_background_image) : asset('images/footer-bg-image.jpg') }}" alt="">
+        @endif
     </div>
 
     {{-- Main Footer Content --}}

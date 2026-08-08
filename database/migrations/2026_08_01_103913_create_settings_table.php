@@ -105,6 +105,22 @@ return new class () extends Migration {
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'group' => 'site',
+                'name' => 'footer_background_image',
+                'locked' => false,
+                'payload' => json_encode(null),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'group' => 'site',
+                'name' => 'google_maps_url',
+                'locked' => false,
+                'payload' => json_encode(null),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 

@@ -29,6 +29,11 @@ class SiteSettings extends Settings
 
     public ?string $youtube_url;
 
+    // Footer
+    public ?string $footer_background_image;
+
+    public ?string $google_maps_url;
+
     public static function group(): string
     {
         return 'site';

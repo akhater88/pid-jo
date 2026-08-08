@@ -115,6 +115,25 @@ class ManageSiteSettings extends SettingsPage
                             ]),
                     ])
                     ->collapsible(),
+
+                Forms\Components\Section::make(__('Footer Settings'))
+                    ->schema([
+                        Forms\Components\FileUpload::make('footer_background_image')
+                            ->label(__('Footer Background Image'))
+                            ->image()
+                            ->directory('footer')
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
+                            ->maxSize(5120)
+                            ->imageEditor()
+                            ->helperText(__('Upload a background image for the footer (recommended size: 1920x400px)')),
+
+                        Forms\Components\TextInput::make('google_maps_url')
+                            ->label(__('Google Maps Location URL'))
+                            ->url()
+                            ->placeholder('https://maps.google.com/?q=31.9539,35.9106')
+                            ->helperText(__('Enter the Google Maps URL for your business location. Clicking the footer background will open this location.')),
+                    ])
+                    ->collapsible(),
             ]);
     }
 }
