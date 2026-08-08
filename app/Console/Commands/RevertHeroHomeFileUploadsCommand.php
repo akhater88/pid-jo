@@ -38,11 +38,22 @@ class RevertHeroHomeFileUploadsCommand extends Command
                         ];
 
                         foreach ($fileFields as $field) {
-                            if (isset($data[$field]) && is_string($data[$field]) && !empty($data[$field])) {
-                                // Convert string back to array format
-                                $data[$field] = [$data[$field]];
-                                $updated = true;
-                                $this->info("  Reverted {$field} to array for page {$page->id} ({$locale})");
+                            if (isset($data[$field])) {
+                                $value = $data[$field];
+
+                                // Case 1: String - convert to simple array
+                                if (is_string($value) && !empty($value)) {
+                                    $data[$field] = [$value];
+                                    $updated = true;
+                                    $this->info("  Converted {$field} from string to array for page {$page->id} ({$locale})");
+                                }
+                                // Case 2: Associative array with UUID keys - extract values
+                                elseif (is_array($value) && !empty($value) && array_keys($value) !== range(0, count($value) - 1)) {
+                                    $data[$field] = array_values($value);
+                                    $updated = true;
+                                    $this->info("  Converted {$field} from associative array to indexed array for page {$page->id} ({$locale})");
+                                }
+                                // Case 3: Already a proper indexed array or empty - no change needed
                             }
                         }
                     }
