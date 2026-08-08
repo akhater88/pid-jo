@@ -64,6 +64,7 @@ class HeroHomeBlock
                         ->visibility('public')
                         ->imagePreviewHeight('250')
                         ->helperText(__('Recommended size: 1920x1080px'))
+                        ->multiple(false)
                         ->columnSpanFull(),
                 ])
                 ->collapsible(),
@@ -114,6 +115,7 @@ class HeroHomeBlock
                         ->visibility('public')
                         ->imagePreviewHeight('150')
                         ->helperText(__('Recommended size: 600x400px'))
+                        ->multiple(false)
                         ->columnSpanFull(),
 
                     FileUpload::make('promo_1_pdf')
@@ -125,6 +127,7 @@ class HeroHomeBlock
                         ->required(fn ($get) => $get('promo_1_mode') === 'pdf')
                         ->hidden(fn ($get) => $get('promo_1_mode') !== 'pdf')
                         ->helperText(__('Upload the PDF file users will download when clicking the promo card'))
+                        ->multiple(false)
                         ->columnSpanFull(),
                 ])
                 ->collapsible()
@@ -176,6 +179,7 @@ class HeroHomeBlock
                         ->visibility('public')
                         ->imagePreviewHeight('150')
                         ->helperText(__('Recommended size: 600x400px'))
+                        ->multiple(false)
                         ->columnSpanFull(),
 
                     FileUpload::make('promo_2_pdf')
@@ -187,6 +191,7 @@ class HeroHomeBlock
                         ->required(fn ($get) => $get('promo_2_mode') === 'pdf')
                         ->hidden(fn ($get) => $get('promo_2_mode') !== 'pdf')
                         ->helperText(__('Upload the PDF file users will download when clicking the promo card'))
+                        ->multiple(false)
                         ->columnSpanFull(),
                 ])
                 ->collapsible()
