@@ -11,6 +11,8 @@ $cta_url = (str_starts_with($ctaUrlRaw, 'http://') || str_starts_with($ctaUrlRaw
     ? $ctaUrlRaw
     : url($ctaUrlRaw);
 $background_image = $data['background_image'] ?? null;
+// Handle both array and string formats from Filament FileUpload
+$background_image = is_array($background_image) ? ($background_image[0] ?? null) : $background_image;
 
 // Promo banners (right side cards)
 $promo_1_mode = $data['promo_1_mode'] ?? 'text';
@@ -18,7 +20,11 @@ $promo_1_title = $data['promo_1_title'] ?? 'Visit our showroom';
 $promo_1_subtitle = $data['promo_1_subtitle'] ?? 'to get your 30% Discount';
 $promo_1_badge = $data['promo_1_badge'] ?? '30% OFF';
 $promo_1_image = $data['promo_1_image'] ?? null;
+// Handle both array and string formats from Filament FileUpload
+$promo_1_image = is_array($promo_1_image) ? ($promo_1_image[0] ?? null) : $promo_1_image;
 $promo_1_pdf = $data['promo_1_pdf'] ?? null;
+// Handle both array and string formats from Filament FileUpload
+$promo_1_pdf = is_array($promo_1_pdf) ? ($promo_1_pdf[0] ?? null) : $promo_1_pdf;
 $promo_1_pdf_url = $promo_1_pdf ? asset('storage/' . $promo_1_pdf) : null;
 
 $promo_2_mode = $data['promo_2_mode'] ?? 'text';
@@ -26,7 +32,11 @@ $promo_2_title = $data['promo_2_title'] ?? 'Visit our showroom';
 $promo_2_subtitle = $data['promo_2_subtitle'] ?? 'to get your 20% Discount';
 $promo_2_badge = $data['promo_2_badge'] ?? '20% OFF';
 $promo_2_image = $data['promo_2_image'] ?? null;
+// Handle both array and string formats from Filament FileUpload
+$promo_2_image = is_array($promo_2_image) ? ($promo_2_image[0] ?? null) : $promo_2_image;
 $promo_2_pdf = $data['promo_2_pdf'] ?? null;
+// Handle both array and string formats from Filament FileUpload
+$promo_2_pdf = is_array($promo_2_pdf) ? ($promo_2_pdf[0] ?? null) : $promo_2_pdf;
 $promo_2_pdf_url = $promo_2_pdf ? asset('storage/' . $promo_2_pdf) : null;
 @endphp
 
