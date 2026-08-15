@@ -115,7 +115,7 @@
                                data-lightbox="project-gallery"
                                data-title="{{ $project->title }} - {{ __('Image') }} {{ $index + 1 }}"
                                class="group relative block rounded-lg overflow-hidden bg-[#2a2830] hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
-                                <img src="{{ $image->getUrl('card') }}"
+                                <img src="{{ $image->hasGeneratedConversion('card') ? $image->getUrl('card') : $image->getUrl() }}"
                                      alt="{{ $project->title }} - {{ __('Image') }} {{ $index + 1 }}"
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                      loading="lazy">

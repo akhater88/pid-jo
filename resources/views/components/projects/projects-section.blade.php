@@ -38,7 +38,7 @@
                     {{-- Project Image --}}
                     <div class="aspect-[4/3] overflow-hidden">
                         @if($firstImage)
-                            <img src="{{ $firstImage->getUrl('card') }}"
+                            <img src="{{ $firstImage->hasGeneratedConversion('card') ? $firstImage->getUrl('card') : $firstImage->getUrl() }}"
                                  alt="{{ $project->title }}"
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         @else

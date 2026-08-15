@@ -331,6 +331,7 @@
 
     {{-- Projects Section --}}
     @include('components.projects.projects-section', ['service' => $service])
+
 @endsection
 
 @if($service->hasMedia('gallery'))
