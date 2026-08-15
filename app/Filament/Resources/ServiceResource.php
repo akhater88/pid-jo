@@ -78,10 +78,10 @@ class ServiceResource extends Resource
                             ->multiple()
                             ->image()
                             ->imageEditor()
-                            ->maxFiles(12)
+                            ->maxFiles(50)
                             ->maxSize(5120)
                             ->reorderable()
-                            ->helperText('Up to 12 images')
+                            ->helperText('Up to 50 images')
                             ->columnSpanFull(),
                     ]),
 

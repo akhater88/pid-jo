@@ -29,9 +29,9 @@
                 @endif
             </a>
             <a href="{{ route('services.index.' . app()->getLocale()) }}"
-               class="{{ request()->routeIs('services.*') ? 'active' : '' }}">
+               class="{{ request()->routeIs('services.*') || request()->routeIs('projects.*') ? 'active' : '' }}">
                 <span>{{ __('Our Services') }}</span>
-                @if(request()->routeIs('services.*'))
+                @if(request()->routeIs('services.*') || request()->routeIs('projects.*'))
                     <img class="pesaro-nav-underline"
                          src="{{ asset('images/menu-underline.png') }}"
                          alt="">
@@ -54,11 +54,11 @@
             <a href="{{ route('locale.switch', app()->getLocale() === 'en' ? 'ar' : 'en') }}"
                class="pesaro-lang-switcher"
                aria-label="{{ app()->getLocale() === 'en' ? __('Switch to Arabic') : __('Switch to English') }}">
-                <img src="{{ asset('images/us-flag.png') }}"
-                     alt="{{ app()->getLocale() === 'en' ? 'English' : 'العربية' }}"
+                <img src="{{ asset(app()->getLocale() === 'en' ? 'images/saudi-flag.svg' : 'images/uk-flag.svg') }}"
+                     alt="{{ app()->getLocale() === 'en' ? 'العربية' : 'English' }}"
                      width="24"
                      height="24">
-                <span>{{ app()->getLocale() === 'en' ? 'ENG' : 'عربي' }}</span>
+                <span>{{ app()->getLocale() === 'en' ? 'عربي' : 'ENG' }}</span>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
                     <path d="M6 8l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -99,8 +99,8 @@
         <!-- Language Switcher (Mobile) -->
         <a href="{{ route('locale.switch', app()->getLocale() === 'en' ? 'ar' : 'en') }}"
            class="pesaro-mobile-lang-switcher">
-            <img src="{{ asset('images/us-flag.png') }}"
-                 alt="{{ app()->getLocale() === 'en' ? 'English' : 'العربية' }}"
+            <img src="{{ asset(app()->getLocale() === 'en' ? 'images/saudi-flag.svg' : 'images/uk-flag.svg') }}"
+                 alt="{{ app()->getLocale() === 'en' ? 'العربية' : 'English' }}"
                  width="24"
                  height="24">
             <span>{{ app()->getLocale() === 'en' ? __('Switch to Arabic') : __('Switch to English') }}</span>
