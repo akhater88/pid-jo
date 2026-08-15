@@ -34,6 +34,12 @@ class FixAllBlocksFileUploadsCommand extends Command
                 $blocks = $page->getTranslation('blocks', $locale, false) ?? [];
                 $localeUpdated = false;
 
+                // Skip if blocks is not an array (corrupted data)
+                if (!is_array($blocks)) {
+                    $this->warn("  [{$locale}] Page {$page->id}: Blocks is not an array - skipping (corrupted data)");
+                    continue;
+                }
+
                 foreach ($blocks as $blockIndex => &$block) {
                     $blockType = $block['type'] ?? 'unknown';
                     $data = &$block['data'];
@@ -117,7 +123,7 @@ class FixAllBlocksFileUploadsCommand extends Command
 
         if ($dryRun) {
             $this->warn("DRY RUN: Would fix {$fieldsFixed} field(s) in {$pagesFixed} page(s)");
-            $this->info("Run without --dry-run to apply changes");
+            $this->info('Run without --dry-run to apply changes');
         } else {
             $this->info("✅ Fixed {$fieldsFixed} field(s) in {$pagesFixed} page(s)");
 

@@ -25,6 +25,12 @@ class DiagnoseAllBlocksDataCommand extends Command
             foreach (['en', 'ar'] as $locale) {
                 $blocks = $page->getTranslation('blocks', $locale, false) ?? [];
 
+                // Skip if blocks is not an array (corrupted data)
+                if (!is_array($blocks)) {
+                    $this->error("  [{$locale}] Blocks is not an array - corrupted data: " . gettype($blocks));
+                    continue;
+                }
+
                 foreach ($blocks as $blockIndex => $block) {
                     $blockType = $block['type'] ?? 'unknown';
                     $data = $block['data'] ?? [];
@@ -111,7 +117,7 @@ class DiagnoseAllBlocksDataCommand extends Command
             $this->error("Found {$issuesFound} potential FileUpload field issue(s)!");
             $this->info("Run 'php artisan pages:fix-all-blocks-uploads' to fix them.");
         } else {
-            $this->info("✅ No issues found! All FileUpload fields are in the correct format.");
+            $this->info('✅ No issues found! All FileUpload fields are in the correct format.');
         }
 
         return Command::SUCCESS;

@@ -117,4 +117,12 @@ class Service extends Model implements HasMedia
     {
         return $this->hasMany(ServiceSection::class)->ordered();
     }
+
+    /**
+     * Get the projects for the service.
+     */
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class)->orderBy('sort_order')->orderBy('created_at', 'desc');
+    }
 }

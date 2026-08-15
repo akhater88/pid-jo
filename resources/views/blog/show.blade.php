@@ -24,28 +24,28 @@
             </h1>
 
             {{-- Breadcrumb --}}
-            <nav class="pesaro-about-hero-breadcrumb" aria-label="Breadcrumb">
-                <div class="pesaro-about-hero-breadcrumb-item">
-                    <a href="{{ route('home.' . app()->getLocale()) }}" class="pesaro-about-hero-breadcrumb-link">
+            <nav class="flex items-center gap-[16px]" aria-label="Breadcrumb">
+                <div class="flex items-center justify-center gap-[12px]">
+                    <a href="{{ route('home.' . app()->getLocale()) }}" class="text-[26px] leading-[36px] font-medium text-white/90 hover:text-white transition-colors">
                         {{ __('Home') }}
                     </a>
-                    <div class="pesaro-about-hero-breadcrumb-separator">
-                        <svg width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="flex items-center justify-center w-[7px] h-[14px]">
+                        <svg class="-rotate-90 rtl:rotate-90" width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="#C09A5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
-                <div class="pesaro-about-hero-breadcrumb-item">
-                    <a href="{{ route('blog.index.' . app()->getLocale()) }}" class="pesaro-about-hero-breadcrumb-link">
+                <div class="flex items-center justify-center gap-[12px]">
+                    <a href="{{ route('blog.index.' . app()->getLocale()) }}" class="text-[26px] leading-[36px] font-medium text-white/90 hover:text-white transition-colors">
                         {{ __('News & Events') }}
                     </a>
-                    <div class="pesaro-about-hero-breadcrumb-separator">
-                        <svg width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="flex items-center justify-center w-[7px] h-[14px]">
+                        <svg class="-rotate-90 rtl:rotate-90" width="14" height="7" viewBox="0 0 17 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="#C09A5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
-                <span class="pesaro-about-hero-breadcrumb-current">{{ $post->title }}</span>
+                <span class="text-[26px] leading-[36px] font-semibold text-[#c09a5b]">{{ Str::limit($post->title, 50) }}</span>
             </nav>
         </div>
     </section>

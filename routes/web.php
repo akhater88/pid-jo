@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ foreach (['en', 'ar'] as $locale) {
         // Services
         Route::get('/services', [PageController::class, 'services'])->name("services.index.{$locale}");
         Route::get('/services/{slug}', [ServiceController::class, 'show'])->name("services.show.{$locale}");
+        Route::get('/services/{serviceSlug}/projects/{projectSlug}', [ProjectController::class, 'show'])->name("projects.show.{$locale}");
 
         // Blog / News & Blogs
         Route::get('/blog', [PageController::class, 'blog'])->name("blog.index.{$locale}");

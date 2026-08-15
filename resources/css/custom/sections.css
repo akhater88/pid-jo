@@ -522,7 +522,7 @@
 
     .pesaro-about-text-content {
         max-width: 615px;
-        text-align: left;
+        text-align: start; /* RTL-aware: start = left in LTR, right in RTL */
         gap: 44px; /* Tablet: larger gap */
     }
 
@@ -630,7 +630,7 @@
     }
 
     .pesaro-about-text-content {
-        text-align: left;
+        text-align: start; /* RTL-aware: start = left in LTR, right in RTL */
         order: 2; /* Desktop: text on right */
     }
 

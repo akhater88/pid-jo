@@ -35,6 +35,7 @@ class FixAboutPageSlugCommand extends Command
 
         if (! $page) {
             $this->error('About page not found!');
+
             return Command::FAILURE;
         }
 
@@ -45,6 +46,7 @@ class FixAboutPageSlugCommand extends Command
 
         if ($currentArSlug === 'about') {
             $this->info('✅ Arabic slug is already correct!');
+
             return Command::SUCCESS;
         }
 

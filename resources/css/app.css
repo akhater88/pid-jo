@@ -78,23 +78,10 @@
     /* RTL Text Direction Support */
     [dir="rtl"] {
         text-align: right;
+        direction: rtl;
     }
 
-    /* Reset text-align for centered and left-aligned elements in RTL */
-    [dir="rtl"] .text-center,
-    [dir="rtl"] [class*="text-center"] {
-        text-align: center;
-    }
-
-    [dir="rtl"] .text-left {
-        text-align: right;
-    }
-
-    [dir="rtl"] .text-right {
-        text-align: left;
-    }
-
-    /* RTL for paragraphs, headings, and text content */
+    /* Explicitly set RTL alignment for all text elements */
     [dir="rtl"] p,
     [dir="rtl"] h1,
     [dir="rtl"] h2,
@@ -104,19 +91,34 @@
     [dir="rtl"] h6,
     [dir="rtl"] li,
     [dir="rtl"] span,
-    [dir="rtl"] div {
-        text-align: inherit;
+    [dir="rtl"] a,
+    [dir="rtl"] label,
+    [dir="rtl"] button {
+        text-align: right;
     }
 
-    /* Keep specific centered sections centered */
+    /* Override specific centered sections */
+    [dir="rtl"] .text-center,
+    [dir="rtl"] [class*="text-center"],
     [dir="rtl"] header,
     [dir="rtl"] .pesaro-section-header,
     [dir="rtl"] .pesaro-timeline-header,
     [dir="rtl"] .pesaro-services-header,
     [dir="rtl"] .pesaro-news-header,
     [dir="rtl"] .pesaro-testimonials-header,
-    [dir="rtl"] .pesaro-about-heading {
-        text-align: center;
+    [dir="rtl"] .pesaro-about-heading,
+    [dir="rtl"] .pesaro-hero-title,
+    [dir="rtl"] .pesaro-hero-subtitle {
+        text-align: center !important;
+    }
+
+    /* Swap left/right alignment in RTL */
+    [dir="rtl"] .text-left {
+        text-align: right !important;
+    }
+
+    [dir="rtl"] .text-right {
+        text-align: left !important;
     }
 
     /* RTL flex direction for specific layouts */
@@ -126,6 +128,15 @@
 
     [dir="rtl"] .flex-row {
         flex-direction: row-reverse;
+    }
+
+    /* RTL Breadcrumb Support - Align to right and reverse direction */
+    [dir="rtl"] nav[aria-label="Breadcrumb"],
+    [dir="rtl"] .pesaro-about-hero-breadcrumb,
+    [dir="rtl"] .pesaro-services-hero nav,
+    [dir="rtl"] .pesaro-blog-hero nav {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
     }
 }
 
