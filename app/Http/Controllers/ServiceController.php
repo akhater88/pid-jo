@@ -30,8 +30,15 @@ class ServiceController extends Controller
      */
     public function show(string $slug): View
     {
+        $currentLocale = app()->getLocale();
+        $fallbackLocale = 'en';
+
+        // Try to find service by slug in current locale, fallback to English if not found
         $service = Service::query()
-            ->where('slug->' . app()->getLocale(), $slug)
+            ->where(function ($query) use ($currentLocale, $slug, $fallbackLocale) {
+                $query->where('slug->' . $currentLocale, $slug)
+                    ->orWhere('slug->' . $fallbackLocale, $slug);
+            })
             ->published()
             ->firstOrFail();
 

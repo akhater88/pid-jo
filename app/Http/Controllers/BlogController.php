@@ -29,8 +29,15 @@ class BlogController extends Controller
      */
     public function show(string $slug): View
     {
+        $currentLocale = app()->getLocale();
+        $fallbackLocale = 'en';
+
+        // Try to find blog post by slug in current locale, fallback to English if not found
         $post = BlogPost::query()
-            ->where('slug->' . app()->getLocale(), $slug)
+            ->where(function ($query) use ($currentLocale, $slug, $fallbackLocale) {
+                $query->where('slug->' . $currentLocale, $slug)
+                    ->orWhere('slug->' . $fallbackLocale, $slug);
+            })
             ->published()
             ->firstOrFail();
 
