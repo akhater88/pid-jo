@@ -112,9 +112,9 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($galleryImages as $index => $image)
                             <a href="{{ $image->getUrl() }}"
-                               data-lightbox="project-gallery"
-                               data-title="{{ $project->title }} - {{ __('Image') }} {{ $index + 1 }}"
-                               class="group relative block rounded-lg overflow-hidden bg-[#2a2830] hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+                               class="glightbox group relative block rounded-lg overflow-hidden bg-[#2a2830] hover:shadow-2xl transition-all duration-300 aspect-[4/3]"
+                               data-gallery="project-gallery"
+                               data-glightbox="description: {{ $project->title }} - {{ __('Image') }} {{ $index + 1 }}">
                                 <img src="{{ $image->hasGeneratedConversion('card') ? $image->getUrl('card') : $image->getUrl() }}"
                                      alt="{{ $project->title }} - {{ __('Image') }} {{ $index + 1 }}"
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -151,15 +151,23 @@
     </section>
 @endsection
 
+@push('styles')
+    {{-- GLightbox CSS --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+@endpush
+
 @push('scripts')
-    {{-- Lightbox for image gallery --}}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    {{-- GLightbox JS (no jQuery required) --}}
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
     <script>
-        lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true,
-            'albumLabel': '{{ __("Image %1 of %2") }}'
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = GLightbox({
+                touchNavigation: true,
+                loop: true,
+                autoplayVideos: true,
+                zoomable: true,
+                draggable: true
+            });
         });
     </script>
 @endpush
