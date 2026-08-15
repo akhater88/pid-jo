@@ -74,12 +74,13 @@ class ProjectResource extends Resource
                             ->collection('gallery')
                             ->image()
                             ->imageEditor()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/jpg'])
                             ->maxFiles(50)
                             ->multiple()
                             ->reorderable()
                             ->panelLayout('grid')
                             ->maxSize(10240) // 10MB
-                            ->helperText('Upload up to 50 images for this project. Images can be reordered by dragging.'),
+                            ->helperText('Upload up to 50 images for this project (JPG, PNG, WebP). Images can be reordered by dragging.'),
                     ]),
 
                 Forms\Components\Section::make('Publishing')

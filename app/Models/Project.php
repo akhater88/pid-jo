@@ -80,6 +80,12 @@ class Project extends Model implements HasMedia
      */
     public function registerMediaConversions(?Media $media = null): void
     {
+        // Skip conversions for SVG files (they're vector graphics and don't need conversion)
+        // This also avoids ImageMagick security policy issues with SVG files
+        if ($media && $media->mime_type === 'image/svg+xml') {
+            return;
+        }
+
         $this->addMediaConversion('thumb')
             ->width(400)
             ->height(300)
