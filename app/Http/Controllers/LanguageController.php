@@ -41,9 +41,9 @@ class LanguageController extends Controller
             abort(404);
         }
 
-        // Determine return URL - rewrite locale prefix
+        // Determine return URL - translate route with proper slugs
         $referer = $request->header('referer');
-        $returnUrl = $this->rewriteLocaleInUrl($referer, $locale);
+        $returnUrl = $this->translateRouteUrl($referer, $locale);
 
         // Set cookie for 1 year
         $cookie = Cookie::make(
@@ -59,6 +59,114 @@ class LanguageController extends Controller
         );
 
         return redirect($returnUrl)->cookie($cookie);
+    }
+
+    /**
+     * Translate URL to target locale with proper slug translation.
+     */
+    private function translateRouteUrl(?string $url, string $targetLocale): string
+    {
+        if (! $url) {
+            return '/' . $targetLocale;
+        }
+
+        // Parse URL
+        $parsedUrl = parse_url($url);
+        $path = $parsedUrl['path'] ?? '/';
+
+        // Extract current locale and path
+        if (! preg_match('#^/(en|ar)(/.*)?$#', $path, $matches)) {
+            return '/' . $targetLocale . $path;
+        }
+
+        $currentLocale = $matches[1];
+        $remainingPath = $matches[2] ?? '';
+
+        // If already in target locale, return as-is
+        if ($currentLocale === $targetLocale) {
+            return $path;
+        }
+
+        // Try to translate specific routes
+        $translatedPath = $this->translatePathSlugs($remainingPath, $currentLocale, $targetLocale);
+
+        return '/' . $targetLocale . $translatedPath;
+    }
+
+    /**
+     * Translate slug parameters in path.
+     */
+    private function translatePathSlugs(string $path, string $fromLocale, string $toLocale): string
+    {
+        // Project route: /services/{serviceSlug}/projects/{projectSlug}
+        if (preg_match('#^/services/([^/]+)/projects/([^/]+)#', $path, $matches)) {
+            $serviceSlug = $matches[1];
+            $projectSlug = $matches[2];
+
+            $service = \App\Models\Service::query()
+                ->where(function ($q) use ($serviceSlug, $fromLocale) {
+                    $q->where('slug->' . $fromLocale, $serviceSlug)
+                        ->orWhere('slug->en', $serviceSlug);
+                })
+                ->published()
+                ->first();
+
+            $project = \App\Models\Project::query()
+                ->where(function ($q) use ($projectSlug, $fromLocale) {
+                    $q->where('slug->' . $fromLocale, $projectSlug)
+                        ->orWhere('slug->en', $projectSlug);
+                })
+                ->published()
+                ->first();
+
+            if ($service && $project) {
+                $newServiceSlug = $service->getTranslation('slug', $toLocale, false) ?: $service->getTranslation('slug', 'en');
+                $newProjectSlug = $project->getTranslation('slug', $toLocale, false) ?: $project->getTranslation('slug', 'en');
+
+                return '/services/' . $newServiceSlug . '/projects/' . $newProjectSlug;
+            }
+        }
+
+        // Service route: /services/{slug}
+        if (preg_match('#^/services/([^/]+)$#', $path, $matches)) {
+            $slug = $matches[1];
+
+            $service = \App\Models\Service::query()
+                ->where(function ($q) use ($slug, $fromLocale) {
+                    $q->where('slug->' . $fromLocale, $slug)
+                        ->orWhere('slug->en', $slug);
+                })
+                ->published()
+                ->first();
+
+            if ($service) {
+                $newSlug = $service->getTranslation('slug', $toLocale, false) ?: $service->getTranslation('slug', 'en');
+
+                return '/services/' . $newSlug;
+            }
+        }
+
+        // Blog route: /blog/{slug}
+        if (preg_match('#^/blog/([^/]+)$#', $path, $matches)) {
+            $slug = $matches[1];
+
+            $post = \App\Models\BlogPost::query()
+                ->where(function ($q) use ($slug, $fromLocale) {
+                    $q->where('slug->' . $fromLocale, $slug)
+                        ->orWhere('slug->en', $slug);
+                })
+                ->published()
+                ->first();
+
+            if ($post) {
+                $newSlug = $post->getTranslation('slug', $toLocale, false) ?: $post->getTranslation('slug', 'en');
+
+                return '/blog/' . $newSlug;
+            }
+        }
+
+        // Default: return path as-is
+        return $path;
     }
 
     /**
@@ -92,29 +200,5 @@ class LanguageController extends Controller
         }
 
         return null;
-    }
-
-    /**
-     * Rewrite locale prefix in URL.
-     */
-    private function rewriteLocaleInUrl(?string $url, string $newLocale): string
-    {
-        if (! $url) {
-            return '/' . $newLocale;
-        }
-
-        // Parse URL and replace locale segment
-        $parsedUrl = parse_url($url);
-        $path = $parsedUrl['path'] ?? '/';
-
-        // Match /en/* or /ar/*
-        if (preg_match('#^/(en|ar)(/.*)?$#', $path, $matches)) {
-            $remainingPath = $matches[2] ?? '';
-
-            return '/' . $newLocale . $remainingPath;
-        }
-
-        // If no locale in path, prepend it
-        return '/' . $newLocale . $path;
     }
 }
