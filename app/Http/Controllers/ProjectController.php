@@ -24,11 +24,12 @@ class ProjectController extends Controller
             ->published()
             ->firstOrFail();
 
-        // Verify the project belongs to the correct service (check both locales)
-        $serviceSlugInCurrentLocale = $project->service->getTranslation('slug', $currentLocale, false);
-        $serviceSlugInFallback = $project->service->getTranslation('slug', $fallbackLocale, false);
+        // Verify the project belongs to the correct service (check all available translations)
+        $serviceSlugEn = $project->service->getTranslation('slug', 'en', false);
+        $serviceSlugAr = $project->service->getTranslation('slug', 'ar', false);
 
-        if ($serviceSlugInCurrentLocale !== $serviceSlug && $serviceSlugInFallback !== $serviceSlug) {
+        // Accept if slug matches in either language
+        if ($serviceSlugEn !== $serviceSlug && $serviceSlugAr !== $serviceSlug) {
             abort(404);
         }
 
