@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Observers\PageObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
+#[ObservedBy([PageObserver::class])]
 class Page extends Model
 {
     use HasTranslations;
