@@ -23,6 +23,8 @@ class AboutHeroBlock
                 ->label(__('Background Image'))
                 ->image()
                 ->imageEditor()
+                ->multiple()
+                ->maxFiles(1)
                 ->maxSize(5120)
                 ->directory('hero-images')
                 ->visibility('public')

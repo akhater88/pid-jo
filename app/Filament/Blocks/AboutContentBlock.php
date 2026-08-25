@@ -17,6 +17,8 @@ class AboutContentBlock
             FileUpload::make('video_thumbnail')
                 ->label(__('Video Thumbnail Image'))
                 ->required()
+                ->multiple()
+                ->maxFiles(1)
                 ->disk('public')
                 ->directory('blocks/video-thumbnails')
                 ->image()
