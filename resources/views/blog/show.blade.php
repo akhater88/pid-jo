@@ -98,19 +98,17 @@
                     {{-- Content Section --}}
                     <div>
                         <div class="prose prose-invert prose-lg max-w-none">
-                            <div class="text-[16px] leading-[24px] text-white/80">
-                                @if($post->excerpt)
-                                    <div class="mb-6">
-                                        {!! $post->excerpt !!}
-                                    </div>
-                                @endif
+                            @if($post->excerpt)
+                                <div class="mb-6">
+                                    {!! $post->excerpt !!}
+                                </div>
+                            @endif
 
-                                @if($post->body)
-                                    <div>
-                                        {!! $post->body !!}
-                                    </div>
-                                @endif
-                            </div>
+                            @if($post->body)
+                                <div>
+                                    {!! $post->body !!}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
