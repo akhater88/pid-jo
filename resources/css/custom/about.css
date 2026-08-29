@@ -583,7 +583,7 @@
 }
 
 [dir="rtl"] .pesaro-timeline-right-content {
-    align-items: flex-start;
+    align-items: inherit;
 }
 
 [dir="rtl"] .pesaro-timeline-horizontal-dot-left {
