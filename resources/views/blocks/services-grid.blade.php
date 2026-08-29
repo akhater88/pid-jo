@@ -26,14 +26,18 @@ $services = \App\Models\Service::query()
         <!-- Section Header -->
         <div class="pesaro-services-header">
             <!-- Badge -->
-            <div class="pesaro-services-badge">
-                <ul><li>{{ $section_label }}</li></ul>
-            </div>
+            @if(isset($data['subheading']) && !empty($data['subheading']))
+                <div class="pesaro-services-badge">
+                    <ul><li>{{ $data['subheading'] }}</li></ul>
+                </div>
+            @endif
 
             <!-- Title -->
-            <h2 class="pesaro-services-title">
-                {{ __('Explore Our ') }}<span class="gold">{{ __('Comprehensive') }}<br>{{ __('Interior Design') }}</span> {{ __('Services') }}
-            </h2>
+            @if(isset($data['heading']) && !empty($data['heading']))
+                <h2 class="pesaro-services-title">
+                    {!! $data['heading'] !!}
+                </h2>
+            @endif
         </div>
 
         <!-- Services Carousel -->

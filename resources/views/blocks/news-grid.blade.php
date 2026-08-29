@@ -26,14 +26,18 @@ $posts = \App\Models\BlogPost::query()
         <!-- Section Header -->
         <div class="pesaro-news-header">
             <!-- Badge -->
-            <div class="pesaro-news-badge">
-                <ul><li>{{ $section_label }}</li></ul>
-            </div>
+            @if(isset($data['subheading']) && !empty($data['subheading']))
+                <div class="pesaro-news-badge">
+                    <ul><li>{{ $data['subheading'] }}</li></ul>
+                </div>
+            @endif
 
             <!-- Title -->
-            <h2 class="pesaro-news-title">
-                {{ __('Explore Our ') }}<span class="gold">{{ __('Comprehensive') }}<br>{{ __('Interior Design') }}</span> {{ __('Services') }}
-            </h2>
+            @if(isset($data['heading']) && !empty($data['heading']))
+                <h2 class="pesaro-news-title">
+                    {!! $data['heading'] !!}
+                </h2>
+            @endif
         </div>
 
         <!-- Blog Posts Carousel -->
