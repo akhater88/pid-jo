@@ -95,17 +95,18 @@
                         </div>
                     @endif
 
-                    {{-- Introduction Section --}}
+                    {{-- Content Section --}}
                     <div>
-                        <h2 class="text-[32px] leading-[48px] font-semibold text-white mb-6">{{ __('Introduction') }}</h2>
                         <div class="prose prose-invert prose-lg max-w-none">
                             <div class="text-[16px] leading-[24px] text-white/80">
                                 @if($post->excerpt)
-                                    {!! $post->excerpt !!}
+                                    <div class="mb-6">
+                                        {!! $post->excerpt !!}
+                                    </div>
                                 @endif
 
                                 @if($post->body)
-                                    <div class="mt-6">
+                                    <div>
                                         {!! $post->body !!}
                                     </div>
                                 @endif
