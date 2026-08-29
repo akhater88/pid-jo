@@ -567,15 +567,15 @@
 
 /* RTL Timeline - Swap left and right positions */
 [dir="rtl"] .pesaro-timeline-left {
+    /* align-items: flex-end; */
     left: auto;
     right: 0;
-    align-items: flex-end;
 }
 
 [dir="rtl"] .pesaro-timeline-right {
-    right: auto;
+    /* align-items: flex-start; */
     left: 0;
-    align-items: flex-start;
+    right: auto;
 }
 
 [dir="rtl"] .pesaro-timeline-left-content {
