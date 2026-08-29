@@ -101,12 +101,12 @@
                         <div class="prose prose-invert prose-lg max-w-none">
                             <div class="text-[16px] leading-[24px] text-white/80">
                                 @if($post->excerpt)
-                                    {!! nl2br(e($post->excerpt)) !!}
+                                    {!! $post->excerpt !!}
                                 @endif
 
                                 @if($post->body)
                                     <div class="mt-6">
-                                        {!! nl2br(e($post->body)) !!}
+                                        {!! $post->body !!}
                                     </div>
                                 @endif
                             </div>
